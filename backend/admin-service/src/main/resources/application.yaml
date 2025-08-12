@@ -1,0 +1,21 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: admin-service
+  datasource:
+    url: "jdbc:mysql://localhost:3306/AdminHealthcareDB"
+    username: root
+    password: 123@123
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+  #    auto update db
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

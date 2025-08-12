@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="39ec9a9c-428a-4c65-a90c-23a8ea1897f4" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="30jyjqZoQoAtblL5zuDyZThhEMX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.AppointmentServiceApplication (1).executor&quot;: &quot;Run&quot;,
+    &quot;Application.AppointmentServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Patient-service.executor&quot;: &quot;Run&quot;,
+    &quot;Application.PatientServiceApplication (1).executor&quot;: &quot;Run&quot;,
+    &quot;Application.PatientServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.admin-service.executor&quot;: &quot;Run&quot;,
+    &quot;Application.api-gateway.executor&quot;: &quot;Run&quot;,
+    &quot;Application.doctor-service.executor&quot;: &quot;Run&quot;,
+    &quot;Application.eureka-server.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/OneDrive/Máy tính/personal project/healthcare-system/backend/appointment-service&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Application.eureka-server">
+    <configuration name="Patient-service" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.patient_service.PatientServiceApplication" />
+      <module name="patient-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.patient_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="admin-service" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.example.admin_service.AdminServiceApplication" />
+      <module name="admin-service" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="api-gateway" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.example.api_gateway.ApiGatewayApplication" />
+      <module name="api-gateway" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="appointment-service" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.appointment_service.AppointmentServiceApplication" />
+      <module name="appointment-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.appointment_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="doctor-service" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.example.doctor_service.DoctorServiceApplication" />
+      <module name="doctor-service" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="eureka-server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.example.eureka_server.EurekaServerApplication" />
+      <module name="eureka-server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Patient-service" />
+      <item itemvalue="Application.admin-service" />
+      <item itemvalue="Application.api-gateway" />
+      <item itemvalue="Application.appointment-service" />
+      <item itemvalue="Application.doctor-service" />
+      <item itemvalue="Application.eureka-server" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.appointment-service" />
+        <item itemvalue="Application.Patient-service" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="39ec9a9c-428a-4c65-a90c-23a8ea1897f4" name="Changes" comment="" />
+      <created>1754155416259</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1754155416259</updated>
+    </task>
+    <servers />
+  </component>
+</project>
