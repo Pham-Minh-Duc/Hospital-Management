@@ -14,6 +14,7 @@
         <module>doctor-service</module>
         <module>patient-service</module>
         <module>appointment-service</module>
+        <module>realtime-service</module>
         <module>eureka-server/eureka-server</module>
         <module>api-gateway/api-gateway</module>
     </modules>

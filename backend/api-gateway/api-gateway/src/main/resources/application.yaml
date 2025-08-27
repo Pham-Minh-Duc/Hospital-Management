@@ -6,6 +6,11 @@ spring:
     name: api-gateway
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      httpserver:
+        websocket:
+          enabled: true
       routes:
         - id: doctor-service
           uri: lb://doctor-service
@@ -33,7 +38,18 @@ spring:
           predicates:
             - Path=/appointments/**
           filters:
-            -StripPrefix=0
+            - StripPrefix=0
+
+        - id: realtime-service
+          uri: lb://realtime-service
+          predicates:
+            - Path=/ws/**
+          filters:
+            - RemoveRequestHeader=Sec-WebSocket-Protocol
+            - PreserveHostHeader
+            - RewritePath=/ws(?<segment>/?.*), /ws${segment}
+
+
 
 eureka:
   client:

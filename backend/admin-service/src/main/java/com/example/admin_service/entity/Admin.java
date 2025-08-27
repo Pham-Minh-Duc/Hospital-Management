@@ -4,11 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.time.LocalDate;
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder //khai báo builder là phải khai báo thêm 2 cái trên
 @Entity
 @Getter
 @Setter
@@ -18,8 +18,8 @@ public class Admin {
     private String adminId;
     private String adminName;
     private String adminEmail;
-    private String adminPhone;
     private String adminPassword;
     private String adminGender;
-    private LocalDate adminBirthday;
+    private String adminPhone;
+    private String adminBirthday;
 }
