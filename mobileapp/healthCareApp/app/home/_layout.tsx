@@ -27,6 +27,7 @@ function TabsScreen() {
         name="index"
         options={{
           title: "Trang chủ",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => <Ionicons name="home" size={size} color={color} />,
         }}
       />
@@ -34,6 +35,7 @@ function TabsScreen() {
         name="appointments"
         options={{
           title: "Lịch khám",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => <Ionicons name="calendar" size={size} color={color} />,
         }}
       />
@@ -41,13 +43,15 @@ function TabsScreen() {
         name="doctors"
         options={{
           title: "Bác sĩ",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => <Ionicons name="medkit" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="profiles"
         options={{
           title: "Hồ sơ",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} />,
         }}
       />
@@ -55,6 +59,7 @@ function TabsScreen() {
         name="settings"
         options={{
           title: "Cài đặt",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => <Ionicons name="settings" size={size} color={color} />,
         }}
       />

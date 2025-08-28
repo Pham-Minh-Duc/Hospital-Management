@@ -12,14 +12,19 @@ const specialties = [
 export default function Specialties() {
   const router = useRouter();
 
-  const renderItem = ({ item }: any) => (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => router.push(`../home/doctor/{item.id}`)}
-    >
-      <Text style={styles.name}>{item.name}</Text>
-    </TouchableOpacity>
-  );
+const renderItem = ({ item }: any) => (
+  <TouchableOpacity
+    style={styles.card}
+    onPress={() =>
+      router.push({
+        pathname: "/home/doctors/[specialty]",
+        params: { specialty: item.id },
+      })
+    }
+  >
+    <Text style={styles.name}>{item.name}</Text>
+  </TouchableOpacity>
+);
 
   return (
     <View style={styles.container}>
