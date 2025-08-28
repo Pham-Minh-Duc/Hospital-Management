@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddAppointmentModal from "../../src/components/appointment/addApointmentModal";
 import {
   View,
   Text,
@@ -8,98 +9,93 @@ import {
   Modal,
 } from "react-native";
 
-// ✅ Kiểu dữ liệu cho lịch khám
+// ✅ Kiểu dữ liệu đầy đủ cho lịch khám
 interface Appointment {
   id: string;
+  name: string;
+  age: string;
+  phone: string;
+  address: string;
+  reason: string;
   date: string;
   time: string;
-  doctor: string;
-  specialty: string;
-  hospital: string;
-  location: string;
   status: string;
 }
 
-// 🗓️ Dữ liệu mẫu
-const appointments: Appointment[] = [
-  {
-    id: "1",
-    date: "Thứ 5, 28/08/2025",
-    time: "09:30",
-    doctor: "BS. Trần Thị C",
-    specialty: "Nhi khoa",
-    hospital: "BV Nhi TW",
-    location: "Phòng khám số 3",
-    status: "Đã xác nhận",
-  },
-  {
-    id: "2",
-    date: "Thứ 6, 29/08/2025",
-    time: "14:00",
-    doctor: "BS. Phạm Văn E",
-    specialty: "Tim mạch",
-    hospital: "BV 108",
-    location: "Tầng 2, khu A",
-    status: "Chờ xác nhận",
-  },
-  {
-    id: "3",
-    date: "Thứ 7, 30/08/2025",
-    time: "10:00",
-    doctor: "BS. Nguyễn Văn A",
-    specialty: "Da liễu",
-    hospital: "BV Da Liễu",
-    location: "Phòng 101",
-    status: "Đã hủy",
-  },
-];
+// ✅ Kiểu dữ liệu khi thêm mới
+type NewAppointment = Omit<Appointment, "id" | "date" | "time" | "status"> & {
+  datetime: string;
+};
 
 export default function AppointmentList() {
   const [selected, setSelected] = useState<Appointment | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [myAppointments, setMyAppointments] = useState<Appointment[]>([]);
+
+  const handleAdd = (data: NewAppointment) => {
+    const [date, time] = data.datetime.split(" - ");
+
+    const newItem: Appointment = {
+      id: Date.now().toString(),
+      name: data.name,
+      age: data.age,
+      phone: data.phone,
+      address: data.address,
+      reason: data.reason,
+      date: date || "",
+      time: time || "",
+      status: "Chờ xác nhận",
+    };
+
+    setMyAppointments((prev) => [...prev, newItem]);
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>📅 Lịch khám của tôi</Text>
+      <View style={styles.headerRow}>
+        <Text style={styles.headerText}>📅 Lịch khám của tôi</Text>
+        <TouchableOpacity
+          style={styles.headerButton}
+          onPress={() => setShowModal(true)}
+        >
+          <Text style={styles.headerButtonText}>＋</Text>
+        </TouchableOpacity>
+      </View>
 
       <FlatList
-        data={appointments}
+        data={myAppointments}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => {
-          const borderColor =
-            item.status === "Đã xác nhận"
-              ? "#32CD32" // xanh lá
-              : item.status === "Chờ xác nhận"
-              ? "#FFD700" // vàng
-              : "#ccc";   // mặc định
-
-          return (
-            <TouchableOpacity
-              style={[styles.card, { borderLeftColor: borderColor }]}
-              onPress={() => setSelected(item)}
-            >
-              <Text style={styles.date}>{item.date} - {item.time}</Text>
-              <Text style={styles.doctor}>{item.doctor} - {item.specialty}</Text>
-              <Text style={styles.hospital}>{item.hospital}</Text>
-              <Text style={styles.status}>{item.status}</Text>
-            </TouchableOpacity>
-          );
-        }}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={[styles.card, { borderLeftColor: "#007AFF" }]}
+            onPress={() => setSelected(item)}
+          >
+            <Text style={styles.date}>
+              {item.date} - {item.time}
+            </Text>
+            <Text style={styles.name}>👤 {item.name} ({item.age})</Text>
+            <Text style={styles.phone}>📞 {item.phone}</Text>
+            <Text style={styles.reason}>📝 {item.reason}</Text>
+            <Text style={styles.status}>📌 {item.status}</Text>
+          </TouchableOpacity>
+        )}
         ListEmptyComponent={
           <Text style={styles.empty}>Bạn chưa có lịch khám nào</Text>
         }
       />
 
-      {/* 🔍 Modal chi tiết lịch khám */}
       <Modal visible={!!selected} transparent animationType="slide">
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Chi tiết lịch khám</Text>
             {selected && (
               <>
-                <Text>👨‍⚕️ Bác sĩ: {selected.doctor}</Text>
+                <Text>👤 Họ tên: {selected.name}</Text>
+                <Text>🎂 Tuổi: {selected.age}</Text>
+                <Text>📞 SĐT: {selected.phone}</Text>
+                <Text>🏠 Địa chỉ: {selected.address}</Text>
+                <Text>📝 Lý do: {selected.reason}</Text>
                 <Text>🕒 Thời gian: {selected.date} - {selected.time}</Text>
-                <Text>🏥 Bệnh viện: {selected.hospital}</Text>
-                <Text>📍 Địa điểm: {selected.location}</Text>
                 <Text>📌 Trạng thái: {selected.status}</Text>
               </>
             )}
@@ -112,24 +108,45 @@ export default function AppointmentList() {
           </View>
         </View>
       </Modal>
+
+      <AddAppointmentModal
+        visible={showModal}
+        onClose={() => setShowModal(false)}
+        onSave={handleAdd}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, backgroundColor: "#fff" },
-  header: { fontSize: 22, fontWeight: "bold", marginBottom: 16 },
+  headerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  headerText: { fontSize: 20, fontWeight: "600" },
+  headerButton: {
+    backgroundColor: "#007AFF",
+    borderRadius: 20,
+    width: 36,
+    height: 36,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  headerButtonText: { color: "#fff", fontSize: 24, lineHeight: 24 },
   card: {
     backgroundColor: "#f0f8ff",
     padding: 16,
     borderRadius: 10,
     marginBottom: 12,
     borderLeftWidth: 4,
-    borderLeftColor: "#ccc", // mặc định, sẽ bị override
   },
   date: { fontSize: 16, fontWeight: "600", marginBottom: 4 },
-  doctor: { fontSize: 15 },
-  hospital: { fontSize: 14, color: "#555" },
+  name: { fontSize: 15 },
+  phone: { fontSize: 14 },
+  reason: { fontSize: 14 },
   status: { fontSize: 14, color: "#007AFF", marginTop: 4 },
   empty: { textAlign: "center", marginTop: 40, color: "#999" },
   modalOverlay: {
@@ -142,7 +159,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 20,
     borderRadius: 12,
-    width: "80%",
+    width: "85%",
   },
   modalTitle: { fontSize: 18, fontWeight: "bold", marginBottom: 12 },
   closeButton: {

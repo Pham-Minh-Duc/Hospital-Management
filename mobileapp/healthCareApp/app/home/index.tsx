@@ -1,6 +1,7 @@
-import React from "react";
-import { useContext } from "react";
+// import  from "react";
+import React, { useContext } from "react";
 import { ThemeContext } from "../../src/context/themeContext";
+import { useRouter } from "expo-router";
 import {
   View,
   Text,
@@ -11,6 +12,8 @@ import {
 } from "react-native";
 
 export default function HomeScreen() {
+
+    const router = useRouter();
     const { darkMode, toggleDarkMode } = useContext(ThemeContext);
 
     const theme = {
@@ -26,7 +29,10 @@ export default function HomeScreen() {
       <View style={[styles.header, { backgroundColor: theme.card }]}>
         <View style={[styles.headerTop, { backgroundColor: theme.card }]}>
           <Text style={[styles.title, { color: theme.text }]}>🏥 Bệnh viện Đức Tâm</Text>
-          <TouchableOpacity style={styles.headerButton}>
+          <TouchableOpacity 
+            style={styles.headerButton}
+            onPress={() => router.push("/home/appointments")}
+          >
             <Text style={styles.headerButtonText}>Đặt lịch</Text>
           </TouchableOpacity>
         </View>
@@ -54,7 +60,15 @@ export default function HomeScreen() {
 
       {/* Đội ngũ bác sĩ */}
       <View style={[styles.section, { backgroundColor: theme.card }]}>
-        <Text style={styles.sectionTitle}>👨‍⚕️ Đội ngũ bác sĩ</Text>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", margin:8 }}>
+          <Text style={styles.sectionTitle}>👨‍⚕️ Đội ngũ bác sĩ</Text>
+          <TouchableOpacity 
+            style={styles.headerButton}
+            onPress={() => router.push("/home/doctors")}
+          >
+            <Text style={styles.headerButtonText}>Đặt lịch theo bác sĩ</Text>
+          </TouchableOpacity>
+        </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {doctors.map((doc) => (
             <View key={doc.id} style={[styles.doctorCard, { backgroundColor: theme.card }]}>

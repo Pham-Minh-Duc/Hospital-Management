@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { View, Text, FlatList, StyleSheet, Alert, TouchableOpacity, Image } from "react-native";
 import { useLocalSearchParams } from "expo-router";
+import BookingModal, { BookingData } from "../../../src/components/doctor/BookingModal";
 
 const allDoctors = [
   {
@@ -31,12 +32,10 @@ const specialtyNames: Record<string, string> = {
 
 export default function DoctorList() {
 
-
   const { specialty } = useLocalSearchParams<{ specialty: string }>();
-
-
-  const [confirm, setConfirm] = React.useState("false");
-
+  // const [confirm, setConfirm] = React.useState("false");
+  const [selectedDoctor, setSelectedDoctor] = React.useState<string | null>(null);
+  const [showBooking, setShowBooking] = React.useState(false);
 
   const doctors = useMemo(
     () => allDoctors.filter((d) => d.specialty === specialty),
@@ -66,24 +65,10 @@ export default function DoctorList() {
             </View>
             <View>
               <TouchableOpacity
-                onPress={() =>
-                  Alert.alert(
-                    "Xác nhận đặt lịch",
-                    `Bạn có chắc muốn đặt lịch với ${item.name}?`,
-                    [
-                      {
-                        text: "Không",
-                        onPress: () => setConfirm("no"),
-                        style: "cancel",
-                      },
-                      {
-                        text: "Có",
-                        onPress: () => setConfirm("yes"),
-                      },
-                    ]
-                  )
-                }
-                style={styles.button}
+                onPress={() => {
+                  setSelectedDoctor(item.name);
+                  setShowBooking(true);
+                }}
               >
                 <Text style={{ color: "#007AFF", fontSize: 14, fontWeight: "500" }}>
                   Đặt lịch
@@ -94,6 +79,17 @@ export default function DoctorList() {
         )}
         ListEmptyComponent={<Text>Chưa có bác sĩ trong chuyên khoa này</Text>}
       />
+    {selectedDoctor && (
+      <BookingModal
+        visible={showBooking}
+        doctorName={selectedDoctor}
+        onClose={() => setShowBooking(false)}
+        onSubmit={(data: BookingData) => {
+          Alert.alert("Đặt lịch thành công", `Bạn đã đặt lịch với ${selectedDoctor}`);
+          console.log("Thông tin đặt lịch:", data);
+        }}
+      />
+    )}
     </View>
   );
 }
