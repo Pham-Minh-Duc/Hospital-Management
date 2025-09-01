@@ -1,6 +1,8 @@
 package com.example.patient_service.controller;
 
 import com.example.patient_service.dto.request.PatientCreationRequest;
+import com.example.patient_service.dto.request.PatientLoginRequest;
+import com.example.patient_service.dto.request.PatientLoginResponse;
 import com.example.patient_service.dto.request.PatientUpdateRequest;
 import com.example.patient_service.entity.Patient;
 import com.example.patient_service.service.PatientService;
@@ -16,6 +18,12 @@ public class PatientController {
 
     @Autowired
     private PatientService patientService;
+
+    @PostMapping("/login")
+    public PatientLoginResponse login(@RequestBody PatientLoginRequest request) {
+        return patientService.login(request);
+    }
+
 
     @PostMapping
     Patient createPatient(@RequestBody PatientCreationRequest request){

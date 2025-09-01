@@ -10,6 +10,10 @@ export default function Profile() {
         router.replace("/auth/login");
     }
 
+    const backToAppointment = () => {
+        router.replace("/auth/login");
+    }
+
 
     const [modalVisible, setModalVisible] = useState(false);
     const [listModalVisible, setListModalVisible] = useState(false);
@@ -60,7 +64,8 @@ const [userInfo, setUserInfo] = useState({
         <Text style={styles.infoText}>Ngày sinh: 01/01/1990</Text>
         <Text style={styles.infoText}>Giới tính: Nam</Text>
         <Text style={styles.infoText}>Số điện thoại: 0123456789</Text>
-        <Text style={styles.infoText}>Nhóm máu: O+</Text>
+        <Text style={styles.infoText}>Địa chỉ: 20/25 Tân Quý, Tân Phú, TP HCM</Text>
+        <Text style={styles.infoText}>BHXH: edsssdaa</Text>
       </View>
 
       {/* Lịch khám */}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AddAppointmentModal from "../../src/components/appointment/addApointmentModal";
+import AddAppointmentModal from "../../src/components/modal/appointment/addApointmentModal";
 import {
   View,
   Text,
@@ -73,10 +73,13 @@ export default function AppointmentList() {
             <Text style={styles.date}>
               {item.date} - {item.time}
             </Text>
-            <Text style={styles.name}>👤 {item.name} ({item.age})</Text>
-            <Text style={styles.phone}>📞 {item.phone}</Text>
-            <Text style={styles.reason}>📝 {item.reason}</Text>
-            <Text style={styles.status}>📌 {item.status}</Text>
+            <Text style={styles.name}>Họ và tên: {item.name} ({item.age} tuổi)</Text>
+            <Text style={styles.phone}>Số điện thoại: {item.phone}</Text>
+            <Text style={styles.reason}>Lí do khám/ ghi chú: {item.reason}</Text>
+            <Text style={styles.status}>Trạng thái: {item.status}</Text>
+            <Text style={styles.status}>Ngày đặt lịch: </Text>
+            <Text style={styles.status}>khi xác nhận lịch khám từ admin thì thêm trường: phòng khám, tên bác sĩ, chuyên khoa</Text>
+            <Text style={styles.status}>Thời gian khám:</Text>
           </TouchableOpacity>
         )}
         ListEmptyComponent={

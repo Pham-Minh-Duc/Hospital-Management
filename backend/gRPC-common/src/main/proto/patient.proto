@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package patient;
+
+service PatientService {
+  rpc GetPatientById(PatientRequest) returns (PatientResponse);
+}
+
+message PatientRequest {
+  string patientId = 1;
+}
+
+message PatientResponse {
+  string name = 1;
+  string gender = 2;
+  string dob = 3;
+}

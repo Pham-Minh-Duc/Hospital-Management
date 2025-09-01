@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuthStore } from "../../src/store/authStore";
-import { login } from "../../src/services/authService";
+import { login } from "../../src/services/clientService";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -11,15 +11,31 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  // const handleLogin = async () => {
+  //   try {
+  //     const res = await login(email, password);
+  //     setAuth(res.token, res.user);
+  //     router.replace("/home");
+  //   } catch (e: any) {
+  //     setError(e.message);
+  //   }
+  // };
+
   const handleLogin = async () => {
     try {
       const res = await login(email, password);
-      setAuth(res.token, res.user);
+      // backend trả về { patientId, patientName, patientEmail }
+      setAuth(null, { 
+        id: res.patientId, 
+        name: res.patientName 
+      });
       router.replace("/home");
     } catch (e: any) {
       setError(e.message);
     }
   };
+
+
 
   const handleRegister = () => {
     

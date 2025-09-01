@@ -1,5 +1,7 @@
 package com.example.appointment_service.service;
 
+import com.example.appointment_service.client.Doctor_gRPC;
+import com.example.appointment_service.client.Patient_gRPC;
 import com.example.appointment_service.dto.PatientDto;
 import com.example.appointment_service.dto.request.AppointmentCreationRequest;
 import com.example.appointment_service.dto.request.AppointmentResponse;
@@ -19,12 +21,15 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
     private WebClient webClient;
+//    private final Patient_gRPC patientClient;
+//    private final Doctor_gRPC doctorClient;
+
+
 
     public AppointmentService(AppointmentRepository appointmentRepository, WebClient webClient) {
         this.appointmentRepository = appointmentRepository;
         this.webClient = webClient;
     }
-
 
     public List<Appointment> getAppointment(){
         return appointmentRepository.findAll();

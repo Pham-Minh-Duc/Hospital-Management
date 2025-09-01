@@ -1,39 +1,87 @@
-import React from "react";
-import { View, Text, TouchableOpacity, FlatList, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 import { useRouter } from "expo-router";
+import { fetchDoctors } from "../../../src/services/doctorService";
 
-const specialties = [
-  { id: "cardio", name: "Tim mạch" },
-  { id: "pediatrics", name: "Nhi khoa" },
-  { id: "derma", name: "Da liễu" },
-  { id: "ortho", name: "Chấn thương chỉnh hình" },
-];
+type Doctor = {
+  doctorDepartment: string;
+  // bạn có thể thêm các trường khác nếu cần
+};
+
+
+// Khai báo kiểu cho chuyên khoa
+type Specialty = {
+  id: string;
+  name: string;
+};
 
 export default function Specialties() {
+  const [specialties, setSpecialties] = useState<Specialty[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
-const renderItem = ({ item }: any) => (
-  <TouchableOpacity
-    style={styles.card}
-    onPress={() =>
-      router.push({
-        pathname: "/home/doctors/[specialty]",
-        params: { specialty: item.id },
-      })
+  useEffect(() => {
+  const loadSpecialties = async () => {
+    try {
+      const doctors: Doctor[] = await fetchDoctors();
+
+      // Lấy danh sách chuyên khoa duy nhất, lọc và ép kiểu rõ ràng
+      const rawDepartment: string[] = doctors
+        .map((doc: Doctor) => doc.doctorDepartment)
+        .filter((name: string): name is string => typeof name === "string" && name.trim() !== "");
+
+      const uniqueDepartment: Specialty[] = Array.from(new Set<string>(rawDepartment)).map(
+        (name: string) => ({
+          id: name.toLowerCase().replace(/\s/g, "-"),
+          name,
+        })
+      );
+
+      setSpecialties(uniqueDepartment);
+    } catch (error) {
+      console.error("Lỗi khi tải chuyên khoa:", error);
+    } finally {
+      setLoading(false);
     }
-  >
-    <Text style={styles.name}>{item.name}</Text>
-  </TouchableOpacity>
-);
+  };
+
+  loadSpecialties();
+}, []);
+
+
+  const renderItem = ({ item }: { item: Specialty }) => (
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() =>
+        router.push({
+          pathname: "/home/doctors/[specialty]",
+          params: { specialty: item.id },
+        })
+      }
+    >
+      <Text style={styles.name}>{item.name}</Text>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Chọn chuyên khoa</Text>
-      <FlatList
-        data={specialties}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-      />
+      {loading ? (
+        <ActivityIndicator size="large" color="#007AFF" />
+      ) : (
+        <FlatList
+          data={specialties}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+        />
+      )}
     </View>
   );
 }

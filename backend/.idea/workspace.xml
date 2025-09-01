@@ -5,44 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39ec9a9c-428a-4c65-a90c-23a8ea1897f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/dto/request/AdminLoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/dto/request/AdminRegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/java/com/example/api_gateway/config/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/config/WebClientConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/controller/AppointmentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/PatientDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/request/AppointmentCreationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/request/AppointmentResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/request/AppointmentUpdateRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/repository/AppointmentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/service/AppointmentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/Dto/ChatMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/Dto/PrivateMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/config/UserInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/config/WebSocketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/controller/ChatController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/controller/NotificationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/client/Doctor_gRPC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/client/Patient_gRPC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gRPC-common/src/main/proto/doctor.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gRPC-common/src/main/proto/patient.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/dto/request/PatientLoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/dto/request/PatientLoginResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/dto/request/AdminCreationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/dto/request/AdminUpdateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/dto/request/AdminLoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/entity/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/entity/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/repository/AdminRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/repository/AdminRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-service/src/main/java/com/example/admin_service/service/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/api-gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/admin-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/java/com/example/api_gateway/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/java/com/example/api_gateway/config/WebConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appointment-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/entity/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/entity/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/controller/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/controller/DoctorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/service/AppointmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/controller/PatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/controller/PatientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/entity/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/entity/Patient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/repository/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/repository/PatientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/service/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/service/PatientService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/auth/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/appointments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/appointments.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/doctors/[specialty].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/doctors/[specialty].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/doctors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/doctors/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/profiles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/profiles.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/profile/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/components/appointment/addApointmentModal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/components/doctor/BookingModal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/services/apiClient.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/services/authService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/services/userService.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +85,7 @@
     &quot;Application.appointment-service.executor&quot;: &quot;Run&quot;,
     &quot;Application.doctor-service.executor&quot;: &quot;Run&quot;,
     &quot;Application.eureka-server.executor&quot;: &quot;Run&quot;,
+    &quot;Application.gRPC-common.executor&quot;: &quot;Run&quot;,
     &quot;Application.realtime-service.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -100,7 +98,12 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.realtime-service">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OneDrive\Máy tính\personal project\healthcare-system\backend\gRPC-common\src\main\proto" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Patient-service">
     <configuration name="Patient-service" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.example.patient_service.PatientServiceApplication" />
       <module name="patient-service" />
@@ -155,6 +158,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="gRPC-common" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.healthcare.Main" />
+      <module name="gRPC-common" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="realtime-service" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.example.realtime_service.RealtimeServiceApplication" />
       <module name="realtime-service" />
@@ -173,15 +183,16 @@
       <item itemvalue="Application.api-gateway" />
       <item itemvalue="Application.doctor-service" />
       <item itemvalue="Application.eureka-server" />
+      <item itemvalue="Application.gRPC-common" />
       <item itemvalue="Application.Patient-service" />
       <item itemvalue="Application.realtime-service" />
       <item itemvalue="Application.appointment-service" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Patient-service" />
         <item itemvalue="Application.realtime-service" />
         <item itemvalue="Application.appointment-service" />
-        <item itemvalue="Application.Patient-service" />
       </list>
     </recent_temporary>
   </component>

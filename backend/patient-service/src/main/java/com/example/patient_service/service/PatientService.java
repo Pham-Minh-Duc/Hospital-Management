@@ -1,6 +1,8 @@
 package com.example.patient_service.service;
 
 import com.example.patient_service.dto.request.PatientCreationRequest;
+import com.example.patient_service.dto.request.PatientLoginRequest;
+import com.example.patient_service.dto.request.PatientLoginResponse;
 import com.example.patient_service.dto.request.PatientUpdateRequest;
 import com.example.patient_service.entity.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +59,21 @@ public class PatientService {
 
     public Patient getPatient(String id){
         return patientRepository.findById(id).orElseThrow(() -> new RuntimeException("Patient not found"));
+    }
+
+    public PatientLoginResponse login(PatientLoginRequest request) {
+        Patient patient = patientRepository.findByPatientEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("Sai tài khoản hoặc mật khẩu"));
+
+        if (!patient.getPatientPassword().equals(request.getPassword())) {
+            throw new RuntimeException("Sai tài khoản hoặc mật khẩu");
+        }
+
+        return new PatientLoginResponse(
+                patient.getPatientId(),
+                patient.getPatientName(),
+                patient.getPatientEmail()
+        );
     }
 }
 
