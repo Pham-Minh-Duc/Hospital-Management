@@ -1,12 +1,13 @@
 package com.example.appointment_service.service;
 
-import com.example.appointment_service.client.Doctor_gRPC;
-import com.example.appointment_service.client.Patient_gRPC;
+//import com.example.appointment_service.client.Doctor_gRPC;
+//import com.example.appointment_service.client.Patient_gRPC;
 import com.example.appointment_service.dto.PatientDto;
 import com.example.appointment_service.dto.request.AppointmentCreationRequest;
 import com.example.appointment_service.dto.request.AppointmentResponse;
 import com.example.appointment_service.entity.Appointment;
 import com.example.appointment_service.repository.AppointmentRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class AppointmentService {
 
     @Autowired
@@ -25,14 +27,15 @@ public class AppointmentService {
 //    private final Doctor_gRPC doctorClient;
 
 
-
+// constructor
     public AppointmentService(AppointmentRepository appointmentRepository, WebClient webClient) {
         this.appointmentRepository = appointmentRepository;
         this.webClient = webClient;
     }
 
-    public List<Appointment> getAppointment(){
-        return appointmentRepository.findAll();
+// lấy danh sách lịch khám theo từng client.
+    public List<Appointment> getAppointmentsByPatient(String patientId) {
+        return appointmentRepository.findByPatientId(patientId);
     }
 
     public List<AppointmentResponse> getAllAppointmentsWithPatient() {

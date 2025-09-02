@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-nativ
 import { useRouter } from "expo-router";
 import { useAuthStore } from "../../src/store/authStore";
 import { login } from "../../src/services/clientService";
+import AsyncStorage from "@react-native-async-storage/async-storage"; // 👈 import thêm
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -11,40 +12,38 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // const handleLogin = async () => {
-  //   try {
-  //     const res = await login(email, password);
-  //     setAuth(res.token, res.user);
-  //     router.replace("/home");
-  //   } catch (e: any) {
-  //     setError(e.message);
-  //   }
-  // };
+ const handleLogin = async () => {
+  try {
+    const res = await login(email, password);
+    // backend trả về { patientId, patientName, patientEmail }
 
-  const handleLogin = async () => {
-    try {
-      const res = await login(email, password);
-      // backend trả về { patientId, patientName, patientEmail }
-      setAuth(null, { 
-        id: res.patientId, 
-        name: res.patientName 
-      });
-      router.replace("/home");
-    } catch (e: any) {
-      setError(e.message);
-    }
-  };
+    // Lưu vào Zustand store
+    setAuth(null, {
+      id: res.patientId,
+      name: res.patientName,
+    });
+
+    router.replace("/home"); // chuyển sang home
+
+    // Lưu patientId + patientName vào AsyncStorage
+    await AsyncStorage.setItem("patientId", res.id.toString());
+    await AsyncStorage.setItem("patientName", res.name);
 
 
+  } catch (e: any) {
+    setError(e.message || "Đăng nhập thất bại");
+  }
+};
 
   const handleRegister = () => {
-    
-  }
+    // TODO: viết sau
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Đăng nhập</Text>
       {error ? <Text style={styles.error}>{error}</Text> : null}
+
       <TextInput
         placeholder="Email"
         value={email}
@@ -52,6 +51,7 @@ export default function LoginScreen() {
         style={styles.input}
         placeholderTextColor={"#999"}
       />
+
       <TextInput
         placeholder="Mật khẩu"
         value={password}
@@ -60,10 +60,12 @@ export default function LoginScreen() {
         style={styles.input}
         placeholderTextColor={"#999"}
       />
+
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Đăng nhập</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
+
+      <TouchableOpacity style={[styles.button, { marginTop: 10 }]} onPress={handleRegister}>
         <Text style={styles.buttonText}>Đăng kí</Text>
       </TouchableOpacity>
     </View>

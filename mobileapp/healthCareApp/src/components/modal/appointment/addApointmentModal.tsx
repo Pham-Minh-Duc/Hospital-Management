@@ -7,50 +7,59 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  Alert,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { NewAppointment } from "../../../services/appointmentService";
 
-type NewAppointment = {
-  name: string;
-  age: string;
-  phone: string;
-  address: string;
-  reason: string;
-  datetime: string;
-};
+// 🔹 form không bao gồm patientId
+type AppointmentForm = Omit<NewAppointment, "patientId">;
 
 interface Props {
   visible: boolean;
   onClose: () => void;
-  onSave: (data: NewAppointment) => void;
+  onSave: (data: NewAppointment) => void; // khi submit sẽ thêm patientId
 }
 
 export default function AddAppointmentModal({ visible, onClose, onSave }: Props) {
-  const [form, setForm] = useState<NewAppointment>({
-    name: "",
-    age: "",
-    phone: "",
-    address: "",
-    reason: "",
-    datetime: "",
+  const [form, setForm] = useState<AppointmentForm>({
+    appointmentDate: "",
+    appointmentTime: "",
+    appointmentRoom: "",
+    specialty: "",
+    appointmentNote: "",
   });
 
-  const handleChange = (key: keyof NewAppointment, value: string) => {
+  const handleChange = (key: keyof AppointmentForm, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    // kiểm tra dữ liệu không trống
     const isValid = Object.values(form).every((val) => val.trim() !== "");
-    if (!isValid) return;
-    onSave(form);
+    if (!isValid) {
+      Alert.alert("Lỗi", "Vui lòng điền đầy đủ thông tin trước khi lưu.");
+      return;
+    }
+
+    // lấy patientId từ AsyncStorage
+    const patientId = await AsyncStorage.getItem("patientId");
+    if (!patientId) {
+      Alert.alert("Lỗi", "Không tìm thấy patientId");
+      return;
+    }
+
+    // gửi form + patientId lên onSave
+    onSave({ ...form, patientId });
+
+    // reset form
     setForm({
-      name: "",
-      age: "",
-      phone: "",
-      address: "",
-      reason: "",
-      datetime: "",
+      appointmentDate: "",
+      appointmentTime: "",
+      appointmentRoom: "",
+      specialty: "",
+      appointmentNote: "",
     });
-    onClose();
   };
 
   return (
@@ -58,52 +67,44 @@ export default function AddAppointmentModal({ visible, onClose, onSave }: Props)
       <View style={styles.overlay}>
         <View style={styles.modal}>
           <Text style={styles.title}>Thêm lịch khám mới</Text>
-          <ScrollView>
+          <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
             <TextInput
               style={styles.input}
-              placeholder="👤 Họ tên"
-              value={form.name}
-              onChangeText={(text) => handleChange("name", text)}
+              placeholder="📅 Ngày (VD: 28/08/2025)"
+              value={form.appointmentDate}
+              onChangeText={(text) => handleChange("appointmentDate", text)}
             />
             <TextInput
               style={styles.input}
-              placeholder="🎂 Tuổi"
-              value={form.age}
-              onChangeText={(text) => handleChange("age", text)}
-              keyboardType="numeric"
+              placeholder="⏰ Giờ (VD: 14:30)"
+              value={form.appointmentTime}
+              onChangeText={(text) => handleChange("appointmentTime", text)}
             />
             <TextInput
               style={styles.input}
-              placeholder="📞 Số điện thoại"
-              value={form.phone}
-              onChangeText={(text) => handleChange("phone", text)}
-              keyboardType="phone-pad"
+              placeholder="🏥 Phòng khám"
+              value={form.appointmentRoom}
+              onChangeText={(text) => handleChange("appointmentRoom", text)}
             />
             <TextInput
               style={styles.input}
-              placeholder="🏠 Địa chỉ"
-              value={form.address}
-              onChangeText={(text) => handleChange("address", text)}
+              placeholder="🩺 Chuyên khoa"
+              value={form.specialty}
+              onChangeText={(text) => handleChange("specialty", text)}
             />
             <TextInput
               style={styles.input}
-              placeholder="📝 Lý do khám"
-              value={form.reason}
-              onChangeText={(text) => handleChange("reason", text)}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="🕒 Ngày giờ (VD: Thứ 5, 28/08/2025 - 09:30)"
-              value={form.datetime}
-              onChangeText={(text) => handleChange("datetime", text)}
+              placeholder="📝 Ghi chú"
+              value={form.appointmentNote}
+              onChangeText={(text) => handleChange("appointmentNote", text)}
             />
           </ScrollView>
 
           <View style={styles.buttonRow}>
-            <TouchableOpacity onPress={onClose}>
+            <TouchableOpacity style={styles.cancelBtn} onPress={onClose}>
               <Text style={styles.cancel}>Hủy</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleSubmit}>
+            <TouchableOpacity style={styles.saveBtn} onPress={handleSubmit}>
               <Text style={styles.save}>Lưu</Text>
             </TouchableOpacity>
           </View>
@@ -140,6 +141,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 12,
   },
-  cancel: { color: "#999", fontSize: 16 },
-  save: { color: "#007AFF", fontSize: 16 },
+  cancelBtn: {
+    flex: 1,
+    marginRight: 10,
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: "#eee",
+    alignItems: "center",
+  },
+  saveBtn: {
+    flex: 1,
+    marginLeft: 10,
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: "#007AFF",
+    alignItems: "center",
+  },
+  cancel: { color: "#555", fontSize: 16 },
+  save: { color: "#fff", fontSize: 16, fontWeight: "bold" },
 });

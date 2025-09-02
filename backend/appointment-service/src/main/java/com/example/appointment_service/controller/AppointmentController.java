@@ -23,10 +23,10 @@ public class AppointmentController {
     }
 
 
-    @GetMapping("/raw")
-    List<Appointment> getAppointment(){
-        return appointmentService.getAppointment();
-    }
+//    @GetMapping("/raw")
+//    List<Appointment> getAppointment(){
+//        return appointmentService.getAppointment();
+//    }
 
     @GetMapping
     public ResponseEntity<List<AppointmentResponse>> getAllAppointments() {
@@ -34,10 +34,10 @@ public class AppointmentController {
         return ResponseEntity.ok(responses);
     }
 
-
-//    @PostMapping
-//    Appointment createAppointment(@RequestBody AppointmentCreationRequest request){
-//        return appointmentService.createAppointment(request);
-//    }
+// hiển thị danh sách lịch khám theo từng client.
+    @GetMapping("/{patientId}")
+    public List<Appointment> getAppointments(@PathVariable String patientId) {
+        return appointmentService.getAppointmentsByPatient(patientId);
+    }
 
 }

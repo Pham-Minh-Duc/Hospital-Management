@@ -1,7 +1,8 @@
 // import  from "react";
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "../../src/context/themeContext";
 import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   View,
   Text,
@@ -9,12 +10,31 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Modal, Pressable
 } from "react-native";
 
 export default function HomeScreen() {
 
     const router = useRouter();
     const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+
+    const [patientId, setPatientId] = useState<string | null>(null);
+    const [patientName, setPatientName] = useState<string | null>(null);
+    const [showModal, setShowModal] = useState(false);
+
+    useEffect(() => {
+      const loadUser = async () => {
+        const id = await AsyncStorage.getItem("patientId");
+        const name = await AsyncStorage.getItem("patientName");
+        setPatientId(id);
+        setPatientName(name);
+        if (id && name) {
+          setShowModal(true); // 🔥 Hiện modal ngay khi đăng nhập
+          setTimeout(() => setShowModal(false), 3000); // 3 giây sau tự tắt
+        } 
+      };
+      loadUser();
+    }, []);
 
     const theme = {
       bg: darkMode ? "#121212" : "#f2f2f2",
@@ -24,6 +44,7 @@ export default function HomeScreen() {
     };
   
   return (
+    <>
     <ScrollView style={[styles.container, { backgroundColor: theme.bg }]}>
       {/* Header */}
       <View style={[styles.header, { backgroundColor: theme.card }]}>
@@ -119,6 +140,48 @@ export default function HomeScreen() {
         ))}
       </View>
     </ScrollView>
+    <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showModal}
+        onRequestClose={() => setShowModal(false)}
+      >
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0,0,0,0.5)",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "#fff",
+              padding: 20,
+              borderRadius: 10,
+              width: "80%",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 10 }}>
+              Xin chào, {patientName}!
+            </Text>
+            <Text style={{ marginBottom: 20 }}>ID: {patientId}</Text>
+            <Pressable
+              onPress={() => setShowModal(false)}
+              style={{
+                backgroundColor: "#2a52be",
+                paddingVertical: 10,
+                paddingHorizontal: 20,
+                borderRadius: 8,
+              }}
+            >
+              <Text style={{ color: "#fff", fontWeight: "600" }}>Đóng</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+</>
   );
 }
 
