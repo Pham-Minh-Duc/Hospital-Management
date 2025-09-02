@@ -22,12 +22,6 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
-
-//    @GetMapping("/raw")
-//    List<Appointment> getAppointment(){
-//        return appointmentService.getAppointment();
-//    }
-
     @GetMapping
     public ResponseEntity<List<AppointmentResponse>> getAllAppointments() {
         List<AppointmentResponse> responses = appointmentService.getAllAppointmentsWithPatient();
@@ -38,6 +32,12 @@ public class AppointmentController {
     @GetMapping("/{patientId}")
     public List<Appointment> getAppointments(@PathVariable String patientId) {
         return appointmentService.getAppointmentsByPatient(patientId);
+    }
+// thêm lịch khám
+    @PostMapping
+    public ResponseEntity<Appointment> createAppointment(@RequestBody AppointmentCreationRequest request) {
+        Appointment saved = appointmentService.createAppointment(request);
+        return ResponseEntity.ok(saved);
     }
 
 }

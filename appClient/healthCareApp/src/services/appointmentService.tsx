@@ -1,3 +1,6 @@
+const API_URL = "http://localhost:8080/appointments"; 
+
+
 // src/services/appointmentService.ts
 
 export interface Appointment {
@@ -25,8 +28,8 @@ export interface NewAppointment {
   appointmentNote: string;
 }
 
-const API_URL = "http://localhost:8080/appointments"; 
-// ⚠️ Android Emulator: 10.0.2.2, thiết bị thật thay bằng IP máy backend
+
+
 
 // Lấy danh sách lịch khám theo patientId
 export async function getAppointmentsByPatient(patientId: string): Promise<Appointment[]> {
@@ -66,8 +69,11 @@ export async function createAppointment(data: NewAppointment): Promise<Appointme
   });
 
   if (!res.ok) {
-    throw new Error("Không thể tạo lịch khám mới");
+    const error = await res.text();
+    throw new Error("Không thể tạo lịch khám mới: " + error);
   }
 
-  return res.json() as Promise<Appointment>;
+  const result = await res.json();
+  return result as Appointment;
 }
+

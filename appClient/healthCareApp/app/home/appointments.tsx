@@ -136,11 +136,11 @@ export default function AppointmentList() {
       <AddAppointmentModal
         visible={showModal}
         onClose={() => setShowModal(false)}
-        onSave={async (data: NewAppointment) => {
+        onSave={async (data) => {
           try {
             const patientId = await AsyncStorage.getItem("patientId");
             if (!patientId) return;
-            const payload = { ...data, patientId };
+            const payload = { ...data, patientId }; // thêm patientId
             const saved = await createAppointment(payload);
             setMyAppointments((prev) => [...prev, saved]);
             setShowModal(false);
@@ -148,6 +148,7 @@ export default function AppointmentList() {
             console.error("Không thể tạo lịch:", err);
           }
         }}
+
       />
     </View>
   );

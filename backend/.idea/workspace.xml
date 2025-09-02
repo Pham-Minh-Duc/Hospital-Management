@@ -6,19 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="39ec9a9c-428a-4c65-a90c-23a8ea1897f4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/client/Doctor_gRPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/client/Doctor_gRPC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/client/Patient_gRPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/client/Patient_gRPC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/controller/AppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/controller/AppointmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/repository/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/repository/AppointmentRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/service/AppointmentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/auth/login.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/appointments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/appointments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/components/modal/appointment/addApointmentModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/components/modal/appointment/addApointmentModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/services/appointmentService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/services/appointmentService.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/services/clientService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/services/clientService.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

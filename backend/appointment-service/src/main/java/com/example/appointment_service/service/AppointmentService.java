@@ -22,37 +22,29 @@ public class AppointmentService {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
-    private WebClient webClient;
+//    private WebClient webClient;
 //    private final Patient_gRPC patientClient;
 //    private final Doctor_gRPC doctorClient;
 
 
 // constructor
-    public AppointmentService(AppointmentRepository appointmentRepository, WebClient webClient) {
-        this.appointmentRepository = appointmentRepository;
-        this.webClient = webClient;
-    }
+//    public AppointmentService(AppointmentRepository appointmentRepository, WebClient webClient) {
+//        this.appointmentRepository = appointmentRepository;
+//        this.webClient = webClient;
+//    }
 
 // lấy danh sách lịch khám theo từng client.
     public List<Appointment> getAppointmentsByPatient(String patientId) {
         return appointmentRepository.findByPatientId(patientId);
     }
 
-    public List<AppointmentResponse> getAllAppointmentsWithPatient() {
-        List<Appointment> appointments = appointmentRepository.findAll();
 
-        return appointments.stream().map(appointment -> {
-            PatientDto patient = webClient.get()
-                    .uri("/patients/{id}", appointment.getPatientId())
-                    .retrieve()
-                    .bodyToMono(PatientDto.class)
-                    .onErrorResume(e -> {
-                        // fallback nếu không gọi được patientService
-                        return Mono.just(new PatientDto(appointment.getPatientId(), "Không xác định", ""));
-                    })
-                    .block();
+// lấy danh sách lịch khám của tất cả client
+public List<AppointmentResponse> getAllAppointmentsWithPatient() {
+    List<Appointment> appointments = appointmentRepository.findAll();
 
-            return new AppointmentResponse(
+    return appointments.stream().map(appointment ->
+            new AppointmentResponse(
                     appointment.getAppointmentId(),
                     appointment.getAppointmentDate(),
                     appointment.getAppointmentTime(),
@@ -62,10 +54,25 @@ public class AppointmentService {
                     appointment.getSpecialty(),
                     appointment.getAppointmentStatus(),
                     appointment.getAppointmentNote(),
-                    patient.getPatientId(),
-                    patient.getPatientName(),
-                    patient.getPatientEmail()
-            );
-        }).collect(Collectors.toList());
+                    appointment.getPatientId(),   // chỉ trả về patientId
+                    null,                         // chưa có patientName
+                    null                          // chưa có patientEmail
+            )
+    ).collect(Collectors.toList());
+}
+
+
+    //tạo lịch khám theo id
+    public Appointment createAppointment(AppointmentCreationRequest request) {
+        Appointment appointment = new Appointment();
+        appointment.setPatientId(request.getPatientId());
+        appointment.setAppointmentDate(request.getAppointmentDate());
+        appointment.setAppointmentTime(request.getAppointmentTime());
+        appointment.setAppointmentRoom(request.getAppointmentRoom());
+        appointment.setSpecialty(request.getSpecialty());
+        appointment.setAppointmentNote(request.getAppointmentNote());
+        appointment.setAppointmentStatus("Chưa xác nhận"); // default status
+        return appointmentRepository.save(appointment);
     }
+
 }
