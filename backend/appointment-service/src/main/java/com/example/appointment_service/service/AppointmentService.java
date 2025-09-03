@@ -22,16 +22,6 @@ public class AppointmentService {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
-//    private WebClient webClient;
-//    private final Patient_gRPC patientClient;
-//    private final Doctor_gRPC doctorClient;
-
-
-// constructor
-//    public AppointmentService(AppointmentRepository appointmentRepository, WebClient webClient) {
-//        this.appointmentRepository = appointmentRepository;
-//        this.webClient = webClient;
-//    }
 
 // lấy danh sách lịch khám theo từng client.
     public List<Appointment> getAppointmentsByPatient(String patientId) {
@@ -48,15 +38,16 @@ public List<AppointmentResponse> getAllAppointmentsWithPatient() {
                     appointment.getAppointmentId(),
                     appointment.getAppointmentDate(),
                     appointment.getAppointmentTime(),
-                    appointment.getDoctorName(),
-                    appointment.getDoctorId(),
                     appointment.getAppointmentRoom(),
                     appointment.getSpecialty(),
                     appointment.getAppointmentStatus(),
                     appointment.getAppointmentNote(),
-                    appointment.getPatientId(),   // chỉ trả về patientId
-                    null,                         // chưa có patientName
-                    null                          // chưa có patientEmail
+                    appointment.getCreatedAt(),
+                    appointment.getDoctorId(),
+                    null,
+                    appointment.getPatientId(),
+                    null,
+                    null
             )
     ).collect(Collectors.toList());
 }
@@ -71,7 +62,7 @@ public List<AppointmentResponse> getAllAppointmentsWithPatient() {
         appointment.setAppointmentRoom(request.getAppointmentRoom());
         appointment.setSpecialty(request.getSpecialty());
         appointment.setAppointmentNote(request.getAppointmentNote());
-        appointment.setAppointmentStatus("Chưa xác nhận"); // default status
+        appointment.setAppointmentStatus("Chờ xác nhận"); // default status
         return appointmentRepository.save(appointment);
     }
 

@@ -22,6 +22,7 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
+//hiển thị danh sách lịch khám
     @GetMapping
     public ResponseEntity<List<AppointmentResponse>> getAllAppointments() {
         List<AppointmentResponse> responses = appointmentService.getAllAppointmentsWithPatient();

@@ -7,11 +7,10 @@
     <list default="true" id="39ec9a9c-428a-4c65-a90c-23a8ea1897f4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/controller/AppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/controller/AppointmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/request/AppointmentResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/request/AppointmentResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/service/AppointmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/appointments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/app/home/appointments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/components/modal/appointment/addApointmentModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/components/modal/appointment/addApointmentModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/services/appointmentService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mobileapp/healthCareApp/src/services/appointmentService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/entity/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/entity/Doctor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webAdmin" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

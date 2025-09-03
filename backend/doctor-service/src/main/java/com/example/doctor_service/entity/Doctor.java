@@ -25,5 +25,6 @@ public class Doctor {
     private String  doctorPosition;
     private String  doctorQualification;
     private String  doctorSpecialization;
+    private String  doctorStatus;
     private Integer doctorExperienceYears;
 }

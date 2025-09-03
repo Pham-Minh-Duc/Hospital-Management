@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,15 +15,16 @@ public class AppointmentResponse {
     private String appointmentId;
     private String appointmentDate;
     private String appointmentTime;
-    private String doctorName;
-    private String doctorId;
     private String appointmentRoom;
     private String specialty;
     private String appointmentStatus;
     private String appointmentNote;
+    private LocalDateTime createdAt;
+
+    private String doctorId;
+    private String doctorName;
 
     private String patientId;
     private String patientName;
     private String patientEmail;
-
 }
