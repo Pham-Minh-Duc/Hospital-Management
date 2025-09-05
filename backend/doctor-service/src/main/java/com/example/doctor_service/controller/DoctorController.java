@@ -30,4 +30,9 @@ public class DoctorController {
         return doctorService.getDoctor(doctorId);
     }
 
+    @DeleteMapping("/{doctorId}")
+    String deleteDoctor(@PathVariable String doctorId) {
+        doctorService.deleteDoctor(doctorId);
+        return "Xóa bác sĩ thành công";
+    }
 }

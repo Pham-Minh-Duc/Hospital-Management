@@ -26,7 +26,7 @@ public class DoctorService {
         doctor.setDoctorQualification(request.getDoctorQualification());
         doctor.setDoctorSpecialization(request.getDoctorSpecialization());
         doctor.setDoctorExperienceYears(request.getDoctorExperienceYears());
-
+        doctor.setDoctorStatus(request.getDoctorStatus());
 
         return doctorRepository.save(doctor);
     }
@@ -37,6 +37,10 @@ public class DoctorService {
 
     public Doctor getDoctor(String id){
         return doctorRepository.findById(id).orElseThrow(() -> new RuntimeException("Doctor not found"));
+    }
+
+    public void deleteDoctor(String doctorId) {
+        doctorRepository.deleteById(doctorId);
     }
 }
 
