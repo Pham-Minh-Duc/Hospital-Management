@@ -29,6 +29,29 @@ export async function createPatient(patient: Omit<Patient, "patientId">): Promis
     const errText = await res.text();
     throw new Error("Không thể thêm bệnh nhân: " + errText);
   }
+  return res.json();
+}
+
+export async function deletePatient(id: string) {
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+  });
+  if(!res.ok) {
+    throw new Error("Xóa bệnh nhân thất bại");
+  }
+  return true;
+}
+
+export async function updatePatient(id: string, data: Partial<Patient>): Promise<Patient> {
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw new Error("Cập nhật thông tin bệnh nhân thất bại");
+  }
 
   return res.json();
 }

@@ -5,7 +5,8 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import Label from "@/components/label";
 import AddPatientModal from "./modal/addPatientModal";
-import { getAllPatients, Patient } from "../../../../service/patientService";
+import EditPatientModal from "./modal/editPatientModal";
+import { getAllPatients, deletePatient, Patient } from "../../../../service/patientService";
 
 
 const PatientPage = () => {
@@ -13,6 +14,10 @@ const PatientPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [deleteMode, setDeleteMode] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [filteredPatients, setFilteredPatients] = useState<Patient[]>([]);
   const [search, setSearch] = useState({
     patientName: "",
@@ -51,6 +56,19 @@ const PatientPage = () => {
         );
       });
       setFilteredPatients(filtered);
+    }
+
+    //xóa bệnh nhân
+    const handleDelete = async (patientId: string) =>{
+      if(!confirm("Bạn có chắc chắn muốn xóa bệnh nhân này?")) return;
+          try{
+            await deletePatient(patientId);
+            alert("Xóa bệnh nhân thành công");
+            await loadPatients();
+          }
+          catch(e){
+            alert("Xóa bệnh nhân thất bại" + e);
+          }
     }
 
     return (
@@ -97,8 +115,8 @@ const PatientPage = () => {
         <div className="mt-[15px]">
           <Button label="Tìm kiếm" onClick={handleSearch}/>
           <Button label="Thêm" onClick={() => setShowModal(true)}/>
-          <Button label="Xóa"/>
-          <Button label="Sửa"/>
+          <Button label={deleteMode ? "Thoát xóa" : "Xóa"} onClick={() => setDeleteMode(!deleteMode)}/>
+          <Button label={editMode ? "Thoát sửa" : "Sửa"} onClick={() => setEditMode(!editMode)}/>
         </div>
 
 
@@ -115,6 +133,7 @@ const PatientPage = () => {
               <table className="w-full text-sm">
                 <thead className="sticky top-0 bg-gray-100 text-left">
                   <tr className="text-center">
+                    {deleteMode && <th className="p-3"></th>}
                     <th className="p-3">ID bệnh nhân</th>
                     <th className="p-3">Tên bệnh nhân</th>
                     <th className="p-3">Số điện thoại</th>
@@ -123,12 +142,21 @@ const PatientPage = () => {
                     <th className="p-3">Năm sinh</th>
                     <th className="p-3">Địa chỉ</th>
                     <th className="p-3">BYHT</th>
+                    {editMode && <th className="p-3"></th>}
                   </tr>
                 </thead>
                 <tbody>
                   {filteredPatients.length > 0 ? (
                   filteredPatients.map((item, index) => (
                     <tr key={index} className="border-b hover:bg-gray-100 text-center">
+                      {deleteMode && (
+                          <td
+                            className="p-3 text-red-500 cursor-pointer hover:font-bold"
+                            onClick={() => handleDelete(item.patientId)}
+                          >
+                            ❌
+                          </td>
+                        )}
                       <td className="p-3">{item.patientId}</td>
                       <td className="p-3">{item.patientName}</td>
                       <td className="p-3">{item.patientPhone}</td>
@@ -137,6 +165,14 @@ const PatientPage = () => {
                       <td className="p-3">{item.patientBirthday}</td>
                       <td className="p-3">{item.patientAddress}</td>
                       <td className="p-3">{item.patientInsuranceNumber}</td>
+                      {editMode && (
+                        <td className="p-3"
+                          onClick={() => {
+                            setSelectedPatient(item); // lưu bệnh nhân được chọn
+                            setShowEditModal(true);   // mở modal
+                          }}>✏️
+                        </td>
+                      )}
                     </tr>
                   ))
                   ) : (
@@ -156,6 +192,13 @@ const PatientPage = () => {
         {showModal && (
           <AddPatientModal
             onClose={() => setShowModal(false)}
+            onSuccess={loadPatients}
+          />
+        )}
+        {showEditModal && selectedPatient && (
+          <EditPatientModal
+            patient={selectedPatient}
+            onClose={() => setShowEditModal(false)}
             onSuccess={loadPatients}
           />
         )}

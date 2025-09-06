@@ -36,6 +36,7 @@ public class PatientService {
     public Patient updatePatient(String patientId, PatientUpdateRequest request){
         Patient patient = getPatient(patientId);
 
+        patient.setPatientName(request.getPatientName());
         patient.setPatientPhone(request.getPatientPhone());
         patient.setPatientEmail(request.getPatientEmail());
         patient.setPatientGender(request.getPatientGender());

@@ -4,6 +4,7 @@ import clsx from "clsx";
 interface InputProps {
     type?: string;
     placeholder?: string;
+    name?: string;
     value?: string;
     readonly?: boolean;
     onClick?: () => void;
@@ -11,11 +12,12 @@ interface InputProps {
     className?: string;
 }
 
-const InputStyles = ({type, placeholder, value, readonly, onClick, onChange, className} : InputProps) => {
+const InputStyles = ({type, placeholder, name, value, readonly, onClick, onChange, className} : InputProps) => {
     return (
         <input 
             type={type}
             placeholder={placeholder}
+            name={name}
             value={value}
             readOnly={readonly}
             onClick={onClick}
