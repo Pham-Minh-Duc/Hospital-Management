@@ -3,6 +3,7 @@ package com.example.doctor_service.service;
 import com.example.doctor_service.entity.Doctor;
 import com.example.doctor_service.repository.DoctorRepository;
 import com.example.doctor_service.request.DoctorCreationRequest;
+import com.example.doctor_service.request.DoctorUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,29 @@ public class DoctorService {
         return doctorRepository.save(doctor);
     }
 
+    public Doctor updateDoctor(String doctorId, DoctorUpdateRequest request){
+        Doctor doctor = getDoctor(doctorId);
+
+        doctor.setDoctorName(request.getDoctorName());
+        doctor.setDoctorGender(request.getDoctorGender());
+        doctor.setDoctorDob(request.getDoctorDob());
+        doctor.setDoctorPhone(request.getDoctorPhone());
+        doctor.setDoctorPhone(request.getDoctorPhone());
+        doctor.setDoctorEmail(request.getDoctorEmail());
+        doctor.setDoctorDepartment(request.getDoctorDepartment());
+        doctor.setDoctorPosition(request.getDoctorPosition());
+        doctor.setDoctorQualification(request.getDoctorQualification());
+        doctor.setDoctorSpecialization(request.getDoctorSpecialization());
+        doctor.setDoctorStatus(request.getDoctorStatus());
+        doctor.setDoctorExperienceYears(request.getDoctorExperienceYears());
+
+        return doctorRepository.save(doctor);
+    }
+
+    public void deleteDoctor(String doctorId) {
+        doctorRepository.deleteById(doctorId);
+    }
+
     public List<Doctor> getDoctor() {
         return doctorRepository.findAll();
     }
@@ -39,8 +63,6 @@ public class DoctorService {
         return doctorRepository.findById(id).orElseThrow(() -> new RuntimeException("Doctor not found"));
     }
 
-    public void deleteDoctor(String doctorId) {
-        doctorRepository.deleteById(doctorId);
-    }
+
 }
 

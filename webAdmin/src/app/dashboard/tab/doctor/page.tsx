@@ -6,6 +6,7 @@ import Input from '@/components/input'
 import Label from '@/components/label';
 import Select from '@/components/select';
 import AddDoctorModal from './modal/addDoctorModal';
+import EditDoctorModal from './modal/editDoctorModal';
 import { getAllDoctors, deleteDoctor, Doctor } from '../../../../service/doctorService';
 
 const DoctorPage = () => {
@@ -15,6 +16,9 @@ const DoctorPage = () => {
   const [status, setStatus] = useState('all');
   const [showModal, setShowModal] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
   const [filteredDoctors, setFilteredDoctors] = useState<Doctor[]>([]);
   const [search, setSearch] = useState({
     doctorName: "",
@@ -123,7 +127,7 @@ const DoctorPage = () => {
         <Button label="Tìm kiếm" onClick={handleSearch}/>
         <Button label="Thêm" onClick={() => setShowModal(true)}/>
         <Button label={deleteMode ? "Thoát xóa" : "Xóa"} onClick={() => setDeleteMode(!deleteMode)}/>
-        <Button label='Sửa'/>
+        <Button label={editMode ? "Thoát sửa" : "Sửa"} onClick={() => setEditMode(!editMode)}/>
       </div>
       {/* table */}
       <div className="mt-5">
@@ -140,7 +144,7 @@ const DoctorPage = () => {
             <table className="w-full text-sm">
               <thead className="sticky top-0 bg-gray-100 text-left">
                 <tr className="text-center">
-                  {deleteMode && <th className="p-3">❌</th>}
+                  {deleteMode && <th className="p-3"></th>}
                   <th className="p-3">Mã bác sĩ</th>
                   <th className="p-3">Họ tên</th>
                   <th className="p-3">Giới tính</th>
@@ -153,6 +157,7 @@ const DoctorPage = () => {
                   <th className="p-3">Chuyên ngành</th>
                   <th className="p-3">Kinh nghiệm (năm)</th>
                   <th className="p-3">Trạng thái</th>
+                  {editMode && <th className="p-3"></th>}
                 </tr>
               </thead>
               <tbody>
@@ -164,7 +169,7 @@ const DoctorPage = () => {
                             className="p-3 text-red-500 cursor-pointer hover:font-bold"
                             onClick={() => handleDelete(item.doctorId)}
                           >
-                            ➖
+                            ❌
                           </td>
                         )}
                       <td className="p-3">{item.doctorId}</td>
@@ -179,6 +184,14 @@ const DoctorPage = () => {
                       <td className="p-3">{item.doctorSpecialization}</td>
                       <td className="p-3">{item.doctorExperienceYears}</td>
                       <td className="p-3">{statusLabels[item.doctorStatus] || item.doctorStatus}</td>
+                      {editMode && (
+                      <td className="p-3"
+                        onClick={() => {
+                          setSelectedDoctor(item); // lưu bệnh nhân được chọn
+                          setShowEditModal(true);   // mở modal
+                        }}>✏️
+                      </td>
+                    )}
                     </tr>
                   ))
                 ) : (
@@ -200,6 +213,13 @@ const DoctorPage = () => {
             onSuccess={loadDoctors}
           />
         )}
+      {showEditModal && selectedDoctor && (
+        <EditDoctorModal
+          doctor={selectedDoctor}
+          onClose={() => setShowEditModal(false)}
+          onSuccess={loadDoctors}
+        />
+      )}
     </div>
   );
 }

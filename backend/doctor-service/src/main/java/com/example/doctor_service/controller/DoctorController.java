@@ -2,6 +2,7 @@ package com.example.doctor_service.controller;
 
 import com.example.doctor_service.entity.Doctor;
 import com.example.doctor_service.request.DoctorCreationRequest;
+import com.example.doctor_service.request.DoctorUpdateRequest;
 import com.example.doctor_service.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,11 @@ public class DoctorController {
     @GetMapping("/{doctorId}")
     Doctor getDoctor(@PathVariable String doctorId){
         return doctorService.getDoctor(doctorId);
+    }
+
+    @PutMapping("/{doctorId}")
+    Doctor putDoctor(@PathVariable String doctorId, @RequestBody DoctorUpdateRequest request) {
+        return doctorService.updateDoctor(doctorId, request);
     }
 
     @DeleteMapping("/{doctorId}")

@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39ec9a9c-428a-4c65-a90c-23a8ea1897f4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/request/DoctorUpdateRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/dto/request/PatientUpdateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/dto/request/PatientUpdateRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/service/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/service/PatientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/controller/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/controller/DoctorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/service/DoctorService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +72,7 @@
       <recent name="D:\OneDrive\Máy tính\personal project\healthcare-system\backend\gRPC-common\src\main\proto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Patient-service">
+  <component name="RunManager" selected="Application.doctor-service">
     <configuration name="Patient-service" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.example.patient_service.PatientServiceApplication" />
       <module name="patient-service" />
