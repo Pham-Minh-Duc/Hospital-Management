@@ -1,5 +1,7 @@
-package com.example.appointment_service.dto.request;
+package com.example.appointment_service.dto.response;
 
+import com.example.appointment_service.dto.DoctorDto;
+import com.example.appointment_service.dto.PatientDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,15 +18,11 @@ public class AppointmentResponse {
     private String appointmentDate;
     private String appointmentTime;
     private String appointmentRoom;
-    private String specialty;
     private String appointmentStatus;
     private String appointmentNote;
     private LocalDateTime createdAt;
 
-    private String doctorId;
-    private String doctorName;
+    private PatientDto patient;
 
-    private String patientId;
-    private String patientName;
-    private String patientEmail;
+    private DoctorDto doctor;
 }

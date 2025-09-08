@@ -15,7 +15,7 @@ spring:
         - id: doctor-service
           uri: lb://doctor-service
           predicates:
-            - Path=/doctors/**
+            - Path=/doctors/**, /specializations/**
           filters:
             - StripPrefix=0
 

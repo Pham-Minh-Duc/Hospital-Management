@@ -7,25 +7,41 @@ export interface Appointment {
   appointmentId: string;
   appointmentDate: string;
   appointmentTime: string;
-  doctorName: string | null;
-  doctorId: string | null;
   appointmentRoom: string;
-  specialty: string;
   appointmentStatus: string;
   appointmentNote: string;
-  patientId: string;
+  
+  patient:{
+    patientId: string;
+  }
+  doctor:{
+    doctorId: string | null;
+    doctorName: string | null;
+    doctorSpecialization: string;
+  }
   createdAt: string;
   updateAt: string;
 }
 
 // Khi tạo lịch mới
 export interface NewAppointment {
-  patientId: string; // 🔹 bắt buộc gửi patientId
+  appointmentId: string;
   appointmentDate: string;
   appointmentTime: string;
   appointmentRoom: string;
-  specialty: string;
+  appointmentStatus: string;
   appointmentNote: string;
+  
+  patient:{
+    patientId: string;
+  }
+  doctor:{
+    doctorId: string | null;
+    doctorName: string | null;
+    doctorSpecialization: string;
+  }
+  createdAt: string;
+  updateAt: string;
 }
 
 
@@ -46,6 +62,7 @@ export async function getAppointmentsByPatient(patientId: string): Promise<Appoi
   return data as Appointment[];
 }
 
+
 // Lấy chi tiết lịch khám theo appointmentId
 export async function getAppointmentById(appointmentId: string): Promise<Appointment> {
   const res = await fetch(`${API_URL}/detail/${appointmentId}`, {
@@ -59,6 +76,7 @@ export async function getAppointmentById(appointmentId: string): Promise<Appoint
 
   return res.json() as Promise<Appointment>;
 }
+
 
 // Tạo lịch khám mới
 export async function createAppointment(data: NewAppointment): Promise<Appointment> {

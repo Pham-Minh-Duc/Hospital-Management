@@ -5,15 +5,19 @@ export interface Appointment {
   appointmentId: string;
   appointmentDate: string;
   appointmentTime: string;
-  doctorName: string | null;
-  doctorId: string | null;
   appointmentRoom: string;
-  specialty: string;
   appointmentStatus: string;
   appointmentNote: string;
-  patientId: string;
-  patientName?: string;   // nếu API trả kèm
-  email?: string;         // nếu API trả kèm
+  patient: {
+    patientId: string;
+    patientName?: string;   // nếu API trả kèm
+    patientEmail?: string;         // nếu API trả kèm
+  };
+  doctor: {
+    doctorId: string | null;
+    doctorName: string | null;
+    doctorSpecialization: string;
+  };
   createdAt: string;
   updateAt: string;
 }
@@ -21,7 +25,7 @@ export interface Appointment {
 
 
 export async function getAllAppointments(): Promise<Appointment[]> {
-  const res = await fetch(API_URL, { cache: "no-store" }); // luôn fetch mới
+  const res = await fetch(API_URL, { cache: "no-store" });
   if (!res.ok) {
     throw new Error("Không thể tải danh sách lịch khám");
   }

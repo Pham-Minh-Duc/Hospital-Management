@@ -20,15 +20,13 @@ public class PatientService {
         Patient patient = new Patient();
 
         patient.setPatientName(request.getPatientName());
+        patient.setPatientAvatar(request.getPatientAvatar());
         patient.setPatientPhone(request.getPatientPhone());
         patient.setPatientEmail(request.getPatientEmail());
         patient.setPatientGender(request.getPatientGender());
         patient.setPatientBirthday(request.getPatientBirthday());
         patient.setPatientAddress(request.getPatientAddress());
-        patient.setPatientMedicalHistory(request.getPatientMedicalHistory());
-        patient.setPatientAllergies(request.getPatientAllergies());
         patient.setPatientInsuranceNumber(request.getPatientInsuranceNumber());
-        patient.setPatientNotes(request.getPatientNotes());
 
         return patientRepository.save(patient);
     }
@@ -37,15 +35,13 @@ public class PatientService {
         Patient patient = getPatient(patientId);
 
         patient.setPatientName(request.getPatientName());
+        patient.setPatientAvatar(request.getPatientAvatar());
         patient.setPatientPhone(request.getPatientPhone());
         patient.setPatientEmail(request.getPatientEmail());
         patient.setPatientGender(request.getPatientGender());
         patient.setPatientBirthday(request.getPatientBirthday());
         patient.setPatientAddress(request.getPatientAddress());
-        patient.setPatientMedicalHistory(request.getPatientMedicalHistory());
-        patient.setPatientAllergies(request.getPatientAllergies());
         patient.setPatientInsuranceNumber(request.getPatientInsuranceNumber());
-        patient.setPatientNotes(request.getPatientNotes());
 
         return patientRepository.save(patient);
     }
@@ -64,10 +60,10 @@ public class PatientService {
 
     public PatientLoginResponse login(PatientLoginRequest request) {
         Patient patient = patientRepository.findByPatientEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("Sai tài khoản hoặc mật khẩu"));
+                .orElseThrow(() -> new RuntimeException("Error username or password !"));
 
         if (!patient.getPatientPassword().equals(request.getPassword())) {
-            throw new RuntimeException("Sai tài khoản hoặc mật khẩu");
+            throw new RuntimeException("Error username or password !");
         }
 
         return new PatientLoginResponse(

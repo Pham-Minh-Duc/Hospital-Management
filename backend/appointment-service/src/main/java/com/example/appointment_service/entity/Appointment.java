@@ -18,12 +18,11 @@ public class Appointment {
     private String appointmentId;
     private String appointmentDate;
     private String appointmentTime;
-    private String doctorName;
-    private String doctorId;
     private String appointmentRoom;
-    private String specialty;
     private String appointmentStatus;
     private String appointmentNote;
+
+    private String doctorId;
 
     private String patientId;
 

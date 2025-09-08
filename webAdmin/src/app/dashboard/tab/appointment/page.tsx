@@ -47,8 +47,8 @@ const AppointmentPage = () => {
     const filtered = appointments.filter((a) => {
       return (
         (search.appointmentId === "" || a.appointmentId.includes(search.appointmentId)) &&
-        (search.patientId === "" || a.patientId.includes(search.patientId)) &&
-        (search.patientEmail === "" || (a.email && a.email.includes(search.patientEmail))) &&
+        (search.patientId === "" || a.patient.patientId.includes(search.patientId)) &&
+        (search.patientEmail === "" || (a.patient.patientEmail && a.patient.patientEmail.includes(search.patientEmail))) &&
         (search.status === "" || a.appointmentStatus === search.status)
       );
     });
@@ -123,7 +123,7 @@ const AppointmentPage = () => {
                     <th className="p-3">Mã bác sĩ</th>
                     <th className="p-3">Phòng</th>
                     <th className="p-3">Chuyên khoa</th>
-                    <th className="p-3">Email</th>
+                    <th className="p-3">Email bệnh nhân</th>
                     <th className="p-3">Tên bệnh nhân</th>
                     <th className="p-3">Mã bệnh nhân</th>
                     <th className="p-3">Trạng thái</th>
@@ -139,13 +139,13 @@ const AppointmentPage = () => {
                         <td className="p-3">{a.appointmentId}</td>
                         <td className="p-3">{a.appointmentDate}</td>
                         <td className="p-3">{a.appointmentTime}</td>
-                        <td className="p-3">{a.doctorName || "-"}</td>
-                        <td className="p-3">{a.doctorId || "-"}</td>
+                        <td className="p-3">{a.doctor.doctorName || "-"}</td>
+                        <td className="p-3">{a.doctor.doctorId || "-"}</td>
                         <td className="p-3">{a.appointmentRoom}</td>
-                        <td className="p-3">{a.specialty}</td>
-                        <td className="p-3">{a.email || "-"}</td>
-                        <td className="p-3">{a.patientName || "-"}</td>
-                        <td className="p-3">{a.patientId}</td>
+                        <td className="p-3">{a.doctor.doctorSpecialization}</td>
+                        <td className="p-3">{a.patient.patientEmail || "-"}</td>
+                        <td className="p-3">{a.patient.patientName || "-"}</td>
+                        <td className="p-3">{a.patient.patientId}</td>
                         <td className="p-3">{a.appointmentStatus}</td>
                         <td className="p-3">{a.appointmentNote}</td>
                         <td className="p-3">{a.createdAt}</td>

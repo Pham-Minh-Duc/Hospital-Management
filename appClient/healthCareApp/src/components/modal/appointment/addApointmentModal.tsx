@@ -1,103 +1,165 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  Modal,
   View,
   Text,
   TextInput,
   TouchableOpacity,
+  Modal,
   StyleSheet,
-  ScrollView,
-  Alert,
+  ActivityIndicator,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import { getAllSpecializations, getDoctorsBySpecialization } from "../../../services/doctorService";
 
-interface Props {
+interface AddAppointmentModalProps {
   visible: boolean;
   onClose: () => void;
-  onSave: (data: Omit<NewAppointment, "patientId">) => void;
+  onSave: (data: any) => void;
 }
 
-export interface NewAppointment {
-  appointmentDate: string;
-  appointmentTime: string;
-  appointmentRoom: string;
-  specialty: string;
-  appointmentNote: string;
-  patientId: string; // sẽ thêm tự động khi submit
-}
+export default function AddAppointmentModal({
+  visible,
+  onClose,
+  onSave,
+}: AddAppointmentModalProps) {
+  const [appointmentDate, setAppointmentDate] = useState("");
+  const [appointmentTime, setAppointmentTime] = useState("");
+  const [appointmentRoom, setAppointmentRoom] = useState("");
+  const [appointmentNote, setAppointmentNote] = useState("");
 
-export default function AddAppointmentModal({ visible, onClose, onSave }: Props) {
-  const [form, setForm] = useState<Omit<NewAppointment, "patientId">>({
-    appointmentDate: "",
-    appointmentTime: "",
-    appointmentRoom: "",
-    specialty: "",
-    appointmentNote: "",
-  });
+  const [specializations, setSpecializations] = useState<any[]>([]);
+  const [selectedSpecialization, setSelectedSpecialization] = useState<string>("");
+  const [doctors, setDoctors] = useState<any[]>([]);
+  const [selectedDoctor, setSelectedDoctor] = useState<string>("");
 
-  const handleChange = (key: keyof typeof form, value: string) => {
-    setForm((prev) => ({ ...prev, [key]: value }));
-  };
+  const [loadingDoctors, setLoadingDoctors] = useState(false);
 
-  const handleSubmit = () => {
-    const isValid = Object.values(form).every((val) => val.trim() !== "");
-    if (!isValid) {
-      Alert.alert("Lỗi", "Vui lòng điền đầy đủ thông tin trước khi lưu.");
-      return;
-    }
-    onSave(form); // patientId sẽ được thêm ở parent
-    setForm({
-      appointmentDate: "",
-      appointmentTime: "",
-      appointmentRoom: "",
-      specialty: "",
-      appointmentNote: "",
-    });
+  // load chuyên khoa
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await getAllSpecializations();
+        setSpecializations(data);
+      } catch (err) {
+        console.error("Lỗi khi load chuyên khoa:", err);
+      }
+    })();
+  }, []);
+
+  // load bác sĩ khi chọn chuyên khoa
+  useEffect(() => {
+    if (!selectedSpecialization) return;
+    (async () => {
+      setLoadingDoctors(true);
+      try {
+        const data = await getDoctorsBySpecialization(selectedSpecialization);
+        setDoctors(data);
+      } catch (err) {
+        console.error("Lỗi khi load bác sĩ:", err);
+        setDoctors([]);
+      } finally {
+        setLoadingDoctors(false);
+      }
+    })();
+  }, [selectedSpecialization]);
+
+  const handleSave = () => {
+    const newAppointment = {
+      appointmentId: "",
+      appointmentDate,
+      appointmentTime,
+      appointmentRoom,
+      appointmentStatus: "Chờ xác nhận",
+      appointmentNote,
+      patient: { patientId: "" }, // sẽ gán trong AppointmentList
+      doctor: {
+        doctorId: selectedDoctor,
+        doctorName: null,
+        doctorSpecialization: selectedSpecialization,
+      },
+      createdAt: new Date().toISOString(),
+      updateAt: new Date().toISOString(),
+    };
+    onSave(newAppointment);
   };
 
   return (
-    <Modal visible={visible} transparent animationType="slide">
+    <Modal visible={visible} animationType="slide" transparent>
       <View style={styles.overlay}>
         <View style={styles.modal}>
-          <Text style={styles.title}>Thêm lịch khám mới</Text>
-          <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
-            <TextInput
-              style={styles.input}
-              placeholder="📅 Ngày khám (YYYY-MM-DD)"
-              value={form.appointmentDate}
-              onChangeText={(text) => handleChange("appointmentDate", text)}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="⏰ Giờ khám (HH:mm)"
-              value={form.appointmentTime}
-              onChangeText={(text) => handleChange("appointmentTime", text)}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="🏥 Phòng khám"
-              value={form.appointmentRoom}
-              onChangeText={(text) => handleChange("appointmentRoom", text)}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="🩺 Chuyên khoa"
-              value={form.specialty}
-              onChangeText={(text) => handleChange("specialty", text)}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="📝 Ghi chú"
-              value={form.appointmentNote}
-              onChangeText={(text) => handleChange("appointmentNote", text)}
-            />
-          </ScrollView>
+          <Text style={styles.title}>🆕 Tạo lịch khám</Text>
 
-          <View style={styles.buttonRow}>
-            <TouchableOpacity style={styles.cancelBtn} onPress={onClose}>
-              <Text style={styles.cancel}>Hủy</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Ngày khám (yyyy-mm-dd)"
+            value={appointmentDate}
+            onChangeText={setAppointmentDate}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="Giờ khám (HH:mm)"
+            value={appointmentTime}
+            onChangeText={setAppointmentTime}
+          />
+
+          <TextInput
+            style={styles.input}
+            placeholder="Phòng khám"
+            value={appointmentRoom}
+            onChangeText={setAppointmentRoom}
+          />
+
+          {/* chọn chuyên khoa */}
+          <Text style={styles.label}>Chuyên khoa</Text>
+          <Picker
+            selectedValue={selectedSpecialization}
+            onValueChange={(val) => setSelectedSpecialization(val)}
+          >
+            <Picker.Item label="-- Chọn chuyên khoa --" value="" />
+            {specializations.map((s) => (
+              <Picker.Item
+                key={s.specializationId}
+                label={s.specializationName}
+                value={s.specializationName}
+              />
+            ))}
+          </Picker>
+
+          {/* chọn bác sĩ */}
+          <Text style={styles.label}>Bác sĩ</Text>
+          {loadingDoctors ? (
+            <ActivityIndicator size="small" color="#007AFF" />
+          ) : (
+            <Picker
+              selectedValue={selectedDoctor}
+              onValueChange={(val) => setSelectedDoctor(val)}
+              enabled={doctors.length > 0}
+            >
+              <Picker.Item label="-- Chọn bác sĩ --" value="" />
+              {doctors.map((d) => (
+                <Picker.Item
+                  key={d.doctorId}
+                  label={d.doctorName}
+                  value={d.doctorId}
+                />
+              ))}
+            </Picker>
+          )}
+
+          <TextInput
+            style={styles.input}
+            placeholder="Ghi chú"
+            value={appointmentNote}
+            onChangeText={setAppointmentNote}
+          />
+
+          <View style={styles.actions}>
+            <TouchableOpacity style={styles.cancel} onPress={onClose}>
+              <Text style={{ color: "#999" }}>Hủy</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.saveBtn} onPress={handleSubmit}>
-              <Text style={styles.save}>Lưu</Text>
+            <TouchableOpacity style={styles.save} onPress={handleSave}>
+              <Text style={{ color: "#fff" }}>Lưu</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -107,13 +169,37 @@ export default function AddAppointmentModal({ visible, onClose, onSave }: Props)
 }
 
 const styles = StyleSheet.create({
-  overlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.3)", justifyContent: "center", alignItems: "center" },
-  modal: { backgroundColor: "#fff", padding: 20, borderRadius: 12, width: "90%", maxHeight: "90%" },
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.3)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modal: {
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 12,
+    width: "90%",
+  },
   title: { fontSize: 18, fontWeight: "bold", marginBottom: 12 },
-  input: { borderWidth: 1, borderColor: "#ccc", borderRadius: 8, padding: 10, marginBottom: 12 },
-  buttonRow: { flexDirection: "row", justifyContent: "space-between", marginTop: 12 },
-  cancelBtn: { flex: 1, marginRight: 10, padding: 12, borderRadius: 8, backgroundColor: "#eee", alignItems: "center" },
-  saveBtn: { flex: 1, marginLeft: 10, padding: 12, borderRadius: 8, backgroundColor: "#007AFF", alignItems: "center" },
-  cancel: { color: "#555", fontSize: 16 },
-  save: { color: "#fff", fontSize: 16, fontWeight: "bold" },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 12,
+  },
+  label: { fontWeight: "600", marginTop: 10 },
+  actions: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginTop: 16,
+  },
+  cancel: { marginRight: 16 },
+  save: {
+    backgroundColor: "#007AFF",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+  },
 });

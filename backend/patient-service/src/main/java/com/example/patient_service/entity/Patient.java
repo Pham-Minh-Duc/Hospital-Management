@@ -14,15 +14,13 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String patientId;
-    private String patientPassword;
     private String patientName;
-    private String patientPhone;
+    private String patientAvatar;
     private String patientEmail;
+    private String patientPassword;
+    private String patientPhone;
     private String patientGender;
     private String patientBirthday;
     private String patientAddress;
-    private String patientMedicalHistory;
-    private String patientAllergies;
     private String patientInsuranceNumber;
-    private String patientNotes;
 }

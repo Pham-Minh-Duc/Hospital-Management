@@ -16,7 +16,7 @@ public class DoctorCreationRequest {
     private String doctorDepartment;
     private String doctorPosition;
     private String doctorQualification;
-    private String doctorSpecialization;
+    private Long specializationId;
     private Integer doctorExperienceYears;
     private String doctorStatus;
 }

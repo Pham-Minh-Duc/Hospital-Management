@@ -1,9 +1,6 @@
 package com.example.doctor_service.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +21,11 @@ public class Doctor {
     private String  doctorDepartment;
     private String  doctorPosition;
     private String  doctorQualification;
-    private String  doctorSpecialization;
+
+    @ManyToOne
+    @JoinColumn(name = "specialization_id")
+    private Specialization  doctorSpecialization;
+
     private String  doctorStatus;
     private Integer doctorExperienceYears;
 }
