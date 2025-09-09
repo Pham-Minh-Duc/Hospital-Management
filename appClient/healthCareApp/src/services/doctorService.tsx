@@ -22,13 +22,14 @@ export const fetchDoctors = async () => {
   return await response.json();
 };
 
-export async function getDoctorsBySpecialization(specializationName: string) {
-  const res = await fetch(
-    `${API_URL}/by-specialization?specializationName=${encodeURIComponent(specializationName)}`
-  );
-  if (!res.ok) throw new Error("Không thể tải danh sách bác sĩ");
-  return await res.json();
+export async function getDoctorsBySpecialization(specializationId: string) {
+  const res = await fetch(`${API_URL}?specializationId=${specializationId}`);
+  if (!res.ok) {
+    throw new Error("Lỗi khi lấy danh sách bác sĩ");
+  }
+  return res.json();
 }
+
 
 export async function getAllSpecializations() {
   const res = await fetch(`${API_BASE}/specializations`);

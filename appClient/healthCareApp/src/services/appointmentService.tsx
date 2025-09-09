@@ -1,7 +1,20 @@
-const API_URL = "http://localhost:8080/appointments"; 
-
-
 // src/services/appointmentService.ts
+const API_URL = "http://localhost:8080/appointments";
+
+export interface SpecializationDto {
+  specializationId: string;
+  specializationName?: string | null;
+}
+
+export interface DoctorDto {
+  doctorId: string;
+  doctorName?: string | null;
+  specialization?: SpecializationDto | null;
+}
+
+export interface PatientRef {
+  patientId: string;
+}
 
 export interface Appointment {
   appointmentId: string;
@@ -9,89 +22,34 @@ export interface Appointment {
   appointmentTime: string;
   appointmentRoom: string;
   appointmentStatus: string;
-  appointmentNote: string;
-  
-  patient:{
-    patientId: string;
-  }
-  doctor:{
-    doctorId: string | null;
-    doctorName: string | null;
-    doctorSpecialization: string;
-  }
-  createdAt: string;
-  updateAt: string;
+  appointmentNote?: string;
+  patient: PatientRef;
+  doctor?: DoctorDto | null;
+  createdAt?: string;
+  updateAt?: string;
 }
 
-// Khi tạo lịch mới
-export interface NewAppointment {
-  appointmentId: string;
-  appointmentDate: string;
-  appointmentTime: string;
-  appointmentRoom: string;
-  appointmentStatus: string;
-  appointmentNote: string;
-  
-  patient:{
-    patientId: string;
-  }
-  doctor:{
-    doctorId: string | null;
-    doctorName: string | null;
-    doctorSpecialization: string;
-  }
-  createdAt: string;
-  updateAt: string;
-}
+// Dữ liệu gửi khi tạo mới (server thường sinh id và timestamp)
+export type NewAppointment = Omit<Appointment, "appointmentId" | "createdAt" | "updateAt">;
 
-
-
-
-// Lấy danh sách lịch khám theo patientId
 export async function getAppointmentsByPatient(patientId: string): Promise<Appointment[]> {
-  const res = await fetch(`${API_URL}/${patientId}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-
+  const res = await fetch(`${API_URL}/${patientId}`, { cache: "no-store" });
   if (!res.ok) {
-    throw new Error("Không thể tải danh sách lịch khám của bệnh nhân");
+    const err = await res.text();
+    throw new Error(err || "Lỗi khi lấy danh sách lịch khám");
   }
-
-  const data = await res.json();
-  return data as Appointment[];
+  return res.json();
 }
 
-
-// Lấy chi tiết lịch khám theo appointmentId
-export async function getAppointmentById(appointmentId: string): Promise<Appointment> {
-  const res = await fetch(`${API_URL}/detail/${appointmentId}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-
-  if (!res.ok) {
-    throw new Error(`Không thể tải lịch khám ID=${appointmentId}`);
-  }
-
-  return res.json() as Promise<Appointment>;
-}
-
-
-// Tạo lịch khám mới
 export async function createAppointment(data: NewAppointment): Promise<Appointment> {
   const res = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-
   if (!res.ok) {
-    const error = await res.text();
-    throw new Error("Không thể tạo lịch khám mới: " + error);
+    const err = await res.text();
+    throw new Error(err || "Không thể tạo lịch khám mới");
   }
-
-  const result = await res.json();
-  return result as Appointment;
+  return res.json();
 }
-

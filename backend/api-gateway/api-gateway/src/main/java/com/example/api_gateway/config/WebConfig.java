@@ -14,10 +14,8 @@ public class WebConfig {
     @Bean
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000","http://localhost:8020"));
-//        config.setAllowedMethods(List.of("*"));
+        config.setAllowedOrigins(List.of("http://localhost:3000","http://localhost:8085"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-//        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With"));
         config.setAllowedHeaders(List.of(
                 "Authorization",
                 "Content-Type",
@@ -25,7 +23,6 @@ public class WebConfig {
                 "Upgrade",
                 "Connection"
         ));
-//        config.setAllowedHeaders(List.of("*"));
         config.setExposedHeaders(List.of("Authorization"));
         config.setAllowCredentials(true); // bắt buộc nếu dùng cookie/session
 
