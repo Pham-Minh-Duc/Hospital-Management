@@ -11,14 +11,13 @@ import java.time.LocalDate;
 @Setter
 public class Doctor {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String  doctorId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long  doctorId;
     private String  doctorName;
     private String  doctorGender;
-    private String  doctorDob;
+    private LocalDate  doctorDob;
     private String  doctorPhone;
     private String  doctorEmail;
-    private String  doctorDepartment;
     private String  doctorPosition;
     private String  doctorQualification;
 

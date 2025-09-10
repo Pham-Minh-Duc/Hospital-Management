@@ -2,22 +2,22 @@
 const API_URL = "http://localhost:8080/appointments";
 
 export interface SpecializationDto {
-  specializationId: string;
+  specializationId: number; // int (bigint trong DB)
   specializationName?: string | null;
 }
 
 export interface DoctorDto {
-  doctorId: string;
+  doctorId: string; // varchar
   doctorName?: string | null;
   specialization?: SpecializationDto | null;
 }
 
 export interface PatientRef {
-  patientId: string;
+  patientId: string; // varchar
 }
 
 export interface Appointment {
-  appointmentId: string;
+  appointmentId: string; // varchar
   appointmentDate: string;
   appointmentTime: string;
   appointmentRoom: string;
@@ -28,6 +28,7 @@ export interface Appointment {
   createdAt?: string;
   updateAt?: string;
 }
+
 
 // Dữ liệu gửi khi tạo mới (server thường sinh id và timestamp)
 export type NewAppointment = Omit<Appointment, "appointmentId" | "createdAt" | "updateAt">;

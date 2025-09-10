@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from "react";
-import { createDoctor } from "@/service/doctorService";
+import { useEffect, useState } from "react";
+import { createDoctor, getAllSpecializations, Specialization } from "@/service/doctorService";
 import Input from "@/components/input";
 import Label from "@/components/label";
 import Button from "@/components/button";
@@ -18,22 +18,36 @@ const AddDoctorModal = ({ onClose, onSuccess }: AddDoctorModalProps) => {
     doctorDob: "",
     doctorPhone: "",
     doctorEmail: "",
-    doctorDepartment: "",
     doctorPosition: "",
     doctorQualification: "",
-    doctorSpecialization: "",
+    specializationId: 0, // ✅ dùng specializationId thay vì doctorSpecialization
     doctorExperienceYears: 0,
-    doctorStatus: "working"
+    doctorStatus: "working",
   });
 
+  const [specializations, setSpecializations] = useState<Specialization[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Load danh sách chuyên khoa
+  useEffect(() => {
+    const fetchSpecializations = async () => {
+      try {
+        const data = await getAllSpecializations();
+        setSpecializations(data);
+      } catch (err) {
+        console.error("Lỗi khi load chuyên khoa:", err);
+      }
+    };
+    fetchSpecializations();
+  }, []);
 
   const handleSubmit = async () => {
     try {
       setLoading(true);
       setError(null);
-      await createDoctor(formData);
+
+      await createDoctor(formData); // ✅ gửi luôn specializationId
       onSuccess();
       onClose();
     } catch (err: unknown) {
@@ -54,7 +68,7 @@ const AddDoctorModal = ({ onClose, onSuccess }: AddDoctorModalProps) => {
 
         <div className="space-y-3">
           <div className="flex items-center">
-            <Label label="Tên bệnh nhân" />
+            <Label label="Tên bác sĩ" />
             <Input
               type="text"
               placeholder="Nhập tên bác sĩ"
@@ -103,71 +117,65 @@ const AddDoctorModal = ({ onClose, onSuccess }: AddDoctorModalProps) => {
               onChange={(e) => setFormData({ ...formData, doctorDob: e.target.value })}
             />
           </div>
-          <div className="flex items-center">
-            <Label label="Khoa" />
-            <Input
-              type="text"
-              placeholder="Nhập khoa"
-              value={formData.doctorDepartment}
-              onChange={(e) =>
-                setFormData({ ...formData, doctorDepartment: e.target.value })
-              }
-            />
-          </div>
+
           <div className="flex items-center">
             <Label label="Vị trí" />
             <Input
               type="text"
               placeholder="Nhập vị trí"
               value={formData.doctorPosition}
-              onChange={(e) =>
-                setFormData({ ...formData, doctorPosition: e.target.value })
-              }
+              onChange={(e) => setFormData({ ...formData, doctorPosition: e.target.value })}
             />
           </div>
+
           <div className="flex items-center">
             <Label label="Bằng cấp" />
             <Input
               type="text"
               placeholder="Nhập bằng cấp"
               value={formData.doctorQualification}
-              onChange={(e) =>
-                setFormData({ ...formData, doctorQualification: e.target.value })
-              }
+              onChange={(e) => setFormData({ ...formData, doctorQualification: e.target.value })}
             />
           </div>
+
+          {/* Dropdown chọn chuyên khoa */}
           <div className="flex items-center">
             <Label label="Chuyên khoa" />
-            <Input
-              type="text"
-              placeholder="Nhập chuyên khoa"
-              value={formData.doctorSpecialization}
+            <select
+              className="border rounded px-2 py-1 flex-1"
+              value={formData.specializationId}
               onChange={(e) =>
-                setFormData({ ...formData, doctorSpecialization: e.target.value })
+                setFormData({ ...formData, specializationId: Number(e.target.value) })
               }
-            />
+            >
+              <option value={0}>-- Chọn chuyên khoa --</option>
+              {specializations.map((sp) => (
+                <option key={sp.specializationId} value={sp.specializationId}>
+                  {sp.specializationName}
+                </option>
+              ))}
+            </select>
           </div>
+
           <div className="flex items-center">
             <Label label="Số năm kinh nghiệm" />
             <Input
               type="number"
               placeholder="Số năm kinh nghiệm"
-              value= {formData.doctorExperienceYears.toString()}
+              value={formData.doctorExperienceYears.toString()}
               onChange={(e) =>
                 setFormData({ ...formData, doctorExperienceYears: Number(e.target.value) })
               }
             />
           </div>
+
           <div className="flex items-center">
             <Label label="Trạng thái" />
             <Input
               type="text"
               placeholder="Trạng thái"
               value={formData.doctorStatus}
-              onChange={(e) =>
-                setFormData({ ...formData, doctorStatus: e.target.value })
-              }
-              readonly
+              readOnly
             />
           </div>
         </div>

@@ -67,8 +67,8 @@ const DoctorPage = () => {
     setFilteredDoctors(filtered);
   }
 
-  //xóa bác sĩ
-  const handleDelete = async (doctorId: string) => {
+  // xóa bác sĩ
+  const handleDelete = async (doctorId: number) => {
     if(!confirm("Bạn có chắc chắn muốn xóa bác sĩ này?")) return;
     try{
       await deleteDoctor(doctorId);
@@ -151,7 +151,6 @@ const DoctorPage = () => {
                   <th className="p-3">Ngày sinh</th>
                   <th className="p-3">SĐT</th>
                   <th className="p-3">Email</th>
-                  <th className="p-3">Khoa chuyên môn</th>
                   <th className="p-3">Chức vụ</th>
                   <th className="p-3">Học vị</th>
                   <th className="p-3">Chuyên ngành</th>
@@ -167,7 +166,7 @@ const DoctorPage = () => {
                       {deleteMode && (
                           <td
                             className="p-3 text-red-500 cursor-pointer hover:font-bold"
-                            onClick={() => handleDelete(item.doctorId)}
+                            onClick={() => handleDelete(Number(item.doctorId))}
                           >
                             ❌
                           </td>
@@ -178,7 +177,6 @@ const DoctorPage = () => {
                       <td className="p-3">{item.doctorDob}</td>
                       <td className="p-3">{item.doctorPhone}</td>
                       <td className="p-3">{item.doctorEmail}</td>
-                      <td className="p-3">{item.doctorDepartment}</td>
                       <td className="p-3">{item.doctorPosition}</td>
                       <td className="p-3">{item.doctorQualification}</td>
                       <td className="p-3">{item.doctorSpecialization}</td>

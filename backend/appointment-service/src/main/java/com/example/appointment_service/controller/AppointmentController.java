@@ -29,7 +29,7 @@ public class AppointmentController {
     }
 
 // hiển thị danh sách lịch khám theo từng client.
-    @GetMapping("/{patientId}")
+    @GetMapping("/patient/{patientId}")
     public List<AppointmentResponse> getAppointmentsByPatient(@PathVariable String patientId) {
         return appointmentService.getAppointmentsByPatient(patientId);
     }

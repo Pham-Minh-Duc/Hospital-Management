@@ -1,7 +1,8 @@
-package com.example.appointment_service.dto;
+package com.example.doctor_service.dto;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -10,5 +11,4 @@ public class SpecializationDto {
     private Long specializationId;
     private String specializationName;
 }
-
 

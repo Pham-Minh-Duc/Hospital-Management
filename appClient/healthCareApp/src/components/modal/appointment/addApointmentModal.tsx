@@ -65,13 +65,12 @@ export default function AddAppointmentModal({ visible, onClose, onSave }: AddApp
       appointmentRoom,
       appointmentStatus: "waiting",
       appointmentNote,
-      // patient filled by parent (AppointmentList) before calling createAppointment
-      patient: { patientId: "" },
+      patient: { patientId: "" }, // sẽ được gán ở ngoài AppointmentList
       doctor: selectedDoctorId ? {
-        doctorId: selectedDoctorId,
+        doctorId: selectedDoctorId, // string
         doctorName: null,
         specialization: {
-          specializationId: selectedSpecializationId,
+          specializationId: Number(selectedSpecializationId), // ép number vì DB là bigint
           specializationName: null
         }
       } : null
@@ -79,6 +78,7 @@ export default function AddAppointmentModal({ visible, onClose, onSave }: AddApp
 
     onSave(payload);
   };
+
 
   return (
     <Modal visible={visible} animationType="slide" transparent>

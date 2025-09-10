@@ -1,5 +1,6 @@
 package com.example.doctor_service.service;
 
+import com.example.doctor_service.dto.DoctorInfoDto;
 import com.example.doctor_service.entity.Doctor;
 import com.example.doctor_service.entity.Specialization;
 import com.example.doctor_service.repository.DoctorRepository;
@@ -9,78 +10,85 @@ import com.example.doctor_service.request.DoctorUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class DoctorService {
 
-    private final DoctorRepository doctorRepository;
-    private final SpecializationRepository specializationRepository;
+    @Autowired
+    private DoctorRepository doctorRepository;
+
+    @Autowired
+    private SpecializationRepository specializationRepository;
 
     public DoctorService(DoctorRepository doctorRepository, SpecializationRepository specializationRepository) {
         this.doctorRepository = doctorRepository;
         this.specializationRepository = specializationRepository;
     }
 
-    public Doctor createDoctor(DoctorCreationRequest request){
+    public Doctor createDoctor(DoctorInfoDto dto) {
         Doctor doctor = new Doctor();
+        doctor.setDoctorName(dto.getDoctorName());
+        doctor.setDoctorGender(dto.getDoctorGender());
+        doctor.setDoctorDob(dto.getDoctorDob());
+        doctor.setDoctorPhone(dto.getDoctorPhone());
+        doctor.setDoctorEmail(dto.getDoctorEmail());
+        doctor.setDoctorPosition(dto.getDoctorPosition());
+        doctor.setDoctorQualification(dto.getDoctorQualification());
+        doctor.setDoctorStatus(dto.getDoctorStatus());
+        doctor.setDoctorExperienceYears(dto.getDoctorExperienceYears());
 
-        doctor.setDoctorName(request.getDoctorName());
-        doctor.setDoctorGender(request.getDoctorGender());
-        doctor.setDoctorDob(request.getDoctorDob());
-        doctor.setDoctorPhone(request.getDoctorPhone());
-        doctor.setDoctorEmail(request.getDoctorEmail());
-        doctor.setDoctorDepartment(request.getDoctorDepartment());
-        doctor.setDoctorPosition(request.getDoctorPosition());
-        doctor.setDoctorQualification(request.getDoctorQualification());
-        doctor.setDoctorExperienceYears(request.getDoctorExperienceYears());
-        doctor.setDoctorStatus(request.getDoctorStatus());
-
-        // lấy specialization từ DB
-        Specialization specialization = specializationRepository.findById(request.getSpecializationId())
-                .orElseThrow(() -> new RuntimeException("Specialization not found"));
-        doctor.setDoctorSpecialization(specialization);
-
-        return doctorRepository.save(doctor);
-    }
-
-    public Doctor updateDoctor(String doctorId, DoctorUpdateRequest request){
-        Doctor doctor = getDoctor(doctorId);
-
-        doctor.setDoctorName(request.getDoctorName());
-        doctor.setDoctorGender(request.getDoctorGender());
-        doctor.setDoctorDob(request.getDoctorDob());
-        doctor.setDoctorPhone(request.getDoctorPhone());
-        doctor.setDoctorEmail(request.getDoctorEmail());
-        doctor.setDoctorDepartment(request.getDoctorDepartment());
-        doctor.setDoctorPosition(request.getDoctorPosition());
-        doctor.setDoctorQualification(request.getDoctorQualification());
-        doctor.setDoctorExperienceYears(request.getDoctorExperienceYears());
-        doctor.setDoctorStatus(request.getDoctorStatus());
-
-        // lấy specialization từ DB
-        Specialization specialization = specializationRepository.findById(request.getSpecializationId())
-                .orElseThrow(() -> new RuntimeException("Specialization not found"));
-        doctor.setDoctorSpecialization(specialization);
+        // Gắn chuyên khoa bằng specializationId
+        if (dto.getSpecializationId() != null) {
+            Specialization spec = specializationRepository.findById(dto.getSpecializationId())
+                    .orElseThrow(() -> new RuntimeException("Chuyên khoa không tồn tại"));
+            doctor.setDoctorSpecialization(spec);
+        }
 
         return doctorRepository.save(doctor);
     }
 
-    public void deleteDoctor(String doctorId) {
+
+    public Doctor updateDoctor(Long doctorId, DoctorInfoDto dto) {
+        Doctor doctor = doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new RuntimeException("Bác sĩ không tồn tại với id: " + doctorId));
+
+        doctor.setDoctorName(dto.getDoctorName());
+        doctor.setDoctorGender(dto.getDoctorGender());
+        doctor.setDoctorDob(dto.getDoctorDob());
+        doctor.setDoctorPhone(dto.getDoctorPhone());
+        doctor.setDoctorEmail(dto.getDoctorEmail());
+        doctor.setDoctorPosition(dto.getDoctorPosition());
+        doctor.setDoctorQualification(dto.getDoctorQualification());
+        doctor.setDoctorExperienceYears(dto.getDoctorExperienceYears());
+        doctor.setDoctorStatus(dto.getDoctorStatus());
+
+        // cập nhật chuyên khoa
+        if (dto.getSpecializationId() != null) {
+            Specialization spec = specializationRepository.findById(dto.getSpecializationId())
+                    .orElseThrow(() -> new RuntimeException("Chuyên khoa không tồn tại"));
+            doctor.setDoctorSpecialization(spec);
+        }
+
+        return doctorRepository.save(doctor);
+    }
+
+    public void deleteDoctor(Long doctorId) {
         doctorRepository.deleteById(doctorId);
     }
+//
+//    public List<Doctor> getDoctor() {
+//        return doctorRepository.findAll();
+//    }
+//
+//    public Doctor getDoctor(String id){
+//        return doctorRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("Doctor not found"));
+//    }
 
-    public List<Doctor> getDoctor() {
-        return doctorRepository.findAll();
-    }
-
-    public Doctor getDoctor(String id){
-        return doctorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Doctor not found"));
-    }
-
-    public List<Doctor> getDoctorsBySpecialization(Long specializationId) {
-        return doctorRepository.findByDoctorSpecialization_SpecializationId(specializationId);
-    }
+//    public List<Doctor> getDoctorsBySpecialization(Long specializationId) {
+//        return doctorRepository.findByDoctorSpecialization_SpecializationId(specializationId);
+//    }
 }
 

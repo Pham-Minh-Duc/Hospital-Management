@@ -28,23 +28,25 @@ export default function AppointmentList() {
 
   const handleSaveFromModal = async (data: NewAppointment) => {
     try {
-      const patientId = await AsyncStorage.getItem("patientId");
-      if (!patientId) { console.warn("Không có patientId"); return; }
+      const patientId = localStorage.getItem("patientId"); // ✅ lấy từ localStorage
+      if (!patientId) {
+        console.warn("Không tìm thấy patientId trong localStorage");
+        return;
+      }
 
-      // gán patientId vào payload
       const payload: NewAppointment = {
         ...data,
-        patient: { patientId }
+        patient: { patientId } // gán lại đúng patientId
       };
 
       const saved = await createAppointment(payload);
-      // đảm bảo kiểu đúng: saved là Appointment theo service
       setMyAppointments(prev => [...prev, saved]);
       setShowModal(false);
     } catch (err) {
       console.error("Không thể tạo lịch:", err);
     }
   };
+
 
   return (
     <View style={styles.container}>
@@ -58,7 +60,7 @@ export default function AppointmentList() {
       {loading ? <ActivityIndicator size="large" /> : (
         <FlatList
           data={myAppointments}
-          keyExtractor={(i) => i.appointmentId}
+          keyExtractor={(i) => String(i.appointmentId)}
           renderItem={({item}) => (
             <TouchableOpacity style={styles.card} onPress={() => setSelected(item)}>
               <Text>{item.appointmentDate} - {item.appointmentTime}</Text>

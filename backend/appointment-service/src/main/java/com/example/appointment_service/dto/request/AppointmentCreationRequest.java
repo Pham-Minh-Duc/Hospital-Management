@@ -1,5 +1,7 @@
 package com.example.appointment_service.dto.request;
 
+import com.example.appointment_service.dto.DoctorDto;
+import com.example.appointment_service.dto.PatientDto;
 import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,15 +9,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AppointmentCreationRequest {
+    private String appointmentId;
     private String appointmentDate;
     private String appointmentTime;
-    private String doctorName;
-    private String doctorId;
-    private String AppointmentRoom;
-    private String specialty;
-    private String patientEmail;
-    private String patientName;
-    private String patientId;
+    private String appointmentRoom;
     private String appointmentStatus;
     private String appointmentNote;
+    private PatientDto patient;
+    private DoctorDto doctor;
+    private String createdAt;
+    private String updateAt;
 }
