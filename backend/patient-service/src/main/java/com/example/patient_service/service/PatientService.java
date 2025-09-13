@@ -31,7 +31,7 @@ public class PatientService {
         return patientRepository.save(patient);
     }
 
-    public Patient updatePatient(String patientId, PatientUpdateRequest request){
+    public Patient updatePatient(Long patientId, PatientUpdateRequest request){
         Patient patient = getPatient(patientId);
 
         patient.setPatientName(request.getPatientName());
@@ -46,7 +46,7 @@ public class PatientService {
         return patientRepository.save(patient);
     }
 
-    public void deletePatient(String patientId) {
+    public void deletePatient(Long patientId) {
         patientRepository.deleteById(patientId);
     }
 
@@ -54,7 +54,7 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
-    public Patient getPatient(String id){
+    public Patient getPatient(Long id){
         return patientRepository.findById(id).orElseThrow(() -> new RuntimeException("Patient not found"));
     }
 

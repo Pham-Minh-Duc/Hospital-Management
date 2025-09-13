@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientDto {
-    private String patientId;
+    private Long patientId;
     private String patientName;
     private String patientEmail;
     private String patientPhone;

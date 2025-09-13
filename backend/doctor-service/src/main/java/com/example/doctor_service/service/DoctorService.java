@@ -26,7 +26,7 @@ public class DoctorService {
         this.doctorRepository = doctorRepository;
         this.specializationRepository = specializationRepository;
     }
-
+    //web admin: thêm bác sĩ
     public Doctor createDoctor(DoctorInfoDto dto) {
         Doctor doctor = new Doctor();
         doctor.setDoctorName(dto.getDoctorName());
@@ -49,7 +49,12 @@ public class DoctorService {
         return doctorRepository.save(doctor);
     }
 
+    //web admin: xóa bác sĩ
+    public void deleteDoctor(Long doctorId) {
+        doctorRepository.deleteById(doctorId);
+    }
 
+    //web admin: sửa bác sĩ
     public Doctor updateDoctor(Long doctorId, DoctorInfoDto dto) {
         Doctor doctor = doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new RuntimeException("Bác sĩ không tồn tại với id: " + doctorId));
@@ -70,25 +75,21 @@ public class DoctorService {
                     .orElseThrow(() -> new RuntimeException("Chuyên khoa không tồn tại"));
             doctor.setDoctorSpecialization(spec);
         }
-
         return doctorRepository.save(doctor);
     }
 
-    public void deleteDoctor(Long doctorId) {
-        doctorRepository.deleteById(doctorId);
-    }
 //
 //    public List<Doctor> getDoctor() {
 //        return doctorRepository.findAll();
 //    }
 //
-//    public Doctor getDoctor(String id){
-//        return doctorRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Doctor not found"));
-//    }
+    public Doctor getDoctorById(Long id){
+        return doctorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Doctor not found"));
+    }
 
-//    public List<Doctor> getDoctorsBySpecialization(Long specializationId) {
-//        return doctorRepository.findByDoctorSpecialization_SpecializationId(specializationId);
-//    }
+    public List<Doctor> getDoctorsBySpecialization(Long specializationId) {
+        return doctorRepository.findByDoctorSpecialization_SpecializationId(specializationId);
+    }
 }
 

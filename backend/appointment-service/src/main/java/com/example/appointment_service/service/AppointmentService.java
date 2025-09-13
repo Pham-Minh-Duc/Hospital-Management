@@ -10,8 +10,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.logging.Level.parse;
 
 @Service
 @RequiredArgsConstructor
@@ -21,88 +25,118 @@ public class AppointmentService {
     private final WebClient.Builder webClientBuilder;
 
     // 🔹 Lấy danh sách lịch khám theo patientId
-    public List<AppointmentResponse> getAppointmentsByPatient(String patientId) {
-        List<Appointment> appointments = appointmentRepository.findByPatientId(patientId);
-
-        return appointments.stream().map(a -> {
-            // Gọi patient-service
-            PatientDto patient = webClientBuilder.build()
-                    .get()
-                    .uri("http://localhost:8083/patients/" + a.getPatientId())
-                    .retrieve()
-                    .bodyToMono(PatientDto.class)
-                    .block();
-
-            // Gọi doctor-service
-            DoctorDto doctor = webClientBuilder.build()
-                    .get()
-                    .uri("http://localhost:8085/doctors/" + a.getDoctorId())
-                    .retrieve()
-                    .bodyToMono(DoctorDto.class)
-                    .block();
-
-            return new AppointmentResponse(
-                    a.getAppointmentId(),
-                    a.getAppointmentDate(),
-                    a.getAppointmentTime(),
-                    a.getAppointmentRoom(),
-                    a.getAppointmentStatus(),
-                    a.getAppointmentNote(),
-                    a.getCreatedAt(),
-                    patient,
-                    doctor // trong doctor đã có specialization
-            );
-        }).collect(Collectors.toList());
-    }
+//    public List<AppointmentResponse> getAppointmentsByPatient(String patientId) {
+//        List<Appointment> appointments = appointmentRepository.findByPatientId(patientId);
+//
+//        return appointments.stream().map(a -> {
+//            // Gọi patient-service
+//            PatientDto patient = webClientBuilder.build()
+//                    .get()
+//                    .uri("http://localhost:8083/patients/" + a.getPatientId())
+//                    .retrieve()
+//                    .bodyToMono(PatientDto.class)
+//                    .block();
+//
+//            // Gọi doctor-service
+//            DoctorDto doctor = webClientBuilder.build()
+//                    .get()
+//                    .uri("http://localhost:8085/doctors/" + a.getDoctorId())
+//                    .retrieve()
+//                    .bodyToMono(DoctorDto.class)
+//                    .block();
+//
+//            return new AppointmentResponse(
+//                    a.getAppointmentId(),
+//                    a.getAppointmentDate(),
+//                    a.getAppointmentTime(),
+//                    a.getAppointmentRoom(),
+//                    a.getAppointmentStatus(),
+//                    a.getAppointmentNote(),
+//                    a.getCreatedAt(),
+//                    patient,
+//                    doctor // trong doctor đã có specialization
+//            );
+//        }).collect(Collectors.toList());
+//    }
 
 
     // 🔹 Lấy tất cả lịch khám
     public List<AppointmentResponse> getAllAppointments() {
-        List<Appointment> appointments = appointmentRepository.findAll();
-        return appointments.stream().map(a -> mapToResponse(a)).collect(Collectors.toList());
+        return appointmentRepository.findAll().stream().map(a -> {
+            // Gọi doctor-service
+            DoctorDto doctor = webClientBuilder.build()
+                    .get()
+                    .uri("http://localhost:8085/doctors/{id}", a.getDoctorId())
+                    .retrieve()
+                    .bodyToMono(DoctorDto.class)
+                    .block();
+
+            // Gọi patient-service
+            PatientDto patient = webClientBuilder.build()
+                    .get()
+                    .uri("http://localhost:8083/patients/{id}", a.getPatientId())
+                    .retrieve()
+                    .bodyToMono(PatientDto.class)
+                    .block();
+
+            return AppointmentResponse.builder()
+                    .appointmentId(a.getAppointmentId())
+                    .appointmentDate(a.getAppointmentDate())
+                    .appointmentTime(a.getAppointmentTime())
+                    .appointmentRoom(a.getAppointmentRoom())
+                    .appointmentStatus(a.getAppointmentStatus())
+                    .appointmentNote(a.getAppointmentNote())
+                    .createdAt(a.getCreatedAt())
+                    .updateAt(a.getUpdateAt())
+                    .doctor(doctor)
+                    .patient(patient)
+                    .build();
+        }).toList();
     }
 
-    // 🔹 Tạo lịch khám mới
+    //Tạo lịch khám mới
     public Appointment createAppointment(AppointmentCreationRequest request) {
-        Appointment appointment = new Appointment();
-        appointment.setPatientId(request.getPatientId());
-        appointment.setDoctorId(request.getDoctorId());
-        appointment.setAppointmentDate(request.getAppointmentDate());
-        appointment.setAppointmentTime(request.getAppointmentTime());
-        appointment.setAppointmentRoom(request.getAppointmentRoom());
-        appointment.setAppointmentNote(request.getAppointmentNote());
-        appointment.setAppointmentStatus("waiting"); // default status
+        Appointment appointment = Appointment.builder()
+                .appointmentDate(request.getAppointmentDate())
+                .appointmentTime(request.getAppointmentTime())
+                .appointmentRoom(request.getAppointmentRoom())
+                .appointmentStatus(request.getAppointmentStatus())
+                .appointmentNote(request.getAppointmentNote())
+                .doctorId(request.getDoctorId())
+                .patientId(request.getPatientId())
+                .build();
+
         return appointmentRepository.save(appointment);
     }
 
     // 🔹 Hàm tái sử dụng để build AppointmentResponse
-    private AppointmentResponse mapToResponse(Appointment a) {
-        // Gọi patient-service
-        PatientDto patient = webClientBuilder.build()
-                .get()
-                .uri("http://localhost:8083/patients/" + a.getPatientId())
-                .retrieve()
-                .bodyToMono(PatientDto.class)
-                .block();
-
-        // Gọi doctor-service
-        DoctorDto doctor = webClientBuilder.build()
-                .get()
-                .uri("http://localhost:8085/doctors/" + a.getDoctorId())
-                .retrieve()
-                .bodyToMono(DoctorDto.class)
-                .block();
-
-        return new AppointmentResponse(
-                String.valueOf(a.getAppointmentId()),
-                a.getAppointmentDate(),
-                a.getAppointmentTime(),
-                a.getAppointmentRoom(),
-                a.getAppointmentStatus(),
-                a.getAppointmentNote(),
-                a.getCreatedAt(),
-                patient,
-                doctor
-        );
-    }
+//    private AppointmentResponse mapToResponse(Appointment a) {
+//        // Gọi patient-service
+//        PatientDto patient = webClientBuilder.build()
+//                .get()
+//                .uri("http://localhost:8083/patients/" + a.getPatientId())
+//                .retrieve()
+//                .bodyToMono(PatientDto.class)
+//                .block();
+//
+//        // Gọi doctor-service
+//        DoctorDto doctor = webClientBuilder.build()
+//                .get()
+//                .uri("http://localhost:8085/doctors/" + a.getDoctorId())
+//                .retrieve()
+//                .bodyToMono(DoctorDto.class)
+//                .block();
+//
+//        return new AppointmentResponse(
+//                String.valueOf(a.getAppointmentId()),
+//                a.getAppointmentDate(),
+//                a.getAppointmentTime(),
+//                a.getAppointmentRoom(),
+//                a.getAppointmentStatus(),
+//                a.getAppointmentNote(),
+//                a.getCreatedAt(),
+//                patient,
+//                doctor
+//        );
+//    }
 }

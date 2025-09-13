@@ -6,17 +6,22 @@ import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 @Getter
 @Setter
 public class AppointmentCreationRequest {
-    private String appointmentId;
-    private String appointmentDate;
-    private String appointmentTime;
+    private Long appointmentId;
+    private LocalDate appointmentDate;
+    private LocalTime appointmentTime;
     private String appointmentRoom;
     private String appointmentStatus;
     private String appointmentNote;
-    private PatientDto patient;
-    private DoctorDto doctor;
-    private String createdAt;
-    private String updateAt;
+//    private LocalDateTime createdAt;
+//    private LocalDateTime updateAt;
+
+    private Long doctorId;
+    private Long patientId;
 }

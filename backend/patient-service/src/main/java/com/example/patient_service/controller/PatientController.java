@@ -36,17 +36,17 @@ public class PatientController {
     }
 
     @GetMapping("/{patientId}")
-    Patient getPatient(@PathVariable String patientId){
+    Patient getPatient(@PathVariable Long patientId){
         return patientService.getPatient(patientId);
     }
 
     @PutMapping("/{patientId}")
-    Patient putPatient(@PathVariable String patientId, @RequestBody PatientUpdateRequest request) {
+    Patient putPatient(@PathVariable Long patientId, @RequestBody PatientUpdateRequest request) {
         return patientService.updatePatient(patientId, request);
     }
 
     @DeleteMapping("/{patientId}")
-    String deletePatient(@PathVariable String patientId){
+    String deletePatient(@PathVariable Long patientId){
         patientService.deletePatient(patientId);
         return "Patient has been deleted";
     }

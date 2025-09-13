@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DoctorDto {
-    private String doctorId;
+    private Long doctorId;
     private String doctorName;
     private SpecializationDto specialization;
 }

@@ -22,22 +22,21 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
-//hiển thị danh sách lịch khám
+    //web admin: hiển thị danh sách lịch khám
     @GetMapping
-    public List<AppointmentResponse> getAllAppointments() {
-        return appointmentService.getAllAppointments();
+    public ResponseEntity<List<AppointmentResponse>> getAllAppointments() {
+        return ResponseEntity.ok(appointmentService.getAllAppointments());
     }
 
 // hiển thị danh sách lịch khám theo từng client.
-    @GetMapping("/patient/{patientId}")
-    public List<AppointmentResponse> getAppointmentsByPatient(@PathVariable String patientId) {
-        return appointmentService.getAppointmentsByPatient(patientId);
-    }
-// thêm lịch khám
+//    @GetMapping("/patient/{patientId}")
+//    public List<AppointmentResponse> getAppointmentsByPatient(@PathVariable String patientId) {
+//        return appointmentService.getAppointmentsByPatient(patientId);
+//    }
+
+    //web admin: thêm lịch khám
     @PostMapping
     public ResponseEntity<Appointment> createAppointment(@RequestBody AppointmentCreationRequest request) {
-        Appointment saved = appointmentService.createAppointment(request);
-        return ResponseEntity.ok(saved);
+        return ResponseEntity.ok(appointmentService.createAppointment(request));
     }
-
 }

@@ -1,14 +1,14 @@
 package com.example.appointment_service.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class DoctorDto {
-    private String doctorId;
+    private Long doctorId;
     private String doctorName;
-    private SpecializationDto specialization;
+    private SpecializationDto doctorSpecialization;
 }
