@@ -121,7 +121,7 @@ export async function getDoctorsBySpecialization(
 }
 
 
-
+// --- API lấy danh sách bệnh nhân ---
 export async function getAllPatients(): Promise<PatientOption[]> {
   const res = await fetch("http://localhost:8080/patients");
   if (!res.ok) throw new Error("Không thể tải danh sách bệnh nhân");
@@ -132,6 +132,26 @@ export async function getAllPatients(): Promise<PatientOption[]> {
     patientId: String(p.patientId),
     patientName: p.patientName || "Chưa có tên",
   }));
+}
+
+
+// Xóa lịch khám
+export async function deleteAppointment(id: number) {
+  const res = await fetch(`http://localhost:8080/appointments/${id}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("Không thể xóa lịch khám");
+}
+
+// Cập nhật lịch khám
+export async function updateAppointment(id: number, payload: AppointmentRequest) {
+  const res = await fetch(`http://localhost:8080/appointments/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) throw new Error("Không thể cập nhật lịch khám");
+  return res.json();
 }
 
 

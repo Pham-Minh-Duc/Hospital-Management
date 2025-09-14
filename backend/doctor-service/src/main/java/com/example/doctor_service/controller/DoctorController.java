@@ -26,7 +26,8 @@ public class DoctorController {
         this.doctorRepository = doctorRepository;
     }
 
-    //web admin: lấy danh sách bác sĩ
+    //----------------------------CRUD-----------------------------------------------
+    //web admin: hiển thị danh sách bác sĩ
     @GetMapping
     public List<DoctorInfoDto> getAllDoctors() {
         return doctorRepository.findAll().stream()
@@ -66,6 +67,7 @@ public class DoctorController {
     public Doctor updateDoctor(@PathVariable Long doctorId, @RequestBody DoctorInfoDto dto) {
         return doctorService.updateDoctor(doctorId, dto);
     }
+    //------------------------------------------hết CRUD--------------------------------------------
 
 
     //app client: lấy danh sách bác sĩ theo id
@@ -73,7 +75,6 @@ public class DoctorController {
     public ResponseEntity<Doctor> getDoctorById(@PathVariable Long id) {
         return ResponseEntity.ok(doctorService.getDoctorById(id));
     }
-
     //web admin: lấy danh sách bác sĩ theo chuyên khoa
     @GetMapping("/by-specialization/{specializationId}")
     public ResponseEntity<List<DoctorDto>> getDoctorsBySpecialization(@PathVariable Long specializationId) {
@@ -90,10 +91,7 @@ public class DoctorController {
             ));
             return dto;
         }).toList();
-
         return ResponseEntity.ok(doctorDtos);
     }
-
-
 }
 

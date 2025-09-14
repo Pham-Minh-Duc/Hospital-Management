@@ -183,13 +183,13 @@ const DoctorPage = () => {
                       <td className="p-3">{item.doctorExperienceYears}</td>
                       <td className="p-3">{statusLabels[item.doctorStatus] || item.doctorStatus}</td>
                       {editMode && (
-                      <td className="p-3"
-                        onClick={() => {
-                          setSelectedDoctor(item); // lưu bệnh nhân được chọn
-                          setShowEditModal(true);   // mở modal
-                        }}>✏️
-                      </td>
-                    )}
+                        <td className="p-3"
+                          onClick={() => {
+                            setSelectedDoctor(item); // lưu bệnh nhân được chọn
+                            setShowEditModal(true);   // mở modal
+                          }}>✏️
+                        </td>
+                      )}
                     </tr>
                   ))
                 ) : (

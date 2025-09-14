@@ -13,6 +13,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import static java.util.logging.Level.parse;
@@ -139,4 +140,28 @@ public class AppointmentService {
 //                doctor
 //        );
 //    }
+
+    // sửa (update)
+    public Appointment updateAppointment(Long id, Appointment updatedAppointment) {
+        return appointmentRepository.findById(id)
+                .map(appt -> {
+                    appt.setAppointmentDate(updatedAppointment.getAppointmentDate());
+                    appt.setAppointmentTime(updatedAppointment.getAppointmentTime());
+                    appt.setAppointmentRoom(updatedAppointment.getAppointmentRoom());
+                    appt.setAppointmentStatus(updatedAppointment.getAppointmentStatus());
+                    appt.setAppointmentNote(updatedAppointment.getAppointmentNote());
+                    appt.setDoctorId(updatedAppointment.getDoctorId());
+                    appt.setPatientId(updatedAppointment.getPatientId());
+                    return appointmentRepository.save(appt);
+                })
+                .orElseThrow(() -> new NoSuchElementException("Không tìm thấy lịch khám với id = " + id));
+    }
+
+    // xóa
+    public void deleteAppointment(Long id) {
+        if (!appointmentRepository.existsById(id)) {
+            throw new NoSuchElementException("Không tìm thấy lịch khám với id = " + id);
+        }
+        appointmentRepository.deleteById(id);
+    }
 }
