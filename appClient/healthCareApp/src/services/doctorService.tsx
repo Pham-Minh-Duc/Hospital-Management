@@ -1,5 +1,9 @@
-const API_URL = 'http://localhost:8080/doctors';
-const API_BASE = "http://localhost:8080";
+import { getApiEndpoints } from "../services/api";
+const DOCTOR_URL = getApiEndpoints().DOCTOR_URL;
+const API = getApiEndpoints().API_URL;
+
+const API_URL = DOCTOR_URL;
+const API_BASE = API;
 
 export interface Doctor {
   doctorId: string;

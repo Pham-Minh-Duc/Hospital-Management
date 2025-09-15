@@ -1,5 +1,7 @@
-// src/services/appointmentService.ts
-const API_URL = "http://localhost:8080/appointments";
+
+import { getApiEndpoints } from "../services/api";
+const APPOINTMENT_URL = getApiEndpoints().APPOINTMENT_URL;
+const API_URL = APPOINTMENT_URL;
 
 export interface SpecializationDto {
   specializationId: number; // int (bigint trong DB)

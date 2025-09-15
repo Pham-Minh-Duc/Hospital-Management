@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-import { changePassword } from "../services/settingService";
+import { changePassword } from "../../services/settingService";
 
 interface Props {
   patientId: number;

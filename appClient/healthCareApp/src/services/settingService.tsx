@@ -1,8 +1,12 @@
-const PATIENT_URL = "http://localhost:8080/patients";
+import { getApiEndpoints } from "../services/api";
+
+const PATIENT_URL = getApiEndpoints().PATIENT_URL;
+
+const API_URL = PATIENT_URL;
 
 // patientApi.ts
 export async function changePassword(patientId: number, oldPass: string, newPass: string) {
-  const res = await fetch(`${PATIENT_URL}/${patientId}/change-password`, {
+  const res = await fetch(`${API_URL}/${patientId}/change-password`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

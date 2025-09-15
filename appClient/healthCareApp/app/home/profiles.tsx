@@ -1,12 +1,15 @@
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Modal } from "react-native";
 import { useState, useEffect } from "react";
 import { Patient, getPatientById } from "../../src/services/clientService";
 import EditProfileModal from "../../src/components/modal/profile/editProfileModal";
+import ChangePasswordModal from "../../src/modal/setting/changePasswordModal"; // import modal đổi mật khẩu
 
 export default function Profile() {
 
     const [editModalVisible, setEditModalVisible] = useState(false);
     const [patient, setPatient] = useState<Patient | null>(null);
+    const [showChangePass, setShowChangePass] = useState(false);
+    
 
 //load dữ liệu khi load trang
     useEffect(() => {
@@ -59,6 +62,12 @@ export default function Profile() {
         >
           <Text style={styles.buttonText}>Cập nhật thông tin</Text>
         </TouchableOpacity>
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => setShowChangePass(true)}  
+        >
+          <Text style={styles.buttonText}>Đổi mật khẩu</Text>
+        </TouchableOpacity>
       </View>
       {editModalVisible && patient && (
         <EditProfileModal
@@ -68,6 +77,18 @@ export default function Profile() {
           onSuccess={(updated) => setPatient(updated)} 
         />
       )}
+            {/* Modal đổi mật khẩu */}
+      <Modal
+        visible={showChangePass}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setShowChangePass(false)}
+      >
+        <ChangePasswordModal
+          patientId={1} // hoặc lấy từ AsyncStorage / context
+          onClose={() => setShowChangePass(false)}
+        />
+      </Modal>
     </ScrollView>
     
   );

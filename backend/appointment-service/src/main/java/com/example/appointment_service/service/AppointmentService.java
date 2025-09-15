@@ -64,21 +64,27 @@ public class AppointmentService {
     // 🔹 Lấy tất cả lịch khám
     public List<AppointmentResponse> getAllAppointments() {
         return appointmentRepository.findAll().stream().map(a -> {
-            // Gọi doctor-service
-            DoctorDto doctor = webClientBuilder.build()
-                    .get()
-                    .uri("http://localhost:8085/doctors/{id}", a.getDoctorId())
-                    .retrieve()
-                    .bodyToMono(DoctorDto.class)
-                    .block();
+            DoctorDto doctor = null;
+            PatientDto patient = null;
+            if (a.getDoctorId() != null){
+                // Gọi doctor-service
+                doctor = webClientBuilder.build()
+                        .get()
+                        .uri("http://localhost:8085/doctors/{id}", a.getDoctorId())
+                        .retrieve()
+                        .bodyToMono(DoctorDto.class)
+                        .block();
+            }
 
-            // Gọi patient-service
-            PatientDto patient = webClientBuilder.build()
-                    .get()
-                    .uri("http://localhost:8083/patients/{id}", a.getPatientId())
-                    .retrieve()
-                    .bodyToMono(PatientDto.class)
-                    .block();
+            if(a.getPatientId() != null) {
+                // Gọi patient-service
+                patient = webClientBuilder.build()
+                        .get()
+                        .uri("http://localhost:8083/patients/{id}", a.getPatientId())
+                        .retrieve()
+                        .bodyToMono(PatientDto.class)
+                        .block();
+            }
 
             return AppointmentResponse.builder()
                     .appointmentId(a.getAppointmentId())
