@@ -12,7 +12,6 @@ export interface Doctor {
   doctorDob: string;
   doctorPhone: string;
   doctorEmail: string;
-  doctorDepartment: string;
   doctorPosition: string;
   doctorQualification: string;
   doctorSpecialization: string;
@@ -27,7 +26,12 @@ export const fetchDoctors = async () => {
 };
 
 export async function getDoctorsBySpecialization(specializationId: string) {
-  const res = await fetch(`${API_URL}?specializationId=${specializationId}`);
+  const res = await fetch(`${API_URL}/by-specialization/${specializationId}`,{
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   if (!res.ok) {
     throw new Error("Lỗi khi lấy danh sách bác sĩ");
   }
@@ -40,4 +44,3 @@ export async function getAllSpecializations() {
   if (!res.ok) throw new Error("Không thể tải danh sách chuyên khoa");
   return await res.json();
 }
-

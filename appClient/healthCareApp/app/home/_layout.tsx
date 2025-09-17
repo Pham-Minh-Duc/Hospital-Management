@@ -55,14 +55,6 @@ function TabsScreen() {
           tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Cài đặt",
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => <Ionicons name="settings" size={size} color={color} />,
-        }}
-      />
     </Tabs>
   );
 }

@@ -10,8 +10,8 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import BookingModal, { BookingData } from "../../../src/components/modal/doctor/BookingModal";
-import { fetchDoctors } from "../../../src/services/doctorService";
+// import BookingModal, { BookingData } from "../../../src/components/modal/doctor/BookingModal";
+import { fetchDoctors } from "../../../services/doctorService";
 
 type Doctor = {
   doctorId: string;
@@ -108,17 +108,8 @@ export default function DoctorList() {
         />
       )}
 
-      {selectedDoctor && (
-        <BookingModal
-          visible={showBooking}
-          doctorName={selectedDoctor}
-          onClose={() => setShowBooking(false)}
-          onSubmit={(data: BookingData) => {
-            Alert.alert("Đặt lịch thành công", `Bạn đã đặt lịch với ${selectedDoctor}`);
-            console.log("Thông tin đặt lịch:", data);
-          }}
-        />
-      )}
+      {/* {selectedDoctor && (
+      )} */}
     </View>
   );
 }

@@ -70,6 +70,14 @@ export async function updatePatient(id: string, data: Partial<Patient>): Promise
   if (!res.ok) {
     throw new Error("Cập nhật thông tin bệnh nhân thất bại");
   }
+  return res.json();
+}
 
+export async function deletePatient(id: string): Promise<Patient>{
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+    headers:{"Content-Type": "application/json"},
+    body: JSON.stringify(id),
+  })
   return res.json();
 }

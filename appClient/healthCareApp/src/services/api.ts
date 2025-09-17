@@ -1,7 +1,7 @@
 
 
 export function getApiEndpoints() {
-  const API_URL = "http://192.168.1.24:8080";
+  const API_URL = "http://192.168.1.57:8080";
 
   return {
     API_URL: API_URL,

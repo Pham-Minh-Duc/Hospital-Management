@@ -1,17 +1,35 @@
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Modal } from "react-native";
-import { useState, useEffect } from "react";
-import { Patient, getPatientById } from "../../src/services/clientService";
+import { View, Text, StyleSheet, Button, Image, ScrollView, TouchableOpacity, Modal, Switch } from "react-native";
+import { useState, useEffect, useContext } from "react";
+import { Patient, getPatientById, deletePatient } from "../../src/services/clientService";
 import EditProfileModal from "../../src/components/modal/profile/editProfileModal";
 import ChangePasswordModal from "../../src/modal/setting/changePasswordModal"; // import modal đổi mật khẩu
+import { ThemeContext } from "../../src/context/themeContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuthStore } from "../../src/store/authStore";
+import { useRouter } from "expo-router";
+
+
+
 
 export default function Profile() {
 
     const [editModalVisible, setEditModalVisible] = useState(false);
     const [patient, setPatient] = useState<Patient | null>(null);
     const [showChangePass, setShowChangePass] = useState(false);
+    const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+    const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+    const { setAuth } = useAuthStore();
+    const router = useRouter();
     
+    
+    const theme = {
+      bg: darkMode ? "#121212" : "#f2f2f2",
+      card: darkMode ? "#1e1e1e" : "#fff",
+      text: darkMode ? "#fff" : "#000",
+      border: darkMode ? "#333" : "#ddd",
+    };
 
-//load dữ liệu khi load trang
+    //load dữ liệu khi load trang
     useEffect(() => {
       const storedId = localStorage.getItem("patientId");
       if (!storedId) return; // Nếu chưa có ID thì không gọi API
@@ -30,6 +48,33 @@ export default function Profile() {
   if (!patient) {
     return <p>⏳ Đang tải dữ liệu bệnh nhân...</p>;
   }
+
+  const handleLogout = async () => {
+    // Xóa AsyncStorage
+    await AsyncStorage.removeItem("patientId");
+    await AsyncStorage.removeItem("patientName");
+
+    // Reset Zustand
+    setAuth(null, null);
+
+    // Chuyển sang màn Login
+    router.replace("/auth/login");
+  };
+  const handleDelete = async () => {
+  if (confirm("Bạn có chắc chắn muốn xoá tài khoản? Hành động này không thể hoàn tác.")) {
+    try {
+      const id = await AsyncStorage.getItem("patientId");
+      if (id) {
+        await deletePatient(id); // truyền đúng kiểu string
+        await handleLogout(); // Đăng xuất sau khi xoá tài khoản
+      } else {
+        console.warn("Không tìm thấy patientId trong AsyncStorage.");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+};
 
   return (
     <ScrollView style={styles.container}>
@@ -52,7 +97,29 @@ export default function Profile() {
         <Text style={styles.infoText}>Địa chỉ: {patient.patientAddress}</Text>
         <Text style={styles.infoText}>BHXH: {patient.patientInsuranceNumber}</Text>
       </View>
-
+      {/* Thông báo */}
+      <View style={[styles.card, { backgroundColor: theme.card }]}>
+        <Text style={[styles.sectionTitle, { color: theme.text }]}>
+          Thông báo
+        </Text>
+        <View style={styles.row}>
+          <Text style={[styles.text, { color: theme.text }]}>Bật thông báo</Text>
+          <Switch
+            value={notificationsEnabled}
+            onValueChange={() => setNotificationsEnabled(!notificationsEnabled)}
+          />
+        </View>
+      </View>
+      {/* Giao diện */}
+      <View style={[styles.card, { backgroundColor: theme.card }]}>
+        <Text style={[styles.sectionTitle, { color: theme.text }]}>
+          Giao diện
+        </Text>
+        <View style={styles.row}>
+          <Text style={[styles.text, { color: theme.text }]}>Chế độ tối</Text>
+          <Switch value={darkMode} onValueChange={toggleDarkMode} />
+        </View>
+      </View>
       {/* Cài đặt tài khoản */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Cài đặt tài khoản</Text>
@@ -69,6 +136,32 @@ export default function Profile() {
           <Text style={styles.buttonText}>Đổi mật khẩu</Text>
         </TouchableOpacity>
       </View>
+      {/* Quyền riêng tư */}
+            <View style={[styles.card, { backgroundColor: theme.card }]}>
+              <Text style={[styles.sectionTitle, { color: theme.text }]}>
+                Quyền riêng tư
+              </Text>
+              <Button title="Xoá tài khoản" onPress={handleDelete} color="red" />
+            </View>
+      
+            {/* Hỗ trợ */}
+            <View style={[styles.card, { backgroundColor: theme.card }]}>
+              <Text style={[styles.sectionTitle, { color: theme.text }]}>Hỗ trợ</Text>
+              <Text style={[styles.text, { color: theme.text }]}>
+                Phiên bản app: 1.0.0
+              </Text>
+              <Text style={[styles.text, { color: theme.text }]}>
+                Liên hệ: minhduc5116@gmail.com
+              </Text>
+            </View>
+      
+            {/* Đăng xuất */}
+            <View
+              style={[styles.card, { backgroundColor: theme.card, marginBottom: 50 }]}
+            >
+              <Button title="Đăng xuất" onPress={handleLogout} color="red" />
+            </View>
+
       {editModalVisible && patient && (
         <EditProfileModal
           visible={editModalVisible}
@@ -133,5 +226,23 @@ const styles = StyleSheet.create({
     padding: 8,
     marginBottom: 10,
     backgroundColor: "#fff",
+  },
+    card: {
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 20,
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+    text: {
+    fontSize: 14,
+    marginBottom: 6,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });

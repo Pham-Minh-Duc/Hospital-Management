@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @RestController
@@ -59,9 +58,11 @@ public class PatientController {
     }
     //web admin: xóa bệnh nhân
     @DeleteMapping("/{patientId}")
-    String deletePatient(@PathVariable Long patientId){
+    public ResponseEntity<Map<String, String>> deletePatient(@PathVariable Long patientId) {
         patientService.deletePatient(patientId);
-        return "Patient has been deleted";
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Patient has been deleted");
+        return ResponseEntity.ok(response);
     }
     //web admin: chỉnh sửa thông tin bệnh nhân
     @PutMapping("/{patientId}")

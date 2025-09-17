@@ -27,24 +27,27 @@ export default function LoginScreen() {
   const [regPassword, setRegPassword] = useState("");
   const [regError, setRegError] = useState("");
 
-  const handleLogin = async () => {
-    try {
-      const res = await login(email, password);
+const handleLogin = async () => {
+  try {
+    const res = await login(email, password);
 
-      // Lưu vào Zustand
-      setAuth(null, {
-        id: res.patientId,
-        name: res.patientName,
-      });
-      router.replace("/home");
-      // Lưu vào AsyncStorage
-      await AsyncStorage.setItem("patientId", res.patientId.toString());
-      await AsyncStorage.setItem("patientName", res.patientName);
+    console.log("Login response:", res);
 
-    } catch (e: any) {
-      setError(e.message || "Đăng nhập thất bại");
-    }
-  };
+    // Lưu vào Zustand
+    setAuth(null, {
+      id: res.id,
+      name: res.name,
+    });
+
+    // Lưu vào AsyncStorage
+    await AsyncStorage.setItem("patientId", res.id.toString());
+    await AsyncStorage.setItem("patientName", res.name);
+
+    router.replace("/home");
+  } catch (e: any) {
+    setError(e.message || "Đăng nhập thất bại");
+  }
+};
 
   const handleRegister = async () => {
     if (!regName || !regEmail || !regPassword) {
