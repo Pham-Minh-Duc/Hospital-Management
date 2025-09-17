@@ -31,10 +31,11 @@ export default function Profile() {
 
     //load dữ liệu khi load trang
     useEffect(() => {
-      const storedId = localStorage.getItem("patientId");
-      if (!storedId) return; // Nếu chưa có ID thì không gọi API
       const fetchPatient = async () => {
         try {
+          const storedId = await AsyncStorage.getItem("patientId"); // dùng AsyncStorage
+          if (!storedId) return;
+          
           const data = await getPatientById(storedId);
           setPatient(data);
         } catch (err) {
@@ -45,8 +46,13 @@ export default function Profile() {
       fetchPatient();
     }, []);
 
+
   if (!patient) {
-    return <p>⏳ Đang tải dữ liệu bệnh nhân...</p>;
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>⏳ Đang tải dữ liệu bệnh nhân...</Text>
+      </View>
+    )
   }
 
   const handleLogout = async () => {

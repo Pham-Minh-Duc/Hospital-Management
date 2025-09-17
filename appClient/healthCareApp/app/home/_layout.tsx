@@ -48,6 +48,14 @@ function TabsScreen() {
         }}
       />
       <Tabs.Screen
+        name="notifications"
+        options={{
+          title: "Thông báo",
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => <Ionicons name="mail" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="profiles"
         options={{
           title: "Hồ sơ",

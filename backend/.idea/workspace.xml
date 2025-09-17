@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39ec9a9c-428a-4c65-a90c-23a8ea1897f4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/app/auth/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../appClient/healthCareApp/app/auth/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/app/home/doctors/[specialty].tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/app/home/doctors/_layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/app/home/doctors/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/app/home/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../appClient/healthCareApp/app/home/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/app/home/profiles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../appClient/healthCareApp/app/home/profiles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/app/home/settings.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/src/components/modal/doctor/BookingModal.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/clientService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/clientService.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/doctorService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/doctorService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/controller/PatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/example/patient_service/controller/PatientController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +73,7 @@
       <recent name="D:\OneDrive\Máy tính\personal project\healthcare-system\backend\gRPC-common\src\main\proto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Patient-service">
+  <component name="RunManager" selected="Application.doctor-service">
     <configuration name="Patient-service" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.example.patient_service.PatientServiceApplication" />
       <module name="patient-service" />
