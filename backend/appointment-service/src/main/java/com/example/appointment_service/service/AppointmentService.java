@@ -26,39 +26,40 @@ public class AppointmentService {
     private final WebClient.Builder webClientBuilder;
 
     // 🔹 Lấy danh sách lịch khám theo patientId
-//    public List<AppointmentResponse> getAppointmentsByPatient(String patientId) {
-//        List<Appointment> appointments = appointmentRepository.findByPatientId(patientId);
-//
-//        return appointments.stream().map(a -> {
-//            // Gọi patient-service
-//            PatientDto patient = webClientBuilder.build()
-//                    .get()
-//                    .uri("http://localhost:8083/patients/" + a.getPatientId())
-//                    .retrieve()
-//                    .bodyToMono(PatientDto.class)
-//                    .block();
-//
-//            // Gọi doctor-service
-//            DoctorDto doctor = webClientBuilder.build()
-//                    .get()
-//                    .uri("http://localhost:8085/doctors/" + a.getDoctorId())
-//                    .retrieve()
-//                    .bodyToMono(DoctorDto.class)
-//                    .block();
-//
-//            return new AppointmentResponse(
-//                    a.getAppointmentId(),
-//                    a.getAppointmentDate(),
-//                    a.getAppointmentTime(),
-//                    a.getAppointmentRoom(),
-//                    a.getAppointmentStatus(),
-//                    a.getAppointmentNote(),
-//                    a.getCreatedAt(),
-//                    patient,
-//                    doctor // trong doctor đã có specialization
-//            );
-//        }).collect(Collectors.toList());
-//    }
+    public List<AppointmentResponse> getAppointmentsByPatientId(Long patientId) {
+        List<Appointment> appointments = appointmentRepository.findByPatientId(patientId);
+
+        return appointments.stream().map(a -> {
+            // Gọi sang doctor-service
+            DoctorDto doctor = webClientBuilder.build()
+                    .get()
+                    .uri("http://doctor-service/doctors/{id}", a.getDoctorId())
+                    .retrieve()
+                    .bodyToMono(DoctorDto.class)
+                    .block(); // block() vì đang code sync
+
+            // Gọi sang patient-service
+            PatientDto patient = webClientBuilder.build()
+                    .get()
+                    .uri("http://patient-service/patients/{id}", a.getPatientId())
+                    .retrieve()
+                    .bodyToMono(PatientDto.class)
+                    .block();
+
+            return AppointmentResponse.builder()
+                    .appointmentId(a.getAppointmentId())
+                    .appointmentDate(a.getAppointmentDate())
+                    .appointmentTime(a.getAppointmentTime())
+                    .appointmentRoom(a.getAppointmentRoom())
+                    .appointmentStatus(a.getAppointmentStatus())
+                    .appointmentNote(a.getAppointmentNote())
+                    .doctor(doctor)
+                    .patient(patient)
+                    .createdAt(a.getCreatedAt())
+                    .updateAt(a.getUpdateAt())
+                    .build();
+        }).toList();
+    }
 
 
     // 🔹 Lấy tất cả lịch khám
@@ -70,7 +71,7 @@ public class AppointmentService {
                 // Gọi doctor-service
                 doctor = webClientBuilder.build()
                         .get()
-                        .uri("http://localhost:8085/doctors/{id}", a.getDoctorId())
+                        .uri("http://doctor-service/doctors/{id}", a.getDoctorId())
                         .retrieve()
                         .bodyToMono(DoctorDto.class)
                         .block();
@@ -80,7 +81,7 @@ public class AppointmentService {
                 // Gọi patient-service
                 patient = webClientBuilder.build()
                         .get()
-                        .uri("http://localhost:8083/patients/{id}", a.getPatientId())
+                        .uri("http://patient-service/patients/{id}", a.getPatientId())
                         .retrieve()
                         .bodyToMono(PatientDto.class)
                         .block();
@@ -115,37 +116,6 @@ public class AppointmentService {
 
         return appointmentRepository.save(appointment);
     }
-
-    // 🔹 Hàm tái sử dụng để build AppointmentResponse
-//    private AppointmentResponse mapToResponse(Appointment a) {
-//        // Gọi patient-service
-//        PatientDto patient = webClientBuilder.build()
-//                .get()
-//                .uri("http://localhost:8083/patients/" + a.getPatientId())
-//                .retrieve()
-//                .bodyToMono(PatientDto.class)
-//                .block();
-//
-//        // Gọi doctor-service
-//        DoctorDto doctor = webClientBuilder.build()
-//                .get()
-//                .uri("http://localhost:8085/doctors/" + a.getDoctorId())
-//                .retrieve()
-//                .bodyToMono(DoctorDto.class)
-//                .block();
-//
-//        return new AppointmentResponse(
-//                String.valueOf(a.getAppointmentId()),
-//                a.getAppointmentDate(),
-//                a.getAppointmentTime(),
-//                a.getAppointmentRoom(),
-//                a.getAppointmentStatus(),
-//                a.getAppointmentNote(),
-//                a.getCreatedAt(),
-//                patient,
-//                doctor
-//        );
-//    }
 
     // sửa (update)
     public Appointment updateAppointment(Long id, Appointment updatedAppointment) {

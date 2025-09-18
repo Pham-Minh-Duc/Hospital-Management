@@ -28,11 +28,11 @@ public class Appointment {
     private String appointmentStatus;
     private String appointmentNote;
 
-    private Long doctorId;   // chỉ lưu ID bác sĩ
+    private Long doctorId;
     private Long patientId;
 
     @CreationTimestamp
-    @Column(updatable = false)  // không cho phép giá trị của trường này thay đổi sau khi đã cập nhật lần đầu.
+    @Column(updatable = false)
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updateAt;

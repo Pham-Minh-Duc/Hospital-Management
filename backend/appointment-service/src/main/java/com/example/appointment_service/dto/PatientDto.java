@@ -9,5 +9,6 @@ public class PatientDto {
     private Long patientId;
     private String patientName;
     private String patientEmail;
+    private String patientAddress;
     private String patientPhone;
 }

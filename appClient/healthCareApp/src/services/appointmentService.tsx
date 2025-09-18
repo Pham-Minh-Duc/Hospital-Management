@@ -1,7 +1,7 @@
 
 import { getApiEndpoints } from "../services/api";
 const APPOINTMENT_URL = getApiEndpoints().APPOINTMENT_URL;
-const API_URL = APPOINTMENT_URL;
+const APPOINTMENT_ID_URL = getApiEndpoints().APPOINTMENT_ID_URL;
 
 export interface SpecializationDto {
   specializationId: number; // int (bigint trong DB)
@@ -11,7 +11,7 @@ export interface SpecializationDto {
 export interface DoctorDto {
   doctorId: string; // varchar
   doctorName?: string | null;
-  specialization?: SpecializationDto | null;
+  doctorSpecialization?: SpecializationDto | null;
 }
 
 export interface PatientRef {
@@ -36,7 +36,7 @@ export interface Appointment {
 export type NewAppointment = Omit<Appointment, "appointmentId" | "createdAt" | "updateAt">;
 
 export async function getAppointmentsByPatient(patientId: string): Promise<Appointment[]> {
-  const res = await fetch(`${API_URL}/${patientId}`, { cache: "no-store" });
+  const res = await fetch(`${APPOINTMENT_ID_URL}/${patientId}`, { cache: "no-store" });
   if (!res.ok) {
     const err = await res.text();
     throw new Error(err || "Lỗi khi lấy danh sách lịch khám");
@@ -45,7 +45,7 @@ export async function getAppointmentsByPatient(patientId: string): Promise<Appoi
 }
 
 export async function createAppointment(data: NewAppointment): Promise<Appointment> {
-  const res = await fetch(API_URL, {
+  const res = await fetch(APPOINTMENT_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),

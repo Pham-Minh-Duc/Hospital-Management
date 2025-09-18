@@ -25,7 +25,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="backend" target="1.5" />
       <module name="gRPC-common" target="17" />
     </bytecodeTargetLevel>
   </component>

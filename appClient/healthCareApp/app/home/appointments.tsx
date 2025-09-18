@@ -63,10 +63,24 @@ export default function AppointmentList() {
           keyExtractor={(i) => String(i.appointmentId)}
           renderItem={({item}) => (
             <TouchableOpacity style={styles.card} onPress={() => setSelected(item)}>
-              <Text>{item.appointmentDate} - {item.appointmentTime}</Text>
-              <Text>Phòng: {item.appointmentRoom}</Text>
-              <Text>Bác sĩ: {item.doctor?.doctorName ?? "Chưa có"}</Text>
-              <Text>Chuyên khoa: {item.doctor?.specialization?.specializationName ?? "Chưa có"}</Text>
+              <View style={styles.cardRow}>
+                <View style={{flex: 1}}>
+                  <Text>{item.appointmentDate} - {item.appointmentTime}</Text>
+                  <Text>Phòng: {item.appointmentRoom}</Text>
+                  <Text>Bác sĩ: {item.doctor?.doctorName ?? "Chưa có"}</Text>
+                  <Text>Chuyên khoa: {item.doctor?.doctorSpecialization?.specializationName ?? "Chưa có"}</Text>
+                </View>
+                <View>
+                  <Text style={[
+                    styles.statusText,
+                    item.appointmentStatus === "canceled" && {color: "red"},
+                    item.appointmentStatus === "confirmed" && {color: "green"},
+                    item.appointmentStatus === "waiting" && {color: "orange"},
+                  ]}>
+                    {item.appointmentStatus}
+                  </Text>
+                </View>
+              </View>
             </TouchableOpacity>
           )}
           ListEmptyComponent={<Text style={{textAlign:"center", marginTop:40}}>Bạn chưa có lịch khám nào</Text>}
@@ -81,7 +95,7 @@ export default function AppointmentList() {
               <>
                 <Text>🕒 Ngày giờ: {selected.appointmentDate} - {selected.appointmentTime}</Text>
                 <Text>🩺 Bác sĩ: {selected.doctor?.doctorName ?? "Chưa có"}</Text>
-                <Text>Chuyên khoa: {selected.doctor?.specialization?.specializationName ?? "Chưa có"}</Text>
+                <Text>Chuyên khoa: {selected.doctor?.doctorSpecialization?.specializationName ?? "Chưa có"}</Text>
                 <Text>Ghi chú: {selected.appointmentNote}</Text>
               </>
             )}
@@ -101,5 +115,7 @@ const styles = StyleSheet.create({
   headerButtonText: { color:"#fff", fontSize:24 },
   card: { backgroundColor:"#f0f8ff", padding:12, borderRadius:8, marginBottom:10 },
   modalOverlay: { flex:1, justifyContent:"center", alignItems:"center", backgroundColor:"rgba(0,0,0,0.3)" },
-  modalContent: { backgroundColor:"#fff", padding:16, borderRadius:8, width:"85%" }
+  modalContent: { backgroundColor:"#fff", padding:16, borderRadius:8, width:"85%" },
+  cardRow: { flexDirection:"row", justifyContent:"space-between",alignItems:"center"},
+  statusText: { fontWeight: "600", textTransform: "capitalize"}
 });

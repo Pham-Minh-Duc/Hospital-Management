@@ -66,7 +66,7 @@ const EditProfileModal = ({ visible, patient, onClose, onSuccess }: EditProfileM
   };
 
   return (
-    <Modal visible={visible} transparent animationType="slide">
+    <Modal visible={visible} transparent animationType="fade">
       <View style={styles.overlay}>
         <View style={styles.modalContainer}>
           <Text style={styles.title}>✏️ Chỉnh sửa thông tin cá nhân</Text>

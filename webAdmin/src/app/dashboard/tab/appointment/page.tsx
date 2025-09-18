@@ -181,6 +181,7 @@ const AppointmentPage = () => {
         <Button label="Thêm" onClick={() => setIsOpen(true)}/>
         <Button label={deleteMode ? "Thoát xóa" : "Xóa"} onClick={() => setDeleteMode(!deleteMode)}/>
         <Button label={editMode ? "Thoát sửa" : "Sửa"} onClick={() => setEditMode(!editMode)}/>
+        <Button label="Tải lại" onClick={loadAppointments}/>
       </div>
 
       {/* Table */}

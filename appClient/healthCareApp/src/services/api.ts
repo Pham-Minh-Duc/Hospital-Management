@@ -7,6 +7,7 @@ export function getApiEndpoints() {
     API_URL: API_URL,
     PATIENT_URL: `${API_URL}/patients`,
     APPOINTMENT_URL: `${API_URL}/appointments`,
+    APPOINTMENT_ID_URL: `${API_URL}/appointments/patient`,
     DOCTOR_URL: `${API_URL}/doctors`
   };
 }

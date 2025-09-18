@@ -169,18 +169,18 @@ export default function Profile() {
             </View>
 
       {editModalVisible && patient && (
-        <EditProfileModal
-          visible={editModalVisible}
-          patient={patient}
-          onClose={() => setEditModalVisible(false)}
-          onSuccess={(updated) => setPatient(updated)} 
-        />
+          <EditProfileModal
+            visible={editModalVisible}
+            patient={patient}
+            onClose={() => setEditModalVisible(false)}
+            onSuccess={(updated) => setPatient(updated)} 
+            />
       )}
             {/* Modal đổi mật khẩu */}
       <Modal
         visible={showChangePass}
         transparent={true}
-        animationType="slide"
+        animationType="fade"
         onRequestClose={() => setShowChangePass(false)}
       >
         <ChangePasswordModal
