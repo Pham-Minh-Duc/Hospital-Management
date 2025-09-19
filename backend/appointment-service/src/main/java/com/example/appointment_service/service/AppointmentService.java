@@ -2,6 +2,7 @@ package com.example.appointment_service.service;
 
 import com.example.appointment_service.dto.DoctorDto;
 import com.example.appointment_service.dto.PatientDto;
+import com.example.appointment_service.dto.StatusUpdateDto;
 import com.example.appointment_service.dto.response.AppointmentResponse;
 import com.example.appointment_service.dto.request.AppointmentCreationRequest;
 import com.example.appointment_service.entity.Appointment;
@@ -10,13 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
-
-import static java.util.logging.Level.parse;
 
 @Service
 @RequiredArgsConstructor
@@ -76,7 +73,6 @@ public class AppointmentService {
                         .bodyToMono(DoctorDto.class)
                         .block();
             }
-
             if(a.getPatientId() != null) {
                 // Gọi patient-service
                 patient = webClientBuilder.build()
@@ -86,7 +82,6 @@ public class AppointmentService {
                         .bodyToMono(PatientDto.class)
                         .block();
             }
-
             return AppointmentResponse.builder()
                     .appointmentId(a.getAppointmentId())
                     .appointmentDate(a.getAppointmentDate())
@@ -113,7 +108,6 @@ public class AppointmentService {
                 .doctorId(request.getDoctorId())
                 .patientId(request.getPatientId())
                 .build();
-
         return appointmentRepository.save(appointment);
     }
 
@@ -139,5 +133,17 @@ public class AppointmentService {
             throw new NoSuchElementException("Không tìm thấy lịch khám với id = " + id);
         }
         appointmentRepository.deleteById(id);
+    }
+
+    // cập nhật trạng thái
+    public StatusUpdateDto updateStatus(Long id, StatusUpdateDto request){
+        Appointment appointment = appointmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("không tìm thấy lịch khám của bệnh nhân có id: " + id));
+        appointment.setAppointmentStatus(request.getAppointmentStatus());
+        appointment.setUpdateAt(LocalDateTime.now());
+
+        appointmentRepository.save(appointment);
+
+        return new StatusUpdateDto(appointment.getAppointmentStatus());
     }
 }

@@ -16,7 +16,8 @@ import {
   PatientOption,
   getAllPatients,
   getAllSpecializations,
-  getDoctorsBySpecialization
+  getDoctorsBySpecialization,
+  updateStatus
 } from "../../../../service/appointmentService";
 import EditAppointmentModal from '@/app/dashboard/tab/appointment/modal/editAppointmentModal';
 
@@ -25,14 +26,11 @@ const AppointmentPage = () => {
   const [filteredAppointments, setFilteredAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   const [status, setStatus] = useState("all");
   const [search, setSearch] = useState({ appointmentId: "", patientId: "", patientEmail: "", status: "" });
-
   const [specializations, setSpecializations] = useState<Specialization[]>([]);
   const [doctors, setDoctors] = useState<DoctorOption[]>([]);
   const [patients, setPatients] = useState<PatientOption[]>([]);
-
   const [newAppointment, setNewAppointment] = useState({
     appointmentDate: "",
     appointmentTime: "",
@@ -43,12 +41,14 @@ const AppointmentPage = () => {
     doctorId: "",
     specializationId: "",
   });
-
   const [isOpen, setIsOpen] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
+  const [statusChanges, setStatusChanges] = useState<{[key:number]: string}>({});
+
+
 
   // Load danh sách lịch khám
   const loadAppointments = async () => {
@@ -141,6 +141,22 @@ const AppointmentPage = () => {
     }
   };
 
+  const handleApprove = async (appointmentId: number) => {
+    const newStatus = statusChanges[appointmentId];
+    if (!newStatus) {
+      alert("Chưa thay đổi trạng thái");
+      return;
+    }
+    if (!confirm("Bạn có chắc chắn muốn phê duyệt thay đổi trạng thái này?")) return;
+    try {
+      await updateStatus(appointmentId, newStatus);
+      alert("Cập nhật trạng thái thành công");
+      await loadAppointments();
+    } catch (err) {
+      alert("Lỗi cập nhật trạng thái: " + err);
+    }
+  }
+
   return (
     <div className="pt-2 px-12 pb-6">
       {/* Filter */}
@@ -177,11 +193,11 @@ const AppointmentPage = () => {
 
       {/* Buttons */}
       <div className="mt-4 flex gap-2">
-        <Button label="Tìm kiếm" onClick={handleSearch}/>
-        <Button label="Thêm" onClick={() => setIsOpen(true)}/>
-        <Button label={deleteMode ? "Thoát xóa" : "Xóa"} onClick={() => setDeleteMode(!deleteMode)}/>
-        <Button label={editMode ? "Thoát sửa" : "Sửa"} onClick={() => setEditMode(!editMode)}/>
-        <Button label="Tải lại" onClick={loadAppointments}/>
+        <Button label="Tìm kiếm"                          onClick={handleSearch}/>
+        <Button label="Thêm"                              onClick={() => setIsOpen(true)}/>
+        <Button label={deleteMode ? "Thoát xóa" : "Xóa"}  onClick={() => setDeleteMode(!deleteMode)}/>
+        <Button label={editMode ? "Thoát sửa" : "Sửa"}    onClick={() => setEditMode(!editMode)}/>
+        <Button label="Tải lại"                           onClick={loadAppointments}/>
       </div>
 
       {/* Table */}
@@ -219,7 +235,20 @@ const AppointmentPage = () => {
                   <td className="p-3">{a.doctor?.doctorName}</td>
                   <td className="p-3">{a.patient?.patientName}</td>
                   <td className="p-3">{a.appointmentRoom}</td>
-                  <td className="p-3">{a.appointmentStatus}</td>
+                  {/* <td className="p-3">{a.appointmentStatus}</td> */}
+                  <td className="p-3">
+                    <Select
+                      label={a.appointmentStatus}
+                      value={a.appointmentStatus || statusChanges[a.appointmentId]}
+                      onChange={e => setStatusChanges({ ...statusChanges, [a.appointmentId]: e.target.value })}
+                      option={[
+                        {label: "chờ xác nhận", value: "waiting"},
+                        {label: "đã xác nhận", value: "confirmed"},
+                        {label: "đã hủy", value: "canceled"},
+                      ]}
+                    />
+                    <Button label="Phê duyệt" onClick={() => handleApprove(a.appointmentId)}/>
+                  </td>
                   {editMode && (
                     <td
                       className="p-3 cursor-pointer"

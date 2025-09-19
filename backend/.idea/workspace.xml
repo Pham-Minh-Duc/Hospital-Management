@@ -5,17 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39ec9a9c-428a-4c65-a90c-23a8ea1897f4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/app/home/profiles.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../appClient/healthCareApp/app/home/profiles.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/StatusUpdateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payment-service/src/main/java/com/example/payment_service/service/payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/appointmentService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/appointmentService.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/config/WebClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/config/WebClientConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/controller/AppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/controller/AppointmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/PatientDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/PatientDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/request/AppointmentCreationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/request/AppointmentCreationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/request/AppointmentUpdateRequest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/entity/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/entity/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/repository/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/repository/AppointmentRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/service/AppointmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/appointment/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/appointment/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webAdmin/src/service/appointmentService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/service/appointmentService.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,38 +54,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.AppointmentServiceApplication (1).executor&quot;: &quot;Run&quot;,
-    &quot;Application.AppointmentServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Patient-service.executor&quot;: &quot;Run&quot;,
-    &quot;Application.PatientServiceApplication (1).executor&quot;: &quot;Run&quot;,
-    &quot;Application.PatientServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RealtimeServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.admin-service.executor&quot;: &quot;Run&quot;,
-    &quot;Application.api-gateway.executor&quot;: &quot;Run&quot;,
-    &quot;Application.appointment-service.executor&quot;: &quot;Run&quot;,
-    &quot;Application.doctor-service.executor&quot;: &quot;Run&quot;,
-    &quot;Application.eureka-server.executor&quot;: &quot;Run&quot;,
-    &quot;Application.gRPC-common.executor&quot;: &quot;Run&quot;,
-    &quot;Application.realtime-service.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/OneDrive/Máy tính/personal project/healthcare-system/backend&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AppointmentServiceApplication (1).executor": "Run",
+    "Application.AppointmentServiceApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.Patient-service.executor": "Run",
+    "Application.PatientServiceApplication (1).executor": "Run",
+    "Application.PatientServiceApplication.executor": "Run",
+    "Application.RealtimeServiceApplication.executor": "Run",
+    "Application.admin-service.executor": "Run",
+    "Application.api-gateway.executor": "Run",
+    "Application.appointment-service.executor": "Run",
+    "Application.doctor-service.executor": "Run",
+    "Application.eureka-server.executor": "Run",
+    "Application.gRPC-common.executor": "Run",
+    "Application.payment-service.executor": "Run",
+    "Application.realtime-service.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/OneDrive/Máy tính/personal project/healthcare-system/backend/payment-service/pom.xml",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\OneDrive\Máy tính\personal project\healthcare-system\backend\gRPC-common\src\main\proto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.appointment-service">
+  <component name="RunManager" selected="Application.payment-service">
     <configuration name="Patient-service" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.example.patient_service.PatientServiceApplication" />
       <module name="patient-service" />
@@ -142,6 +149,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="payment-service" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.example.payment_service.PaymentServiceApplication" />
+      <module name="payment-service" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="realtime-service" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.example.realtime_service.RealtimeServiceApplication" />
       <module name="realtime-service" />
@@ -157,6 +171,7 @@
     </configuration>
     <list>
       <item itemvalue="Application.admin-service" />
+      <item itemvalue="Application.payment-service" />
       <item itemvalue="Application.api-gateway" />
       <item itemvalue="Application.doctor-service" />
       <item itemvalue="Application.eureka-server" />
@@ -167,8 +182,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.appointment-service" />
         <item itemvalue="Application.Patient-service" />
+        <item itemvalue="Application.appointment-service" />
         <item itemvalue="Application.realtime-service" />
       </list>
     </recent_temporary>

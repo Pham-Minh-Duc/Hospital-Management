@@ -19,8 +19,6 @@ public class AppointmentCreationRequest {
     private String appointmentRoom;
     private String appointmentStatus;
     private String appointmentNote;
-//    private LocalDateTime createdAt;
-//    private LocalDateTime updateAt;
 
     private Long doctorId;
     private Long patientId;

@@ -31,9 +31,10 @@ export interface Appointment {
   updateAt?: string;
 }
 
-
 // Dữ liệu gửi khi tạo mới (server thường sinh id và timestamp)
 export type NewAppointment = Omit<Appointment, "appointmentId" | "createdAt" | "updateAt">;
+
+
 
 export async function getAppointmentsByPatient(patientId: string): Promise<Appointment[]> {
   const res = await fetch(`${APPOINTMENT_ID_URL}/${patientId}`, { cache: "no-store" });
@@ -56,3 +57,6 @@ export async function createAppointment(data: NewAppointment): Promise<Appointme
   }
   return res.json();
 }
+
+
+

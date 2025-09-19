@@ -1,5 +1,6 @@
 package com.example.appointment_service.controller;
 
+import com.example.appointment_service.dto.StatusUpdateDto;
 import com.example.appointment_service.dto.request.AppointmentCreationRequest;
 import com.example.appointment_service.dto.response.AppointmentResponse;
 import com.example.appointment_service.entity.Appointment;
@@ -55,5 +56,10 @@ public class AppointmentController {
     public ResponseEntity<List<AppointmentResponse>> getAppointmentsByPatientId(@PathVariable Long patientId) {
         return ResponseEntity.ok(appointmentService.getAppointmentsByPatientId(patientId));
     }
-
+// update trạng thái
+    @PutMapping("/status/{id}")
+    public ResponseEntity<StatusUpdateDto> updateStatus(@PathVariable Long id, @RequestBody StatusUpdateDto request){
+        StatusUpdateDto updated = appointmentService.updateStatus(id, request);
+        return ResponseEntity.ok(updated);
+    }
 }

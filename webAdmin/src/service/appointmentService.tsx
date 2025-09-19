@@ -1,9 +1,8 @@
 const API_URL = "http://localhost:8080/appointments";
 const SPECIALIZATIONS_URL = "http://localhost:8080/specializations";
 const DOCTOR_URL = "http://localhost:8080/doctors";
+const APPOINTMENT_URL = "http://localhost:8080/appointments";
 
-// services/appointmentService.ts
-// services/appointmentService.ts
 export interface Appointment {
   appointmentId: number;
   appointmentDate: string;
@@ -29,13 +28,13 @@ export interface Appointment {
 }
 // Interface cho request khi thêm mới
 export interface AppointmentRequest {
-  appointmentDate: string;   // "2025-09-20"
-  appointmentTime: string;   // "09:30:00"
+  appointmentDate: string;
+  appointmentTime: string;   
   appointmentRoom: string;
   appointmentStatus: string;
   appointmentNote: string;
-  doctorId: number;          // chỉ gửi id
-  patientId: number;         // chỉ gửi id
+  doctorId: number;        
+  patientId: number;        
 }
 
 export interface Specialization {
@@ -49,7 +48,7 @@ export interface Doctor {
 }
 
 export interface DoctorOption {
-  doctorId: string;   // string để dùng cho Select
+  doctorId: string;
   doctorName: string;
 }
 
@@ -57,7 +56,7 @@ export interface DoctorOption {
 export interface Patient {
   patientId: number;
   patientName: string;
-  // nếu API còn field khác (email, phone, ...) thì thêm vào
+
   email?: string;
   phone?: string;
 }
@@ -67,7 +66,12 @@ export interface PatientOption {
   patientName: string;
 }
 
-// gọi danh sách lịch khám
+export interface StatusUpdateDto {
+  appointmentStatus: string;
+}
+
+
+//---API gọi danh sách lịch khám ---
 export async function getAllAppointments(): Promise<Appointment[]> {
   const res = await fetch(`${API_URL}`, { cache: "no-store" });
   if (!res.ok) {
@@ -75,10 +79,8 @@ export async function getAllAppointments(): Promise<Appointment[]> {
   }
   return res.json();
 }
-// Tạo lịch khám mới
-export async function createAppointment(
-  appointment: AppointmentRequest
-): Promise<Appointment> {
+//---API tạo lịch khám mới ---
+export async function createAppointment(appointment: AppointmentRequest): Promise<Appointment> {
   const res = await fetch(`${API_URL}`, {
     method: "POST",
     headers: {
@@ -93,7 +95,6 @@ export async function createAppointment(
 
   return res.json();
 }
-
 
 // --- API lấy danh sách chuyên khoa ---
 export async function getAllSpecializations(): Promise<Specialization[]> {
@@ -120,7 +121,6 @@ export async function getDoctorsBySpecialization(
   }));
 }
 
-
 // --- API lấy danh sách bệnh nhân ---
 export async function getAllPatients(): Promise<PatientOption[]> {
   const res = await fetch("http://localhost:8080/patients");
@@ -134,8 +134,7 @@ export async function getAllPatients(): Promise<PatientOption[]> {
   }));
 }
 
-
-// Xóa lịch khám
+//--- API Xóa lịch khám ---
 export async function deleteAppointment(id: number) {
   const res = await fetch(`http://localhost:8080/appointments/${id}`, {
     method: "DELETE",
@@ -143,7 +142,7 @@ export async function deleteAppointment(id: number) {
   if (!res.ok) throw new Error("Không thể xóa lịch khám");
 }
 
-// Cập nhật lịch khám
+//---API Cập nhật lịch khám ---
 export async function updateAppointment(id: number, payload: AppointmentRequest) {
   const res = await fetch(`http://localhost:8080/appointments/${id}`, {
     method: "PUT",
@@ -151,6 +150,19 @@ export async function updateAppointment(id: number, payload: AppointmentRequest)
     body: JSON.stringify(payload),
   });
   if (!res.ok) throw new Error("Không thể cập nhật lịch khám");
+  return res.json();
+}
+
+//---API Cập nhật trạng thái lịch khám ---
+export async function updateStatus(appointmentId: number, appointmentStatus: string): Promise<StatusUpdateDto>{
+  const res = await fetch(`${APPOINTMENT_URL}/status/${appointmentId}`, {
+    method:"PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({appointmentStatus})
+  })
+  if(!res.ok){
+    throw new Error("Không thể cập nhật trạng thái");
+  }
   return res.json();
 }
 

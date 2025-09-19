@@ -1,7 +1,5 @@
 package com.example.appointment_service.entity;
 
-import com.example.patient_service.entity.Patient;
-import com.example.doctor_service.entity.Doctor;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
