@@ -13,15 +13,14 @@
         <module name="admin-service" />
         <module name="doctor-service" />
       </profile>
-      <profile name="Annotation profile for backend" enabled="true">
+      <profile name="Annotation profile for chatMessage-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.40/lombok-1.18.40.jar" />
         </processorPath>
-        <module name="appointment-service" />
-        <module name="realtime-service" />
+        <module name="chatMessage-service" />
       </profile>
       <profile name="Annotation profile for payment-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -32,9 +31,19 @@
         </processorPath>
         <module name="payment-service" />
       </profile>
+      <profile name="Annotation profile for backend" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="appointment-service" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="gRPC-common" target="17" />
+      <module name="realtime-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -42,6 +51,7 @@
       <module name="admin-service" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="appointment-service" options="-parameters" />
+      <module name="chatMessage-service" options="-parameters" />
       <module name="doctor-service" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="patient-service" options="-parameters" />

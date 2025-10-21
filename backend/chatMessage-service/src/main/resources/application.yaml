@@ -1,0 +1,24 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: chatmessage-service
+  cloud:
+    gateway:
+      httpserver:
+        websocket:
+          enabled: true
+      routes:
+        - id: chatmessage-service
+          uri: lb://chatmessage-service
+          predicates:
+            - Path=/chatmessage/**
+          filters:
+            - StripPrefix=0
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true

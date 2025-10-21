@@ -166,5 +166,3 @@ export async function updateStatus(appointmentId: number, appointmentStatus: str
   return res.json();
 }
 
-
-

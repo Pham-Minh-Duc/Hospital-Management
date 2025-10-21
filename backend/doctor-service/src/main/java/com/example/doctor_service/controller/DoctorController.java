@@ -3,6 +3,7 @@ package com.example.doctor_service.controller;
 import com.example.doctor_service.dto.DoctorDto;
 import com.example.doctor_service.dto.DoctorInfoDto;
 import com.example.doctor_service.dto.SpecializationDto;
+import com.example.doctor_service.dto.StatusUpdateDto;
 import com.example.doctor_service.entity.Doctor;
 import com.example.doctor_service.repository.DoctorRepository;
 import com.example.doctor_service.request.DoctorCreationRequest;
@@ -92,6 +93,12 @@ public class DoctorController {
             return dto;
         }).toList();
         return ResponseEntity.ok(doctorDtos);
+    }
+
+    @PutMapping("/status/{id}")
+    public ResponseEntity<StatusUpdateDto> updateStatus(@PathVariable Long id, @RequestBody StatusUpdateDto request){
+        StatusUpdateDto updated = doctorService.updateStatus(id, request);
+        return ResponseEntity.ok(updated);
     }
 }
 

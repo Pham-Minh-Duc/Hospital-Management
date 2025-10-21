@@ -14,11 +14,10 @@
         <module>doctor-service</module>
         <module>patient-service</module>
         <module>appointment-service</module>
-        <module>realtime-service</module>
         <module>eureka-server/eureka-server</module>
         <module>api-gateway/api-gateway</module>
-        <module>gRPC-common</module>
         <module>payment-service</module>
+        <module>chatmessage-service</module>
     </modules>
     <dependencies>
         <dependency>

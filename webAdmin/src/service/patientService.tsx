@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/patients";
+const API_TEST = "http://localhost:8080/patients";
 
 export interface Patient {
   patientId: string
@@ -12,7 +12,7 @@ export interface Patient {
 }
 
 export async function getAllPatients(): Promise<Patient[]> {
-  const res = await fetch(API_URL, { cache: "no-store" }); // luôn fetch mới
+  const res = await fetch(API_TEST, { cache: "no-store" }); // luôn fetch mới
   if (!res.ok) {
     throw new Error("Không thể tải danh sách lịch khám");
   }
@@ -20,7 +20,7 @@ export async function getAllPatients(): Promise<Patient[]> {
 }
 
 export async function createPatient(patient: Omit<Patient, "patientId">): Promise<Patient> {
-  const res = await fetch(API_URL, {
+  const res = await fetch(API_TEST, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(patient),
@@ -33,7 +33,7 @@ export async function createPatient(patient: Omit<Patient, "patientId">): Promis
 }
 
 export async function deletePatient(id: string) {
-  const res = await fetch(`${API_URL}/${id}`, {
+  const res = await fetch(`${API_TEST}/${id}`, {
     method: "DELETE",
   });
   if(!res.ok) {
@@ -43,7 +43,7 @@ export async function deletePatient(id: string) {
 }
 
 export async function updatePatient(id: string, data: Partial<Patient>): Promise<Patient> {
-  const res = await fetch(`${API_URL}/${id}`, {
+  const res = await fetch(`${API_TEST}/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),

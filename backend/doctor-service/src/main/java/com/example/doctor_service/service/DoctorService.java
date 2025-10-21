@@ -1,6 +1,7 @@
 package com.example.doctor_service.service;
 
 import com.example.doctor_service.dto.DoctorInfoDto;
+import com.example.doctor_service.dto.StatusUpdateDto;
 import com.example.doctor_service.entity.Doctor;
 import com.example.doctor_service.entity.Specialization;
 import com.example.doctor_service.repository.DoctorRepository;
@@ -78,11 +79,6 @@ public class DoctorService {
         return doctorRepository.save(doctor);
     }
 
-//
-//    public List<Doctor> getDoctor() {
-//        return doctorRepository.findAll();
-//    }
-//
     public Doctor getDoctorById(Long id){
         return doctorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Doctor not found"));
@@ -90,6 +86,16 @@ public class DoctorService {
 
     public List<Doctor> getDoctorsBySpecialization(Long specializationId) {
         return doctorRepository.findByDoctorSpecialization_SpecializationId(specializationId);
+    }
+
+    public StatusUpdateDto updateStatus(Long id, StatusUpdateDto request){
+        Doctor doctor = doctorRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Không tìm thấy bác sĩ có id: " + id));
+        doctor.setDoctorStatus(request.getDoctorStatus());
+
+        doctorRepository.save(doctor);
+
+        return new StatusUpdateDto(doctor.getDoctorStatus());
     }
 }
 

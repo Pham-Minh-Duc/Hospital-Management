@@ -40,23 +40,18 @@ spring:
           filters:
             - StripPrefix=0
 
-        - id: realtime-service
-          uri: lb://realtime-service
+        - id: chatMessage-service
+          uri: lb://chatMessage-service
           predicates:
-            - Path=/ws/**
+            - Path=/chatMessage/**
           filters:
-            - RemoveRequestHeader=Sec-WebSocket-Protocol
-            - PreserveHostHeader
-            - RewritePath=/ws(?<segment>/?.*), /ws${segment}
-
-
-
+            - StripPrefix=0
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
 
 logging:
   level:

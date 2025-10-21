@@ -7,7 +7,7 @@ import Label from '@/components/label';
 import Select from '@/components/select';
 import AddDoctorModal from './modal/addDoctorModal';
 import EditDoctorModal from './modal/editDoctorModal';
-import { getAllDoctors, deleteDoctor, Doctor } from '../../../../service/doctorService';
+import { getAllDoctors, deleteDoctor, Doctor, updateStatus} from '../../../../service/doctorService';
 
 const DoctorPage = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
@@ -20,6 +20,8 @@ const DoctorPage = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
   const [filteredDoctors, setFilteredDoctors] = useState<Doctor[]>([]);
+  const [statusChanges, setStatusChanges] = useState<{[key:number]: string}>({});
+  
   const [search, setSearch] = useState({
     doctorName: "",
     doctorSpecial: "",
@@ -49,10 +51,10 @@ const DoctorPage = () => {
   }, []);
 
 
-  const statusLabels: Record<string, string> = {
-    working: "Đang làm việc",
-    layoff: "Nghỉ việc",
-  };
+  // const statusLabels: Record<string, string> = {
+  //   working: "Đang làm việc",
+  //   layoff: "Nghỉ việc",
+  // };
 
   //tìm kiếm theo lọc
   const handleSearch = () => {
@@ -80,6 +82,21 @@ const DoctorPage = () => {
     }
   }
 
+    const handleApprove = async (doctorId: number) => {
+      const newStatus = statusChanges[doctorId];
+      if (!newStatus) {
+        alert("Chưa thay đổi trạng thái");
+        return;
+      }
+      if (!confirm("Bạn có chắc chắn muốn phê duyệt thay đổi trạng thái này?")) return;
+      try {
+        await updateStatus(doctorId, newStatus);
+        alert("Cập nhật trạng thái thành công");
+        await loadDoctors();
+      } catch (err) {
+        alert("Lỗi cập nhật trạng thái: " + err);
+      }
+    }
 
   return (
     <div className="pt-[10px] pr-[48px] pl-[48px] pb-[24px]">
@@ -105,7 +122,7 @@ const DoctorPage = () => {
             <div className="flex items-center">
               <Label className="w-[100px] text-sm mb-2 mr-2" label='Trạng thái'/> 
               <Select
-                label="Tất cả"
+                // label="Tất cả"
                 value={status}
                 onChange={(e) => {setStatus(e.target.value); setSearch({...search, status: e.target.value})}}
                 option={[
@@ -181,7 +198,19 @@ const DoctorPage = () => {
                       <td className="p-3">{item.doctorQualification}</td>
                       <td className="p-3">{item.doctorSpecialization}</td>
                       <td className="p-3">{item.doctorExperienceYears}</td>
-                      <td className="p-3">{statusLabels[item.doctorStatus] || item.doctorStatus}</td>
+                      {/* <td className="p-3">{statusLabels[item.doctorStatus]}</td> */}
+                      <td className="p-3">
+                    <Select
+                      value={statusChanges[Number(item.doctorId)] || item.doctorStatus}
+                      onChange={e => setStatusChanges({ ...statusChanges, [item.doctorId]: e.target.value })}
+                      option={[
+                        {label: "Đang làm việc", value: "working"},
+                        {label: "Đã nghỉ việc", value: "layoff"},
+                        {label: "Đang nghỉ phép", value: "canceled"},
+                      ]}
+                    />
+                    <Button label="Cập nhật" onClick={() => handleApprove(Number(item.doctorId))}/>
+                  </td>
                       {editMode && (
                         <td className="p-3"
                           onClick={() => {

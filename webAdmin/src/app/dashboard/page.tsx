@@ -6,7 +6,6 @@ import PatientPage from './tab/patient/page';
 import AppointmentTab from './tab/appointment/page';
 import Bills from './tab/bill/page';
 import Doctors from './tab/doctor/page';
-import Helps from './tab/liveHelp/page';
 import Notifications from './tab/note/page';
 import '../../icon/themify-icons-font/themify-icons/themify-icons.css';
 
@@ -16,7 +15,6 @@ const items = [
   { name: 'Doctors', icon: 'ti-heart-broken' },
   { name: 'Appointments', icon: 'ti-calendar' },
   { name: 'Bills', icon: 'ti-receipt' },
-  { name: 'Helps', icon: 'ti-help-alt' },
   { name: 'Notifications', icon: 'ti-bell' },
 ];
 
@@ -46,8 +44,6 @@ const DashboardPage = () => {
         return <AppointmentTab />;
       case 'Bills':
         return <Bills />;
-      case 'Helps':
-        return <Helps />;
       case 'Notifications':
         return <Notifications />;
       default:

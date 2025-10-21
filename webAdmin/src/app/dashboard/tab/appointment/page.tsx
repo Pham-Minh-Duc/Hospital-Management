@@ -86,7 +86,7 @@ const AppointmentPage = () => {
       (search.appointmentId === "" || String(a.appointmentId).includes(search.appointmentId)) &&
       (search.patientId === "" || String(a.patient.patientId).includes(search.patientId)) &&
       (search.patientEmail === "" || (a.patient.patientEmail && a.patient.patientEmail.includes(search.patientEmail))) &&
-      (search.status === "" || a.appointmentStatus === search.status)
+      (search.status === "all" || a.appointmentStatus === search.status)
     );
     setFilteredAppointments(filtered);
   };
@@ -178,10 +178,11 @@ const AppointmentPage = () => {
           <div className="flex items-center">
             <Label label="Trạng thái"/>
             <Select
-              label="Tất cả"
+              // label="Tất cả"
               value={status}
               onChange={e => { setStatus(e.target.value); setSearch({ ...search, status: e.target.value }); }}
               option={[
+                { label: 'Tất cả', value: 'all' },
                 { label: 'Chờ xác nhận', value: 'waiting' },
                 { label: 'Đã xác nhận', value: 'confirmed' },
                 { label: 'Đã hủy', value: 'canceled' },
@@ -235,11 +236,10 @@ const AppointmentPage = () => {
                   <td className="p-3">{a.doctor?.doctorName}</td>
                   <td className="p-3">{a.patient?.patientName}</td>
                   <td className="p-3">{a.appointmentRoom}</td>
-                  {/* <td className="p-3">{a.appointmentStatus}</td> */}
                   <td className="p-3">
                     <Select
-                      label={a.appointmentStatus}
-                      value={a.appointmentStatus || statusChanges[a.appointmentId]}
+                      // label={a.appointmentStatus}
+                      value={statusChanges[a.appointmentId] || a.appointmentStatus}
                       onChange={e => setStatusChanges({ ...statusChanges, [a.appointmentId]: e.target.value })}
                       option={[
                         {label: "chờ xác nhận", value: "waiting"},
@@ -299,7 +299,7 @@ const AppointmentPage = () => {
               <div>
                 <Label label="Trạng thái"/>
                 <Select
-                  label="Trạng thái"
+                  // label="Trạng thái"
                   value={newAppointment.appointmentStatus}
                   onChange={e => setNewAppointment({ ...newAppointment, appointmentStatus: e.target.value })}
                   option={[
@@ -317,7 +317,7 @@ const AppointmentPage = () => {
               <div>
                 <Label label="Bệnh nhân"/>
                 <Select
-                  label="Chọn bệnh nhân"
+                  // label="Chọn bệnh nhân"
                   value={newAppointment.patientId}
                   onChange={e => setNewAppointment({ ...newAppointment, patientId: e.target.value })}
                   option={patients.map(p => ({ label: p.patientName, value: String(p.patientId) }))}
@@ -326,7 +326,7 @@ const AppointmentPage = () => {
               <div>
                 <Label label="Chuyên khoa"/>
                 <Select
-                  label="Chọn chuyên khoa"
+                  // label="Chọn chuyên khoa"
                   value={newAppointment.specializationId}
                   onChange={handleSpecializationChange}
                   option={specializations.map(s => ({ label: s.specializationName, value: String(s.specializationId) }))}
@@ -335,7 +335,7 @@ const AppointmentPage = () => {
               <div>
                 <Label label="Bác sĩ"/>
                 <Select
-                  label="Chọn bác sĩ"
+                  // label="Chọn bác sĩ"
                   value={newAppointment.doctorId}
                   onChange={e => setNewAppointment({ ...newAppointment, doctorId: e.target.value })}
                   option={doctors.map(d => ({ label: d.doctorName, value: String(d.doctorId) }))}

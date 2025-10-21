@@ -60,6 +60,10 @@ export interface Specialization {
   specializationName: string;
 }
 
+export interface StatusUpdateDto {
+  doctorStatus: string;
+}
+
 // ===================== DOCTOR API =====================
 
 // Lấy tất cả bác sĩ
@@ -132,6 +136,18 @@ export async function updateDoctor(
   }
 
   return response.json();
+}
+
+export async function updateStatus(doctorId: number | string, doctorStatus: string): Promise<StatusUpdateDto>{
+  const res = await fetch(`${API_URL}/status/${doctorId}`, {
+    method:"PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({doctorStatus})
+  })
+  if(!res.ok){
+    throw new Error("Không thể cập nhật trạng thái");
+  }
+  return res.json();
 }
 
 // ===================== SPECIALIZATION API =====================

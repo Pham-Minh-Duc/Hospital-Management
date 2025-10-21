@@ -5,22 +5,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39ec9a9c-428a-4c65-a90c-23a8ea1897f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/StatusUpdateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/payment-service/src/main/java/com/example/payment_service/service/payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/appointmentService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../appClient/healthCareApp/src/services/appointmentService.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatMessage-service/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/dto/StatusUpdateDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/controller/AppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/controller/AppointmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/request/AppointmentCreationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/request/AppointmentCreationRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/dto/request/AppointmentUpdateRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/entity/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/entity/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/appointment-service/src/main/java/com/example/appointment_service/service/AppointmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/controller/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/controller/DoctorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/service/DoctorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka-server/eureka-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka-server/eureka-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC-common/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC-common/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC-common/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC-common/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC-common/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC-common/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC-common/src/main/java/com/example/gRPC_common/GRpcCommonApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC-common/src/main/proto/doctor.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC-common/src/main/proto/patient.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC-common/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC-common/src/test/java/com/example/gRPC_common/GRpcCommonApplicationTests.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/Dto/ChatMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/Dto/PrivateMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/RealtimeServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/config/UserInterceptor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/config/WebSocketConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/controller/ChatController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/controller/NotificationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/realtime-service/src/test/java/com/example/realtime_service/RealtimeServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/appointment/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/appointment/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/doctor/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/doctor/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/liveHelp/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webAdmin/src/components/select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/components/select.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../webAdmin/src/service/appointmentService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/service/appointmentService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webAdmin/src/service/doctorService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/service/doctorService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webAdmin/src/service/patientService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/service/patientService.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +96,7 @@
     "Application.admin-service.executor": "Run",
     "Application.api-gateway.executor": "Run",
     "Application.appointment-service.executor": "Run",
+    "Application.chatMessage-service.executor": "Run",
     "Application.doctor-service.executor": "Run",
     "Application.eureka-server.executor": "Run",
     "Application.gRPC-common.executor": "Run",
@@ -76,7 +107,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/OneDrive/Máy tính/personal project/healthcare-system/backend/payment-service/pom.xml",
+    "last_opened_file_path": "D:/OneDrive/Máy tính/personal project/healthcare-system/backend/chatmessage-service",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
@@ -84,10 +115,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OneDrive\Máy tính\personal project\healthcare-system\backend\chatMessage-service" />
       <recent name="D:\OneDrive\Máy tính\personal project\healthcare-system\backend\gRPC-common\src\main\proto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.payment-service">
+  <component name="RunManager" selected="Application.api-gateway">
     <configuration name="Patient-service" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.example.patient_service.PatientServiceApplication" />
       <module name="patient-service" />
@@ -128,6 +160,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="chatMessage-service" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.example.chatmessage_service.ChatmessageServiceApplication" />
+      <module name="chatMessage-service" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="doctor-service" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.example.doctor_service.DoctorServiceApplication" />
       <module name="doctor-service" />
@@ -142,29 +183,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="gRPC-common" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.healthcare.Main" />
-      <module name="gRPC-common" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="payment-service" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.example.payment_service.PaymentServiceApplication" />
       <module name="payment-service" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="realtime-service" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.realtime_service.RealtimeServiceApplication" />
-      <module name="realtime-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.realtime_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -175,16 +196,14 @@
       <item itemvalue="Application.api-gateway" />
       <item itemvalue="Application.doctor-service" />
       <item itemvalue="Application.eureka-server" />
-      <item itemvalue="Application.gRPC-common" />
+      <item itemvalue="Application.chatMessage-service" />
       <item itemvalue="Application.Patient-service" />
-      <item itemvalue="Application.realtime-service" />
       <item itemvalue="Application.appointment-service" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Patient-service" />
         <item itemvalue="Application.appointment-service" />
-        <item itemvalue="Application.realtime-service" />
       </list>
     </recent_temporary>
   </component>
@@ -206,11 +225,6 @@
           <url>file://$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/config/WebSocketConfig.java</url>
           <line>11</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/controller/DoctorController.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

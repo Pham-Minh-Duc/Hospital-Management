@@ -9,11 +9,15 @@
         <option value="$PROJECT_DIR$/patient-service/pom.xml" />
         <option value="$PROJECT_DIR$/realtime-service/pom.xml" />
         <option value="$PROJECT_DIR$/payment-service/pom.xml" />
+        <option value="$PROJECT_DIR$/chatMessage-service/chatMessage-service/pom.xml" />
+        <option value="$PROJECT_DIR$/chatMessage-service/pom.xml" />
+        <option value="$PROJECT_DIR$/chatmessage-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/gRPC-common/pom.xml" />
+        <option value="$PROJECT_DIR$/realtime-service/pom.xml" />
       </set>
     </option>
   </component>
