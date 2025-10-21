@@ -5,52 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39ec9a9c-428a-4c65-a90c-23a8ea1897f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/chatMessage-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/dto/StatusUpdateDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatMessage-service/src/main/java/com/example/chatmessage_service/Chat/ChatController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatMessage-service/src/main/java/com/example/chatmessage_service/Chat/ChatMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatMessage-service/src/main/java/com/example/chatmessage_service/Chat/MessageType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatMessage-service/src/main/java/com/example/chatmessage_service/Config/WebSocketConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatMessage-service/src/main/java/com/example/chatmessage_service/Config/WebSocketEventListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/api-gateway/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/controller/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/controller/DoctorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/doctor-service/src/main/java/com/example/doctor_service/service/DoctorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/eureka-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka-server/eureka-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC-common/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC-common/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC-common/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC-common/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC-common/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC-common/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC-common/src/main/java/com/example/gRPC_common/GRpcCommonApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC-common/src/main/proto/doctor.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC-common/src/main/proto/patient.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC-common/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC-common/src/test/java/com/example/gRPC_common/GRpcCommonApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/Dto/ChatMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/Dto/PrivateMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/RealtimeServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/config/UserInterceptor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/config/WebSocketConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/controller/ChatController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/java/com/example/realtime_service/controller/NotificationController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/src/main/resources/application.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realtime-service/src/test/java/com/example/realtime_service/RealtimeServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/appointment/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/appointment/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/doctor/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/doctor/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../webAdmin/src/app/dashboard/tab/liveHelp/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../webAdmin/src/components/select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/components/select.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../webAdmin/src/service/appointmentService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/service/appointmentService.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../webAdmin/src/service/doctorService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/service/doctorService.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../webAdmin/src/service/patientService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../webAdmin/src/service/patientService.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +22,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -114,12 +75,15 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.chatmessage_service.Chat" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\OneDrive\Máy tính\personal project\healthcare-system\backend\chatMessage-service" />
       <recent name="D:\OneDrive\Máy tính\personal project\healthcare-system\backend\gRPC-common\src\main\proto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.api-gateway">
+  <component name="RunManager" selected="Application.chatMessage-service">
     <configuration name="Patient-service" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.example.patient_service.PatientServiceApplication" />
       <module name="patient-service" />
