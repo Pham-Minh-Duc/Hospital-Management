@@ -84,7 +84,5 @@ Dự án này là một nền tảng quản lý y tế toàn diện, được x�
 3.  **Chạy ứng dụng:** Tham khảo tài liệu React Native để chạy trên trình giả lập hoặc thiết bị vật lý (ví dụ: `npx react-native run-android` hoặc `npx react-native run-ios`).
 
 ## 🤝 Liên hệ
+Phạm Minh Đức
 minhduc5116@gmail.com
-* **Tên bạn:** [Tên của bạn]
-* **Email:** [Địa chỉ Email của bạn]
-* **LinkedIn:** [Link LinkedIn của bạn]
