@@ -1,71 +1,90 @@
-DỰ ÁN QUẢN TRỊ BỆNH VIỆN
+# 🏥 Hospital Management System (Hệ thống Quản lý Bệnh viện)
 
-- backend/ -> webadmin & API
-- frontend/ -> web admin & client
-- mobile-app/ -> app di động (React Native)
-- docs/ -> tài liệu kĩ thuật, hướng dẫn
+Dự án này là một nền tảng quản lý y tế toàn diện, được xây dựng trên kiến trúc **Microservice** hiện đại. Hệ thống được thiết kế để số hóa và tối ưu hóa các quy trình cốt lõi của bệnh viện/phòng khám, bao gồm quản lý hồ sơ bệnh nhân, lịch hẹn, hồ sơ bác sĩ, và giao tiếp theo thời gian thực.
 
-- RUN: npm run dev
+## 🚀 Tính năng nổi bật
 
-------------------------------------------------------------------------------------------------------------------
-- Eureka + Spring Cloud Gateway + Auth service(JWT) + microservices
+### Backend (Dịch vụ Lõi)
 
-Công nghệ	                         Mục đích sử dụng
+* **Kiến trúc Microservice:** Thiết kế phân tán, cho phép mở rộng và bảo trì độc lập từng dịch vụ (ví dụ: Service Bệnh nhân, Service Lịch hẹn, Service ).
+* **Quản lý Lịch hẹn:** Hệ thống đặt lịch hẹn y tế đầy đủ tính năng.
+* **Quản lý Hồ sơ:** Quản lý chi tiết hồ sơ bệnh nhân và hồ sơ bác sĩ với đầy đủ chức năng CRUD.
+* **Thông báo & Chat Real-time:** Triển khai **WebSocket** để hỗ trợ tính năng thông báo và trò chuyện trực tiếp giữa Quản trị viên và Bệnh nhân(Đang triển khai).
+* **Tích hợp & Giao tiếp:** Sử dụng **Eureka** cho khám phá dịch vụ và **API Gateway** cho định tuyến yêu cầu tập trung.
 
-Spring Boot	                         Xây dựng các microservice một cách nhanh chóng, dễ cấu hình.
-Spring Cloud Eureka	                 Đăng ký & phát hiện các service trong hệ thống (Service Discovery).
-Spring Cloud Gateway	             Làm API Gateway: định tuyến các request, filter JWT để bảo vệ các route.
-Spring Security	                     Bảo mật endpoint bằng JWT.
-JWT (JSON Web Token)	             Xác thực người dùng, phân quyền qua token.
-Spring Web	                         Tạo các RESTful API.
-Spring Data JPA	                     Truy vấn dữ liệu, thao tác với database dễ dàng.
-mySql	                             Cơ sở dữ liệu cho các service.
-Lombok	                             Rút gọn code Java (getter, setter, constructor, builder...).
-Maven	                             Quản lý dependencies và build project.
+### Frontend (Giao diện Người dùng)
 
+* **Admin Dashboard:** Giao diện quản trị viên chuyên nghiệp, được xây dựng bằng **React/Next.js**, cung cấp cái nhìn tổng quan và khả năng kiểm soát toàn bộ hệ thống.
+* **Ứng dụng Di động (Mobile App):** Ứng dụng dành cho bệnh nhân được phát triển bằng **React Native**, đảm bảo trải nghiệm người dùng mượt mà và trực quan trên các thiết bị di động.
+* **Khả năng Mở rộng:** Hệ thống được xây dựng để sẵn sàng triển khai thực tế trong môi trường phòng khám hoặc cơ sở chăm sóc sức khỏe.
 
-JWT (JSON Web Token)
-Được dùng ở auth-service.
-Khi người dùng đăng nhập, hệ thống tạo 1 JWT token chứa thông tin người dùng.
-JWT sẽ được client (frontend, postman...) lưu trữ và đính kèm trong mỗi request (Authorization: Bearer <token>).
-Gateway sẽ kiểm tra token trước khi chuyển request đến microservice khác.
+## 🛠️ Công nghệ sử dụng
 
+| Lĩnh vực | Công nghệ | Chi tiết |
+| :--- | :--- | :--- |
+| **Backend & Kiến trúc** | Java Spring Boot, Microservice | Ngôn ngữ và Framework chính. |
+| | API Gateway, Eureka | Quản lý định tuyến và Khám phá dịch vụ. |
+| | WebClient, WebSocket | Giao tiếp giữa các dịch vụ và kết nối Real-time. |
+| **Cơ sở dữ liệu** | MySQL | Quản lý dữ liệu quan trọng (hồ sơ, lịch hẹn, v.v.). |
+| **Frontend Web (Admin)** | React, Next.js, TypeScript | Thư viện và Framework tạo giao diện hiệu suất cao. |
+| | Tailwind CSS | Utility-first CSS Framework cho UI đáp ứng. |
+| **Frontend Mobile (Bệnh nhân)** | React Native | Phát triển ứng dụng đa nền tảng. |
 
+## ⚙️ Hướng dẫn Cài đặt và Chạy dự án
 
- Spring Cloud Gateway
-Đóng vai trò API Gateway.
-Mọi request từ client đều đi qua đây.
-Chức năng chính:
-Kiểm tra JWT (auth filter).
-Định tuyến đến các service nội bộ như /api/users/** → user-service, /api/products/** → product-service.
-Có thể thêm Rate Limiting, CORS, v.v...
+Để chạy dự án này trên môi trường cục bộ, bạn cần thiết lập các thành phần sau:
 
+### 1. Yêu cầu Tiên quyết
 
-Eureka Server
-Là một Service Registry.
-Mỗi service (user-service, product-service...) khi khởi động sẽ đăng ký với Eureka.
-Gateway hoặc các service khác sẽ gọi tên service thay vì hardcode IP/port.
-Ví dụ: http://user-service/users thay vì http://localhost:8081/users.
+* Java Development Kit (JDK) 17+
+* Node.js và npm/yarn
+* MySQL Server
+* Công cụ quản lý Cơ sở dữ liệu (ví dụ: DBeaver, MySQL Workbench)
 
- auth-service
-Cung cấp các API như /auth/register, /auth/login.
-Kiểm tra tài khoản/mật khẩu, nếu hợp lệ → trả về JWT token.
-Có thể lưu user vào database và mã hóa password với BCrypt.
+### 2. Thiết lập Backend (Microservices)
 
+1.  **Tạo CSDL:** Tạo cơ sở dữ liệu `hospital_db` trên MySQL và cập nhật thông tin kết nối trong file `application.yml` của mỗi Service (Repository).
+2.  **Clone Repository:**
+    ```bash
+    git clone [LINK_REPOSITORY_CỦA_BẠN]
+    cd hospital-management-system/backend
+    ```
+3.  **Khởi động các Service:** Khởi động lần lượt các dịch vụ theo thứ tự:
+    * `Eureka Server`
+    * `API Gateway`
+    * Các Service nghiệp vụ (Ví dụ: `patient-service`, `appointment-service`, v.v.)
+    * Sử dụng IDE (IntelliJ IDEA) hoặc câu lệnh Maven/Gradle để chạy từng Service.
 
- user-service / product-service / order-service
-Mỗi service xử lý domain riêng:
-user-service: CRUD user
-product-service: CRUD sản phẩm
-order-service: CRUD đơn hàng
-Các service này thường yêu cầu JWT hợp lệ mới cho phép truy cập.
-Sử dụng Spring Data JPA để thao tác database.
+### 3. Thiết lập Frontend (Web Admin)
 
+1.  **Chuyển đến thư mục web:**
+    ```bash
+    cd ../frontend/web-admin # (hoặc đường dẫn tương ứng)
+    ```
+2.  **Cài đặt dependencies:**
+    ```bash
+    npm install  # hoặc yarn install
+    ```
+3.  **Chạy ứng dụng:**
+    ```bash
+    npm run dev  # hoặc yarn dev
+    ```
+    Ứng dụng sẽ chạy tại `http://localhost:3000` (mặc định của Next.js).
 
-Tóm tắt luồng hoạt động
-Người dùng đăng nhập qua auth-service → nhận JWT.
-Gửi request đến Gateway → Gateway kiểm tra JWT.
-Gateway định tuyến đến microservice tương ứng (user/product/order).
-Microservice xử lý request, truy cập DB nếu cần.
-Trả kết quả về client.
+### 4. Thiết lập Frontend (Mobile App - Tùy chọn)
 
+1.  **Chuyển đến thư mục mobile:**
+    ```bash
+    cd ../mobile-app # (hoặc đường dẫn tương ứng)
+    ```
+2.  **Cài đặt dependencies:**
+    ```bash
+    npm install  # hoặc yarn install
+    ```
+3.  **Chạy ứng dụng:** Tham khảo tài liệu React Native để chạy trên trình giả lập hoặc thiết bị vật lý (ví dụ: `npx react-native run-android` hoặc `npx react-native run-ios`).
+
+## 🤝 Liên hệ
+minhduc5116@gmail.com
+* **Tên bạn:** [Tên của bạn]
+* **Email:** [Địa chỉ Email của bạn]
+* **LinkedIn:** [Link LinkedIn của bạn]
